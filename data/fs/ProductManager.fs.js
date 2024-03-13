@@ -101,7 +101,6 @@ class ProductManager {
 
 async function test() {
     const product = new ProductManager();
-    /*
         await product.create({ title: 'Refresco', photo: 'sin foto', category: 'bebida', price: 1200, stock: 5 })
         await product.create({ title: 'Pan', photo: 'sin foto', category: 'comida', price: 200, stock: 25 })
         await product.create({ title: 'Cerveza', photo: 'sin foto', category: 'bebida', price: 1200, stock: 5 })
@@ -118,7 +117,6 @@ async function test() {
         await product.destroy('298791076a493adfb6a48ef4')
         console.log('\n\n Metodo read() nuevamente para verificar que se elimino el producto de prueba:')
         await product.read()
-        */
 }
 
 
