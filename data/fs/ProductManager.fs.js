@@ -14,7 +14,14 @@ class ProductManager {
             fs.writeFileSync(this.path, newFile)
             console.log('archivo creado')
         } else {
-            console.log('El archivo ya existe')
+            let checkArray = fs.readFileSync(this.path, 'utf-8')
+            if (checkArray.trim() === '') { //VERIFICAMOS SI EL ARCHIVO ESTA VACIO, EN CASO DE ESTARLO SE ELIMINA Y SE CREA DE NUEVO CON UN []
+                console.error('El archivo no contiene un array')
+                fs.unlinkSync(this.path)
+                this.init()
+            } else {
+                console.log('El archivo ya existe')
+            }
         }
     }
     async create(data) {
@@ -94,23 +101,24 @@ class ProductManager {
 
 async function test() {
     const product = new ProductManager();
-
-    await product.create({ title: 'Refresco', photo: 'sin foto', category: 'bebida', price: 1200, stock: 5 })
-    await product.create({ title: 'Pan', photo: 'sin foto', category: 'comida', price: 200, stock: 25 })
-    await product.create({ title: 'Cerveza', photo: 'sin foto', category: 'bebida', price: 1200, stock: 5 })
-    await product.create({ title: 'Queso', photo: 'sin foto', category: 'comida', price: 200, stock: 25 })
-    console.log('Tratamos de crear un producto con stock:null para verificar que se soliciten todos los campos')
-    await product.create({ title: 'Chocolate', photo: 'sin foto', category: 'dulces', price: 1200, stock: null })
-    console.log('producto de prueba: Se le setea un id por deafault para poder probar metodos readOne() y destroy()')
-    await product.create(({ title: 'Producto prueba', photo: 'sin foto', category: 'test', price: 2000, stock: 25 , id: '298791076a493adfb6a48ef4'}))
-    console.log('Metodo Read():')
-    await product.read()
-    console.log('\n\nMetodo ReadOne(), usamos producto de prueba:')
-    console.log(await product.readOne('298791076a493adfb6a48ef4'))    
-    console.log('\n\nMetodo destroy(), usamos producto de prueba:')
-    await product.destroy('298791076a493adfb6a48ef4')
-    console.log('\n\n Metodo read() nuevamente para verificar que se elimino el producto de prueba:')
-    await product.read()
+    /*
+        await product.create({ title: 'Refresco', photo: 'sin foto', category: 'bebida', price: 1200, stock: 5 })
+        await product.create({ title: 'Pan', photo: 'sin foto', category: 'comida', price: 200, stock: 25 })
+        await product.create({ title: 'Cerveza', photo: 'sin foto', category: 'bebida', price: 1200, stock: 5 })
+        await product.create({ title: 'Queso', photo: 'sin foto', category: 'comida', price: 200, stock: 25 })
+        console.log('Tratamos de crear un producto con stock:null para verificar que se soliciten todos los campos')
+        await product.create({ title: 'Chocolate', photo: 'sin foto', category: 'dulces', price: 1200, stock: null })
+        console.log('producto de prueba: Se le setea un id por deafault para poder probar metodos readOne() y destroy()')
+        await product.create(({ title: 'Producto prueba', photo: 'sin foto', category: 'test', price: 2000, stock: 25 , id: '298791076a493adfb6a48ef4'}))
+        console.log('Metodo Read():')
+        await product.read()
+        console.log('\n\nMetodo ReadOne(), usamos producto de prueba:')
+        console.log(await product.readOne('298791076a493adfb6a48ef4'))    
+        console.log('\n\nMetodo destroy(), usamos producto de prueba:')
+        await product.destroy('298791076a493adfb6a48ef4')
+        console.log('\n\n Metodo read() nuevamente para verificar que se elimino el producto de prueba:')
+        await product.read()
+        */
 }
 
 
