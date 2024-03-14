@@ -71,8 +71,8 @@ userManager.create({
 userManager.read();
 
 // Ejemplo de lectura de un usuario específico
-const user = userManager.readOne('ID_DEL_PRODUCTO');
+const user = userManager.readOne('ID_DEL_USUARIO');
 
 // Ejemplo de eliminación de un usuario
-userManager.destroy('ID_DEL_PRODUCTO');
+userManager.destroy('ID_DEL_USUARIO');
 ```
