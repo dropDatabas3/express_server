@@ -1,4 +1,3 @@
-
 # Desafío Entregable: Servidor con Express
 
 Implementación de un servidor utilizando Express, para la gestión de productos y usuarios. Se han desarrollado gestores para manejar los datos de productos y usuarios, permitiendo la creación, lectura, lectura individual y eliminación de recursos tanto en memoria como en archivos.
