@@ -57,7 +57,6 @@ server.get("/api/products", async (req, res) => {
 
 server.get("/api/products/:pid", async (req, res) => {
   try {
-    console.log('/api/products/:pid')
     const { pid } = req.params;
     const oneProduct = await productsManager.readOne(pid);
     if (oneProduct) {
@@ -66,9 +65,9 @@ server.get("/api/products/:pid", async (req, res) => {
         success: true,
       });
     } else {
-      const error = new Error();
+      const error = new Error("No products found with id " + pid);
       error.statusCode = 404;
-      error.message("No products found with id " + pid);
+      throw error
     }
   } catch (error) {
     if (error.statusCode === 404) {
