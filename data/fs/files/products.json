@@ -1,1 +1,162 @@
-[]
+[
+  {
+    "id": "b2e5a871422d2269d860a022",
+    "title": "Galletas",
+    "photo": "galletas.jpg",
+    "category": "snack",
+    "price": 500,
+    "stock": 10
+  },
+  {
+    "id": "22db307a472e99f4b6b29aa4",
+    "title": "Agua Mineral",
+    "photo": "agua.jpg",
+    "category": "bebida",
+    "price": 300,
+    "stock": 50
+  },
+  {
+    "id": "caa4773adb7be033d5a62344",
+    "title": "Manzanas",
+    "photo": "manzanas.jpg",
+    "category": "fruta",
+    "price": 600,
+    "stock": 15
+  },
+  {
+    "id": "2f262d52333c103f02c37494",
+    "title": "Chocolate",
+    "photo": "chocolate.jpg",
+    "category": "dulce",
+    "price": 1000,
+    "stock": 8
+  },
+  {
+    "id": "6eae28653cabdc7d852c9747",
+    "title": "Leche",
+    "photo": "leche.jpg",
+    "category": "lácteo",
+    "price": 900,
+    "stock": 20
+  },
+  {
+    "id": "9df7a4985bd4f1c0e8c70943",
+    "title": "Yogur",
+    "photo": "yogur.jpg",
+    "category": "lácteo",
+    "price": 700,
+    "stock": 15
+  },
+  {
+    "id": "c690c805aea72d4050a12467",
+    "title": "Hamburguesa",
+    "photo": "hamburguesa.jpg",
+    "category": "comida rápida",
+    "price": 1500,
+    "stock": 7
+  },
+  {
+    "id": "229519390de67978d0fe5e0a",
+    "title": "Jugo de Naranja",
+    "photo": "jugo.jpg",
+    "category": "bebida",
+    "price": 800,
+    "stock": 30
+  },
+  {
+    "id": "f38ecffc3ac08b9207da94c2",
+    "title": "Cereal",
+    "photo": "cereal.jpg",
+    "category": "desayuno",
+    "price": 1200,
+    "stock": 10
+  },
+  {
+    "id": "736883916cd2380ea4afc4ab",
+    "title": "Papas Fritas",
+    "photo": "papas.jpg",
+    "category": "snack",
+    "price": 700,
+    "stock": 25
+  },
+  {
+    "id": "909f2abb01d7f163ebdc087c",
+    "title": "Tomates",
+    "photo": "tomates.jpg",
+    "category": "verdura",
+    "price": 400,
+    "stock": 12
+  },
+  {
+    "id": "0c2dd24333fef33936fc64d5",
+    "title": "Pescado",
+    "photo": "pescado.jpg",
+    "category": "mariscos",
+    "price": 2500,
+    "stock": 4
+  },
+  {
+    "id": "95ad7989c510de530fb61378",
+    "title": "Refresco de Lima",
+    "photo": "refresco.jpg",
+    "category": "bebida",
+    "price": 1000,
+    "stock": 20
+  },
+  {
+    "id": "4b1946e27b91569d7eccd075",
+    "title": "Huevos",
+    "photo": "huevos.jpg",
+    "category": "lácteo",
+    "price": 600,
+    "stock": 18
+  },
+  {
+    "id": "6ce30c8bb01479cfb69d0550",
+    "title": "Pizza",
+    "photo": "pizza.jpg",
+    "category": "comida rápida",
+    "price": 1800,
+    "stock": 6
+  },
+  {
+    "id": "08abe3772fdfa8f8852a9a8a",
+    "title": "Caramelo",
+    "photo": "caramelo.jpg",
+    "category": "dulce",
+    "price": 200,
+    "stock": 50
+  },
+  {
+    "id": "37d66952302e45657b4a0cc4",
+    "title": "Sandwich",
+    "photo": "sandwich.jpg",
+    "category": "comida rápida",
+    "price": 900,
+    "stock": 15
+  },
+  {
+    "id": "0abbee99a1fef2c0017ee36b",
+    "title": "Zanahorias",
+    "photo": "zanahorias.jpg",
+    "category": "verdura",
+    "price": 300,
+    "stock": 20
+  },
+  {
+    "id": "c2328ded35a66c3aaa633e14",
+    "title": "Té",
+    "photo": "te.jpg",
+    "category": "bebida",
+    "price": 600,
+    "stock": 40
+  },
+  {
+    "id": "dd587002bfb9db47d84eebef",
+    "title": "Pasta",
+    "photo": "pasta.jpg",
+    "category": "comida",
+    "price": 1100,
+    "stock": 8
+  }
+]
