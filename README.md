@@ -1,78 +1,58 @@
-# Desafío Entregable: Gestión de Productos y Usuarios
 
-Este proyecto implementa un sistema de gestión de productos y usuarios utilizando `Node.js` y el módulo FileSystem (`fs`) de forma asíncrona, aprovechando las funcionalidades de `async/await` y `promises` para garantizar un flujo de ejecución eficiente y no bloqueante.
+# Desafío Entregable: Implementación de Servidor con Express
+
+Implementación de un servidor utilizando Express, para la gestión de productos y usuarios. Se han desarrollado gestores para manejar los datos de productos y usuarios, permitiendo la creación, lectura, lectura individual y eliminación de recursos tanto en memoria como en archivos.
+Para más información sobre los gestores, echa un vistazo al desafío: [Sprint2](https://github.com/juanp1996/servernode/tree/sprint2)
 
 ## Estructura de Datos
 
-Cada producto tiene las siguientes propiedades:
-- ***id*** (código identificador de 12 bytes en hexadecimal)
-- ***title*** (título)
-- ***photo*** (ruta de imagen)
-- ***category*** (categoría)
-- ***price*** (precio)
-- ***stock*** (unidades disponibles)
+Cada producto y usuario posee propiedades específicas:
 
-Cada usuario tiene las siguientes propiedades:
-- ***id*** (código identificador de 12 bytes en hexadecimal)
-- ***photo*** (ruta de imagen)
-- ***email***
-- ***password***
-- ***role*** (rol de usuario)
+### Producto:
+- **id**: Código identificador de 12 bytes en hexadecimal.
+- **title**: Título del producto.
+- **photo**: Ruta de la imagen del producto.
+- **category**: Categoría del producto.
+- **price**: Precio del producto.
+- **stock**: Unidades disponibles del producto.
 
-## Clases ProductManager y UserManager
+### Usuario:
+- **id**: Código identificador de 12 bytes en hexadecimal.
+- **photo**: Ruta de la imagen del usuario.
+- **email**: Dirección de correo electrónico del usuario.
+- **password**: Contraseña del usuario.
+- **role**: Rol del usuario (por defecto cero).
 
-Las clases `ProductManager` y `UserManager` cuentan con los siguientes métodos:
+## Funcionalidades Implementadas
 
-- `init()`: Se utiliza para inicializar el sistema de archivos y asegurarse de que el archivo de datos exista y esté en el formato adecuado.
-- `create(data)`: Agrega un nuevo producto o usuario al sistema.
-- `read()`: Devuelve una lista de todos los productos o usuarios almacenados.
-- `readOne(id)`: Devuelve un producto o usuario específico según su ID.
-- `destroy(id)`: Elimina un producto o usuario según su ID.
+Se han desarrollado las siguientes funcionalidades utilizando Express:
 
-Estos métodos manejan errores utilizando `try/catch`.
+### Endpoints de Productos:
+- `GET /api/products`: Permite obtener todos los productos almacenados. Se puede filtrar por categoría mediante una query. Si el array tiene productos, se devuelve un objeto con un código de estado `200` y la lista de productos en la propiedad "response". Si no hay productos, se devuelve un objeto con un código de estado `404` y un mensaje descriptivo.
+- `GET /api/products/:pid`: Permite obtener un producto específico por su ID. Si se encuentra el producto, se devuelve un objeto con un código de estado `200` y el producto en la propiedad "response". Si no se encuentra, se devuelve un objeto con un código de estado `404` y un mensaje descriptivo.
 
-## Uso del Código
+### Endpoints de Usuarios:
+- `GET /api/users`: Permite obtener todos los usuarios almacenados. Se puede filtrar por rol mediante una query. Si el array tiene usuarios, se devuelve un objeto con un código de estado `200` y la lista de usuarios en la propiedad "response". Si no hay usuarios, se devuelve un objeto con un código de estado `404` y un mensaje descriptivo.
+- `GET /api/users/:uid`: Permite obtener un usuario específico por su ID. Si se encuentra el usuario, se devuelve un objeto con un código de estado `200` y el usuario en la propiedad "response". Si no se encuentra, se devuelve un objeto con un código de estado `404` y un mensaje descriptivo.
 
-Para utilizar las clases `ProductManager` y `UserManager`, puedes seguir el siguiente ejemplo:
+## Ejecución del Código
 
-```javascript
-const productManager = new ProductManager();
+### Requisitos Previos
+- Node.js instalado en el sistema.
 
-// Ejemplo de creación de un producto
-productManager.create({
-    title: 'Producto de Ejemplo',
-    photo: 'ruta/a/la/foto.jpg',
-    category: 'Ejemplo',
-    price: 100,
-    stock: 10
-});
+### Pasos para Probar el Servidor
+1. Clonar el repositorio o descargar el código fuente.
+2. Instalar las dependencias del proyecto utilizando el comando `npm install`.
+3. Iniciar el servidor con el comando `npm run dev` o `node server.js`.
+4. Utilizar las siguientes URLs en un navegador web o realizar peticiones HTTP mediante herramientas como Postman:
 
-// Ejemplo de lectura de todos los productos
-productManager.read();
+   **Productos:**
+   - Para obtener todos los productos: `http://localhost:8080/api/products`
+   - Para filtrar por categoria (reemplazar `filtro` por la categoria): `http://localhost:8080/api/products?category=filtro`
+   - Para obtener un producto específico (reemplazar `:pid` por el ID del producto): `http://localhost:8080/api/products/:pid`
+     
+    **Usuarios:**
+   - Para obtener todos los usuarios: `http://localhost:8080/api/users`
+   - Para filtrar por rol (reemplazar `filtro` por el rol): `http://localhost:8080/api/users?rol=filtro`
+   - Para obtener un usuario específico (reemplazar `:uid` por el ID del usuario): `http://localhost:8080/api/users/:uid`
 
-// Ejemplo de lectura de un producto específico
-const product = productManager.readOne('ID_DEL_PRODUCTO');
-
-// Ejemplo de eliminación de un producto
-productManager.destroy('ID_DEL_PRODUCTO');
-```
-```javascript
-const userManager = new UserManager();
-
-// Ejemplo de creación de un usuario
-userManager.create({
-    email: 'usuario@prueba.com',
-    password: 'password',
-    role: 1,
-    photo: './ruta/imagen.jpg'
-});
-
-// Ejemplo de lectura de todos los usuarios
-userManager.read();
-
-// Ejemplo de lectura de un usuario específico
-const user = userManager.readOne('ID_DEL_USUARIO');
-
-// Ejemplo de eliminación de un usuario
-userManager.destroy('ID_DEL_USUARIO');
-```
