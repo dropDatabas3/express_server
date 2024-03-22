@@ -66,7 +66,7 @@ class ProductManager {
       lista = JSON.parse(lista);
       category && // <-- Evaluamos si category es false
         (lista = lista.filter((each) => each.category === category)); // <-- En caso de ser true, filtramos la lista a solo los que tengan category = category
-        return lista;
+      return lista;
     } catch (error) {
       console.error(error);
       return error;
@@ -76,16 +76,8 @@ class ProductManager {
     try {
       let lista = await fs.promises.readFile(this.path, "utf-8");
       lista = JSON.parse(lista);
-      if (lista.length === 0) {
-        throw new Error("No hay productos en la lista");
-      } else {
-        let product = lista.find((each) => each.id === id);
-        if (!product) {
-          throw new Error("Producto no encontrado");
-        } else {
-          return product;
-        }
-      }
+      let product = lista.find((each) => each.id === id);
+      return product;
     } catch (error) {
       console.error(error);
     }
