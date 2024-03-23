@@ -1,4 +1,4 @@
-# Desafío Entregable: Gestión de Productos y Usuarios
+# Gestión de Productos y Usuarios
 
 Este proyecto implementa un sistema de gestión de productos y usuarios utilizando `Node.js` y el módulo FileSystem (`fs`) de forma asíncrona, aprovechando las funcionalidades de `async/await` y `promises` para garantizar un flujo de ejecución eficiente y no bloqueante.
 
