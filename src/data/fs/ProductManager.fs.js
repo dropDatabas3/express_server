@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 class ProductManager {
   constructor() {
-    this.path = "./data/fs/files/products.json";
+    this.path = "./files/products.json"//"./src/data/fs/files/products.json";
     this.init();
   }
   init() {
@@ -57,7 +57,7 @@ class ProductManager {
         console.log(`producto '${data.title}' guardado correctamente`);
       }
     } catch (error) {
-      console.error(error);
+      throw error
     }
   }
   async read(category) {
@@ -68,7 +68,6 @@ class ProductManager {
         (lista = lista.filter((each) => each.category === category)); // <-- En caso de ser true, filtramos la lista a solo los que tengan category = category
       return lista;
     } catch (error) {
-      console.error(error);
       return error;
     }
   }
@@ -79,7 +78,6 @@ class ProductManager {
       let product = lista.find((each) => each.id === id);
       return product;
     } catch (error) {
-      console.error(error);
       return error;
     }
   }
@@ -87,7 +85,7 @@ class ProductManager {
   async update(id, data) {
     try {
       let all = await this.read();
-      let one = lista.find((each) => each.id === id);
+      let one = all.find((each) => each.id === id);
       if (one) {
         for (let prop in data) {
           one[prop] = data[prop];
@@ -99,7 +97,6 @@ class ProductManager {
       await fs.promises.writeFile(this.path, all);
       return one;
     } catch (error) {
-      console.error(error);
       throw error;
     }
   }
@@ -116,7 +113,7 @@ class ProductManager {
         console.log("Se elimino el producto: ", one.id);
       }
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   }
 }
@@ -327,6 +324,19 @@ async function create20products() {
     stock: 8,
   });
 }
+
+async function testUpdate(){
+  console.log('probando metodo update() de productos')
+  const product = new ProductManager()
+  console.log('ProductManager.readOne(22db307a472e99f4b6b29aa4):')
+  console.log(await product.readOne('22db307a472e99f4b6b29aa4'))
+  console.log('ProductManager.update("22db307a472e99f4b6b29aa4", {price: 200, stock: 20})')
+  await product.update("22db307a472e99f4b6b29saa4", {price: 345, stock: 10})
+  console.log('ProductManager.readOne(22db307a472e99f4b6b29aa4):')
+  console.log(await product.readOne('22db307a472e99f4b6b29aa4'))
+}
+
+testUpdate()
 
 const productsManager = new ProductManager();
 export default productsManager;

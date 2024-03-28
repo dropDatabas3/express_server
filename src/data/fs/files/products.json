@@ -12,8 +12,8 @@
     "title": "Agua Mineral",
     "photo": "agua.jpg",
     "category": "bebida",
-    "price": 300,
-    "stock": 50
+    "price": 345,
+    "stock": 10
   },
   {
     "id": "caa4773adb7be033d5a62344",

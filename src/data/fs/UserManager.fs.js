@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 class UserManager {
   constructor() {
-    this.path = "./data/fs/files/users.json";
+    this.path = "./files/users.json";
     this.init();
   }
 
@@ -62,7 +62,6 @@ class UserManager {
         (lista = lista.filter((each) => each.role == role)); // <-- En caso de ser true, filtramos la lista a solo los que tengan role = role
       return lista;
     } catch (error) {
-      console.error(error);
       throw error;
     }
   }
@@ -73,7 +72,6 @@ class UserManager {
       let user = lista.find((each) => each.id === id);
       return user;
     } catch (error) {
-      console.error(error);
       throw error;
     }
   }
@@ -81,7 +79,7 @@ class UserManager {
   async update(id, data) {
     try {
       let all = await this.read();
-      let one = lista.find((each) => each.id === id);
+      let one = all.find((each) => each.id === id);
       if (one) {
         for (let prop in data) {
           one[prop] = data[prop];
@@ -93,7 +91,6 @@ class UserManager {
       await fs.promises.writeFile(this.path, all);
       return one;
     } catch (error) {
-      console.error(error);
       throw error;
     }
   }
@@ -110,7 +107,6 @@ class UserManager {
         console.log("Se eliminó el usuario: ", one.email);
       }
     } catch (error) {
-      console.error(error);
       throw error;
     }
   }
