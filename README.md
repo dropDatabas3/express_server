@@ -54,4 +54,3 @@ Se han desarrollado las siguientes funcionalidades utilizando Express:
    - Para obtener todos los usuarios: `http://localhost:8080/api/users`
    - Para filtrar por rol (reemplazar `filtro` por el rol): `http://localhost:8080/api/users?rol=filtro`
    - Para obtener un usuario específico (reemplazar `:uid` por el ID del usuario): `http://localhost:8080/api/users/:uid`
-
