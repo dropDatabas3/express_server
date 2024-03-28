@@ -80,8 +80,30 @@ class ProductManager {
       return product;
     } catch (error) {
       console.error(error);
+      return error;
     }
   }
+
+  async update(id, data) {
+    try {
+      let all = await this.read();
+      let one = lista.find((each) => each.id === id);
+      if (one) {
+        for (let prop in data) {
+          one[prop] = data[prop];
+        }
+      } else {
+        throw new Error("No existe el producto");
+      }
+      all = JSON.stringify(all, null, 2);
+      await fs.promises.writeFile(this.path, all);
+      return one;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
   async destroy(id) {
     try {
       const one = await this.readOne(id);

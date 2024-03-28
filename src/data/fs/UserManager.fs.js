@@ -50,6 +50,7 @@ class UserManager {
       }
     } catch (error) {
       console.error(error);
+      throw error;
     }
   }
 
@@ -57,24 +58,43 @@ class UserManager {
     try {
       let lista = await fs.promises.readFile(this.path, "utf-8");
       lista = JSON.parse(lista);
-      role && // <-- Evaluamos si category es false
-        (lista = lista.filter((each) => each.role == role)); // <-- En caso de ser true, filtramos la lista a solo los que tengan category = category
+      role && // <-- Evaluamos si role es false
+        (lista = lista.filter((each) => each.role == role)); // <-- En caso de ser true, filtramos la lista a solo los que tengan role = role
       return lista;
     } catch (error) {
       console.error(error);
-      return error;
+      throw error;
     }
   }
 
   async readOne(id) {
     try {
-      let lista = await fs.promises.readFile(this.path, "utf-8");
-      lista = JSON.parse(lista);
+      let lista = await this.read();
       let user = lista.find((each) => each.id === id);
       return user;
     } catch (error) {
       console.error(error);
-      return error;
+      throw error;
+    }
+  }
+
+  async update(id, data) {
+    try {
+      let all = await this.read();
+      let one = lista.find((each) => each.id === id);
+      if (one) {
+        for (let prop in data) {
+          one[prop] = data[prop];
+        }
+      } else {
+        throw new Error("No existe el usuario");
+      }
+      all = JSON.stringify(all, null, 2);
+      await fs.promises.writeFile(this.path, all);
+      return one;
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
   }
 
@@ -91,6 +111,7 @@ class UserManager {
       }
     } catch (error) {
       console.error(error);
+      throw error;
     }
   }
 }
