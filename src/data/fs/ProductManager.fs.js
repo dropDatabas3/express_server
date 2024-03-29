@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 class ProductManager {
   constructor() {
-    this.path = "./files/products.json"//"./src/data/fs/files/products.json";
+    this.path = "./src/data/fs/files/products.json";
     this.init();
   }
   init() {
@@ -33,7 +33,7 @@ class ProductManager {
         !data.category ||
         !data.photo
       ) {
-        throw new Error("Todos los campos son necesarios");
+        throw new Error("All fields are required");
       } else {
         //CREO EL NUEVO PRODUCTO PARA LUEGO AGREGARLO A LA LISTA
         const newProduct = {
@@ -54,7 +54,7 @@ class ProductManager {
           this.path,
           JSON.stringify(products, null, 2)
         );
-        console.log(`producto '${data.title}' guardado correctamente`);
+        return newProduct
       }
     } catch (error) {
       throw error
@@ -91,7 +91,7 @@ class ProductManager {
           one[prop] = data[prop];
         }
       } else {
-        throw new Error("No existe el producto");
+        throw new Error("Product not found!");
       }
       all = JSON.stringify(all, null, 2);
       await fs.promises.writeFile(this.path, all);
@@ -105,12 +105,13 @@ class ProductManager {
     try {
       const one = await this.readOne(id);
       if (!one) {
-        throw new Error("El producto no existe");
+        throw new Error("Product not found!");
       } else {
         let all = await fs.promises.readFile(this.path, "utf-8");
         all = JSON.parse(all).filter((each) => each.id !== one.id);
         await fs.promises.writeFile(this.path, JSON.stringify(all, null, 2));
-        console.log("Se elimino el producto: ", one.id);
+        console.log("Product with id ", one.id, " successfully deleted:");
+        return one;
       }
     } catch (error) {
       throw error;
@@ -181,7 +182,7 @@ async function test() {
   await product.read();
 }
 
-async function create20products() {
+async function create40products() {
   const product = new ProductManager();
   await product.create({
     title: "Galletas",
@@ -323,20 +324,167 @@ async function create20products() {
     price: 1100,
     stock: 8,
   });
+  await product.create({
+    title: "Café",
+    photo: "cafe.jpg",
+    category: "bebida",
+    price: 450,
+    stock: 40,
+  });
+
+  await product.create({
+    title: "Croissant",
+    photo: "croissant.jpg",
+    category: "panadería",
+    price: 700,
+    stock: 20,
+  });
+
+  await product.create({
+    title: "Ensalada César",
+    photo: "ensalada.jpg",
+    category: "ensalada",
+    price: 1200,
+    stock: 15,
+  });
+
+  await product.create({
+    title: "Sushi",
+    photo: "sushi.jpg",
+    category: "comida",
+    price: 2000,
+    stock: 10,
+  });
+
+  await product.create({
+    title: "Almendras",
+    photo: "almendras.jpg",
+    category: "fruto seco",
+    price: 850,
+    stock: 30,
+  });
+
+  await product.create({
+    title: "Torta de Chocolate",
+    photo: "torta.jpg",
+    category: "postre",
+    price: 1500,
+    stock: 10,
+  });
+
+  await product.create({
+    title: "Sopa de Verduras",
+    photo: "sopa.jpg",
+    category: "sopa",
+    price: 600,
+    stock: 20,
+  });
+
+  await product.create({
+    title: "Pistachos",
+    photo: "pistachos.jpg",
+    category: "fruto seco",
+    price: 900,
+    stock: 25,
+  });
+
+  await product.create({
+    title: "Hummus",
+    photo: "hummus.jpg",
+    category: "dip",
+    price: 750,
+    stock: 15,
+  });
+
+  await product.create({
+    title: "Pastel de Carne",
+    photo: "pastel.jpg",
+    category: "comida",
+    price: 1400,
+    stock: 8,
+  });
+  await product.create({
+    title: "Pancakes",
+    photo: "pancakes.jpg",
+    category: "desayuno",
+    price: 800,
+    stock: 20,
+  });
+
+  await product.create({
+    title: "Sándwich de Pollo",
+    photo: "sandwich_pollo.jpg",
+    category: "comida rápida",
+    price: 1000,
+    stock: 15,
+  });
+
+  await product.create({
+    title: "Aceitunas",
+    photo: "aceitunas.jpg",
+    category: "aperitivo",
+    price: 600,
+    stock: 30,
+  });
+
+  await product.create({
+    title: "Tarta de Queso",
+    photo: "tarta_queso.jpg",
+    category: "postre",
+    price: 1300,
+    stock: 10,
+  });
+
+  await product.create({
+    title: "Burritos",
+    photo: "burritos.jpg",
+    category: "comida rápida",
+    price: 1200,
+    stock: 12,
+  });
+
+  await product.create({
+    title: "Sopa de Tomate",
+    photo: "sopa_tomate.jpg",
+    category: "sopa",
+    price: 700,
+    stock: 25,
+  });
+
+  await product.create({
+    title: "Plátanos",
+    photo: "platanos.jpg",
+    category: "fruta",
+    price: 300,
+    stock: 40,
+  });
+
+  await product.create({
+    title: "Ensalada de Frutas",
+    photo: "ensalada_frutas.jpg",
+    category: "ensalada",
+    price: 900,
+    stock: 15,
+  });
+
+  await product.create({
+    title: "Empanadas",
+    photo: "empanadas.jpg",
+    category: "comida",
+    price: 1100,
+    stock: 8,
+  });
+
+  await product.create({
+    title: "Pastel de Manzana",
+    photo: "pastel_manzana.jpg",
+    category: "postre",
+    price: 1400,
+    stock: 10,
+  });
 }
 
-async function testUpdate(){
-  console.log('probando metodo update() de productos')
-  const product = new ProductManager()
-  console.log('ProductManager.readOne(22db307a472e99f4b6b29aa4):')
-  console.log(await product.readOne('22db307a472e99f4b6b29aa4'))
-  console.log('ProductManager.update("22db307a472e99f4b6b29aa4", {price: 200, stock: 20})')
-  await product.update("22db307a472e99f4b6b29saa4", {price: 345, stock: 10})
-  console.log('ProductManager.readOne(22db307a472e99f4b6b29aa4):')
-  console.log(await product.readOne('22db307a472e99f4b6b29aa4'))
-}
 
-testUpdate()
 
 const productsManager = new ProductManager();
 export default productsManager;

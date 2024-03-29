@@ -1,6 +1,6 @@
 [
   {
-    "id": "b2e5a871422d2269d860a022",
+    "id": "70f99041b88763249199af82",
     "title": "Galletas",
     "photo": "galletas.jpg",
     "category": "snack",
@@ -8,15 +8,15 @@
     "stock": 10
   },
   {
-    "id": "22db307a472e99f4b6b29aa4",
+    "id": "503b0c00080a311ab89e7c7c",
     "title": "Agua Mineral",
     "photo": "agua.jpg",
     "category": "bebida",
-    "price": 345,
-    "stock": 10
+    "price": 300,
+    "stock": 50
   },
   {
-    "id": "caa4773adb7be033d5a62344",
+    "id": "31f490957e87ac8cdf3aad03",
     "title": "Manzanas",
     "photo": "manzanas.jpg",
     "category": "fruta",
@@ -24,7 +24,7 @@
     "stock": 15
   },
   {
-    "id": "2f262d52333c103f02c37494",
+    "id": "7d12695e3463aa2640639f3d",
     "title": "Chocolate",
     "photo": "chocolate.jpg",
     "category": "dulce",
@@ -32,7 +32,7 @@
     "stock": 8
   },
   {
-    "id": "6eae28653cabdc7d852c9747",
+    "id": "7076dfac028c6b90f0a0fe2e",
     "title": "Leche",
     "photo": "leche.jpg",
     "category": "lácteo",
@@ -40,7 +40,7 @@
     "stock": 20
   },
   {
-    "id": "9df7a4985bd4f1c0e8c70943",
+    "id": "cba7c8047108a1ad4bc5ffde",
     "title": "Yogur",
     "photo": "yogur.jpg",
     "category": "lácteo",
@@ -48,7 +48,7 @@
     "stock": 15
   },
   {
-    "id": "c690c805aea72d4050a12467",
+    "id": "e560727544414195d6502630",
     "title": "Hamburguesa",
     "photo": "hamburguesa.jpg",
     "category": "comida rápida",
@@ -56,7 +56,7 @@
     "stock": 7
   },
   {
-    "id": "229519390de67978d0fe5e0a",
+    "id": "ae8bdc0b5202ed0eea583347",
     "title": "Jugo de Naranja",
     "photo": "jugo.jpg",
     "category": "bebida",
@@ -64,7 +64,7 @@
     "stock": 30
   },
   {
-    "id": "f38ecffc3ac08b9207da94c2",
+    "id": "59a16d9bc61155bcaa757e87",
     "title": "Cereal",
     "photo": "cereal.jpg",
     "category": "desayuno",
@@ -72,7 +72,7 @@
     "stock": 10
   },
   {
-    "id": "736883916cd2380ea4afc4ab",
+    "id": "52928c328f66a29fa26323c7",
     "title": "Papas Fritas",
     "photo": "papas.jpg",
     "category": "snack",
@@ -80,7 +80,7 @@
     "stock": 25
   },
   {
-    "id": "909f2abb01d7f163ebdc087c",
+    "id": "61a6e3d3b2de288cedb32fd1",
     "title": "Tomates",
     "photo": "tomates.jpg",
     "category": "verdura",
@@ -88,7 +88,7 @@
     "stock": 12
   },
   {
-    "id": "0c2dd24333fef33936fc64d5",
+    "id": "d14b9d433e5d0f0138747176",
     "title": "Pescado",
     "photo": "pescado.jpg",
     "category": "mariscos",
@@ -96,7 +96,7 @@
     "stock": 4
   },
   {
-    "id": "95ad7989c510de530fb61378",
+    "id": "b79bb8fa0ba25912286cd106",
     "title": "Refresco de Lima",
     "photo": "refresco.jpg",
     "category": "bebida",
@@ -104,7 +104,7 @@
     "stock": 20
   },
   {
-    "id": "4b1946e27b91569d7eccd075",
+    "id": "0053623ae4328056e99b63b3",
     "title": "Huevos",
     "photo": "huevos.jpg",
     "category": "lácteo",
@@ -112,7 +112,7 @@
     "stock": 18
   },
   {
-    "id": "6ce30c8bb01479cfb69d0550",
+    "id": "00703dad6da6900d4d75a409",
     "title": "Pizza",
     "photo": "pizza.jpg",
     "category": "comida rápida",
@@ -120,7 +120,7 @@
     "stock": 6
   },
   {
-    "id": "08abe3772fdfa8f8852a9a8a",
+    "id": "b7aaae438f5c1c0f37a3b03b",
     "title": "Caramelo",
     "photo": "caramelo.jpg",
     "category": "dulce",
@@ -128,7 +128,7 @@
     "stock": 50
   },
   {
-    "id": "37d66952302e45657b4a0cc4",
+    "id": "cf8c344b77415fd33409d3a6",
     "title": "Sandwich",
     "photo": "sandwich.jpg",
     "category": "comida rápida",
@@ -136,7 +136,7 @@
     "stock": 15
   },
   {
-    "id": "0abbee99a1fef2c0017ee36b",
+    "id": "b3ff3cd5dc8069c259bd5782",
     "title": "Zanahorias",
     "photo": "zanahorias.jpg",
     "category": "verdura",
@@ -144,7 +144,7 @@
     "stock": 20
   },
   {
-    "id": "c2328ded35a66c3aaa633e14",
+    "id": "d786abbe533199937e419808",
     "title": "Té",
     "photo": "te.jpg",
     "category": "bebida",
@@ -152,11 +152,187 @@
     "stock": 40
   },
   {
-    "id": "dd587002bfb9db47d84eebef",
+    "id": "054b74e6f638141d73133c27",
     "title": "Pasta",
     "photo": "pasta.jpg",
     "category": "comida",
     "price": 1100,
     "stock": 8
+  },
+  {
+    "id": "d05b3bbc0b0b9067b62cf7e1",
+    "title": "Café",
+    "photo": "cafe.jpg",
+    "category": "bebida",
+    "price": 450,
+    "stock": 40
+  },
+  {
+    "id": "0bd6180885cc6f64608f8d6d",
+    "title": "Croissant",
+    "photo": "croissant.jpg",
+    "category": "panadería",
+    "price": 700,
+    "stock": 20
+  },
+  {
+    "id": "0474a4edea6949c7b5d100a0",
+    "title": "Ensalada César",
+    "photo": "ensalada.jpg",
+    "category": "ensalada",
+    "price": 1200,
+    "stock": 15
+  },
+  {
+    "id": "e7072e6566240a1e48079fda",
+    "title": "Sushi",
+    "photo": "sushi.jpg",
+    "category": "comida",
+    "price": 2000,
+    "stock": 10
+  },
+  {
+    "id": "b3a8b840a3ea88190e9c5096",
+    "title": "Almendras",
+    "photo": "almendras.jpg",
+    "category": "fruto seco",
+    "price": 850,
+    "stock": 30
+  },
+  {
+    "id": "c5f2e7068af02b92debd5550",
+    "title": "Torta de Chocolate",
+    "photo": "torta.jpg",
+    "category": "postre",
+    "price": 1500,
+    "stock": 10
+  },
+  {
+    "id": "3b39d54fd174ceb0a6211706",
+    "title": "Sopa de Verduras",
+    "photo": "sopa.jpg",
+    "category": "sopa",
+    "price": 600,
+    "stock": 20
+  },
+  {
+    "id": "e39e46754d5f3d6a84f088ef",
+    "title": "Pistachos",
+    "photo": "pistachos.jpg",
+    "category": "fruto seco",
+    "price": 900,
+    "stock": 25
+  },
+  {
+    "id": "f8e4847c3a6194c474b89b7b",
+    "title": "Hummus",
+    "photo": "hummus.jpg",
+    "category": "dip",
+    "price": 750,
+    "stock": 15
+  },
+  {
+    "id": "cf9ab263bc88a978b9d0760b",
+    "title": "Pastel de Carne",
+    "photo": "pastel.jpg",
+    "category": "comida",
+    "price": 1400,
+    "stock": 8
+  },
+  {
+    "id": "26467b8a659775fd9f97a3e3",
+    "title": "Pancakes",
+    "photo": "pancakes.jpg",
+    "category": "desayuno",
+    "price": 800,
+    "stock": 20
+  },
+  {
+    "id": "317e59190075047593282ce4",
+    "title": "Sándwich de Pollo",
+    "photo": "sandwich_pollo.jpg",
+    "category": "comida rápida",
+    "price": 1000,
+    "stock": 15
+  },
+  {
+    "id": "2f7562c0093c6227bbbb9f5f",
+    "title": "Aceitunas",
+    "photo": "aceitunas.jpg",
+    "category": "aperitivo",
+    "price": 600,
+    "stock": 30
+  },
+  {
+    "id": "3ee293fd910147094ae4fb19",
+    "title": "Tarta de Queso",
+    "photo": "tarta_queso.jpg",
+    "category": "postre",
+    "price": 1300,
+    "stock": 10
+  },
+  {
+    "id": "ede7478d6f8f5739091bb62a",
+    "title": "Burritos",
+    "photo": "burritos.jpg",
+    "category": "comida rápida",
+    "price": 1200,
+    "stock": 12
+  },
+  {
+    "id": "b99eceb781961317cfd16bd5",
+    "title": "Sopa de Tomate",
+    "photo": "sopa_tomate.jpg",
+    "category": "sopa",
+    "price": 700,
+    "stock": 25
+  },
+  {
+    "id": "1775365c48c3553f676596c2",
+    "title": "Plátanos",
+    "photo": "platanos.jpg",
+    "category": "fruta",
+    "price": 300,
+    "stock": 40
+  },
+  {
+    "id": "17ea3b2f2cc220728c01eca1",
+    "title": "Ensalada de Frutas",
+    "photo": "ensalada_frutas.jpg",
+    "category": "ensalada",
+    "price": 900,
+    "stock": 15
+  },
+  {
+    "id": "c31505bc1c65349675764503",
+    "title": "Empanadas",
+    "photo": "empanadas.jpg",
+    "category": "comida",
+    "price": 1100,
+    "stock": 8
+  },
+  {
+    "id": "047915fe053b78ddb665f8c5",
+    "title": "Pastel de Manzana",
+    "photo": "pastel_manzana.jpg",
+    "category": "postre",
+    "price": 1400,
+    "stock": 10
+  },
+  {
+    "id": "bd465dcf1ec8ae5da683415e",
+    "title": "Tarta de atun",
+    "photo": "tarta_atun.jpg",
+    "category": "comida rápida",
+    "price": 200,
+    "stock": 40
+  },
+  {
+    "id": "c3475deb0f4ccc2f13bd70c5",
+    "title": "Tarta de Jamon y Queso",
+    "photo": "tarta_jq.jpg",
+    "category": "comida rápida",
+    "price": 800,
+    "stock": 15
   }
 ]
