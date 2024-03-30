@@ -1,7 +1,9 @@
 import express from "express";
+
 import indexRouter from "./src/routers/index.router.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
+
 
 /*************
     SERVER
