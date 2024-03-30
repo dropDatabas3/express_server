@@ -1,56 +1,122 @@
-# Servidor con Express
+# Express Server with Product and User Management
 
-Implementación de un servidor utilizando Express, para la gestión de productos y usuarios. Se han desarrollado gestores para manejar los datos de productos y usuarios, permitiendo la creación, lectura, lectura individual y eliminación de recursos tanto en memoria como en archivos.
-Para más información sobre los gestores, echa un vistazo al desafío: [Sprint2](https://github.com/juanp1996/servernode/tree/sprint2)
+Implementation of a server using Express, for managing products and users. Handlers have been developed to handle product and user data, allowing for the creation, reading, individual reading, updating, and deletion of resources.
 
-## Estructura de Datos
 
-Cada producto y usuario posee propiedades específicas:
+## Data Structure
 
-### Producto:
-- **id**: Código identificador de 12 bytes en hexadecimal.
-- **title**: Título del producto.
-- **photo**: Ruta de la imagen del producto.
-- **category**: Categoría del producto.
-- **price**: Precio del producto.
-- **stock**: Unidades disponibles del producto.
+Each product and user has specific properties:
 
-### Usuario:
-- **id**: Código identificador de 12 bytes en hexadecimal.
-- **photo**: Ruta de la imagen del usuario.
-- **email**: Dirección de correo electrónico del usuario.
-- **password**: Contraseña del usuario.
-- **role**: Rol del usuario (por defecto cero).
+**Product:**
+- **id:** 12-byte hexadecimal identifier code.
+- **title:** Product title.
+- **photo:** Product image path.
+- **category:** Product category.
+- **price:** Product price.
+- **stock:** Available units of the product.
 
-## Funcionalidades Implementadas
+**User:**
+- **id:** 12-byte hexadecimal identifier code.
+- **photo:** User image path.
+- **email:** User email address.
+- **password:** User password.
+- **role:** User role (default is zero).
 
-Se han desarrollado las siguientes funcionalidades utilizando Express:
+## Functionality Implemented
 
-### Endpoints de Productos:
-- `GET /api/products`: Permite obtener todos los productos almacenados. Se puede filtrar por categoría mediante una query. Si el array tiene productos, se devuelve un objeto con un código de estado `200` y la lista de productos en la propiedad "response". Si no hay productos, se devuelve un objeto con un código de estado `404` y un mensaje descriptivo.
-- `GET /api/products/:pid`: Permite obtener un producto específico por su ID. Si se encuentra el producto, se devuelve un objeto con un código de estado `200` y el producto en la propiedad "response". Si no se encuentra, se devuelve un objeto con un código de estado `404` y un mensaje descriptivo.
+The following functionalities have been developed using Express:
 
-### Endpoints de Usuarios:
-- `GET /api/users`: Permite obtener todos los usuarios almacenados. Se puede filtrar por rol mediante una query. Si el array tiene usuarios, se devuelve un objeto con un código de estado `200` y la lista de usuarios en la propiedad "response". Si no hay usuarios, se devuelve un objeto con un código de estado `404` y un mensaje descriptivo.
-- `GET /api/users/:uid`: Permite obtener un usuario específico por su ID. Si se encuentra el usuario, se devuelve un objeto con un código de estado `200` y el usuario en la propiedad "response". Si no se encuentra, se devuelve un objeto con un código de estado `404` y un mensaje descriptivo.
+### Endpoints for Products:
 
-## Ejecución del Código
+- **POST /api/products:** Implements the `create(data)` method to create a product and save it with fs.
+  - If created successfully:
+    - **statusCode:** 201
+    - **response:** id (of the new product)
+    - **message:** (descriptive message)
+  - Error handling with errorHandler.
 
-### Requisitos Previos
-- Node.js instalado en el sistema.
+- **GET /api/products:** Implements the `read()` method to fetch all products from fs. Add the necessary query to filter by category.
+  - If the array has products, send the client an object with properties:
+    - **statusCode:** 200
+    - **response:** (the array)
+  - Error handling with errorHandler.
 
-### Pasos para Probar el Servidor
-1. Clonar el repositorio o descargar el código fuente.
-2. Instalar las dependencias del proyecto utilizando el comando `npm install`.
-3. Iniciar el servidor con el comando `npm run dev` o `node server.js`.
-4. Utilizar las siguientes URLs en un navegador web o realizar peticiones HTTP mediante herramientas como Postman:
+- **GET /api/products/:pid:** Implements the `readOne(pid)` method to fetch a product from fs:
+  - If the product is found, send the client an object with properties:
+    - **statusCode:** 200
+    - **response:** (the object)
+  - Error handling with errorHandler.
 
-   **Productos:**
-   - Para obtener todos los productos: `http://localhost:8080/api/products`
-   - Para filtrar por categoria (reemplazar `filtro` por la categoria): `http://localhost:8080/api/products?category=filtro`
-   - Para obtener un producto específico (reemplazar `:pid` por el ID del producto): `http://localhost:8080/api/products/:pid`
-     
-    **Usuarios:**
-   - Para obtener todos los usuarios: `http://localhost:8080/api/users`
-   - Para filtrar por rol (reemplazar `filtro` por el rol): `http://localhost:8080/api/users?rol=filtro`
-   - Para obtener un usuario específico (reemplazar `:uid` por el ID del usuario): `http://localhost:8080/api/users/:uid`
+- **PUT /api/products/:pid:** Implements the `update(pid,data)` method to fetch a product from fs and update it:
+  - If the product is updated, send the client an object with properties:
+    - **statusCode:** 200
+    - **response:** (the modified object)
+  - Error handling with errorHandler.
+
+- **DELETE /api/products/:pid:** Implements the `destroy(pid)` method to fetch a product from fs and delete it:
+  - If the product is deleted, send the client an object with properties:
+    - **statusCode:** 200
+    - **response:** (the object)
+  - Error handling with errorHandler.
+
+### Endpoints for Users:
+
+- **POST /api/users:** Implements the `create(data)` method to create a user and save it with fs. Add the corresponding middleware to validate mandatory and default properties.
+  - If created successfully:
+    - **statusCode:** 201
+    - **response:** id (of the new user)
+    - **message:** (descriptive message)
+  - Error handling with errorHandler.
+
+- **GET /api/users:** Implements the `read()` method to fetch all users from fs. Add the necessary query to filter by role.
+  - If the array has users, send the client an object with properties:
+    - **statusCode:** 200
+    - **response:** (the array)
+  - Error handling with errorHandler.
+
+- **GET /api/users/:uid:** Implements the `readOne(uid)` method to fetch a user from fs:
+  - If the user is found, send the client an object with properties:
+    - **statusCode:** 200
+    - **response:** (the object)
+  - Error handling with errorHandler.
+
+- **PUT /api/users/:uid:** Implements the `update(uid,data)` method to fetch a user from fs and update it:
+  - If the user is updated, send the client an object with properties:
+    - **statusCode:** 200
+    - **response:** (the modified object)
+  - Error handling with errorHandler.
+
+- **DELETE /api/users/:pid:** Implements the `destroy(pid)` method to fetch a user from fs and delete it:
+  - If the user is deleted, send the client an object with properties:
+    - **statusCode:** 200
+    - **response:** (the object)
+  - Error handling with errorHandler.
+ 
+## Additional Information
+
+This project is a continuation of the development done in [Sprint 3](https://github.com/juanp1996/express_server/tree/sprint3). For more details about the functionalities implemented in that sprint, we recommend checking out the corresponding branch.
+
+Furthermore, for a complete understanding of the handlers developed in this project, it is recommended to read the [Sprint 2](https://github.com/juanp1996/express_server/tree/sprint2) branch.
+
+
+## Testing the API
+
+To test the API, you can use Postman or any other HTTP client tool.
+
+### Products Endpoints:
+
+- **GET /api/products:** To get all products: `http://localhost:8080/api/products`
+- **GET /api/products?category=filter:** To filter by category (replace 'filter' with the desired category).
+- **GET /api/products/:pid:** To get a specific product (replace ':pid' with the product ID).
+- **POST /api/products:** To create a product.
+- **PUT /api/products/:pid:** To update a product.
+- **DELETE /api/products/:pid:** To delete a product.
+
+### Users Endpoints:
+
+- **GET /api/users:** To get all products: `http://localhost:8080/api/products`
+- **GET /api/users?role=filter:** To filter by role (replace 'filter' with the desired role).
+- **GET /api/users/:uid:** To get a specific user (replace ':uid' with the user ID).
+- **POST /api/users:** To create a user.
+- **PUT /api/users/:uid:** To update a users.
+- **DELETE /api/users/:uid:** To delete a user.

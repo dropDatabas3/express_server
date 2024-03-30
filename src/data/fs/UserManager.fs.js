@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 class UserManager {
   constructor() {
-    this.path = "./files/users.json";
+    this.path = "./src/data/fs/files/users.json";
     this.init();
   }
 
@@ -28,7 +28,7 @@ class UserManager {
   async create(data) {
     try {
       if (!data.email || !data.password || !data.role || !data.photo) {
-        throw new Error("Todos los campos son necesarios");
+        throw new Error("All fields are required");
       } else {
         // Crear el nuevo usuario
         const newUser = {
@@ -46,7 +46,7 @@ class UserManager {
 
         // Escribir en el archivo
         await fs.promises.writeFile(this.path, JSON.stringify(users, null, 2));
-        console.log(`Usuario '${data.email}' guardado correctamente`);
+        return newUser;
       }
     } catch (error) {
       console.error(error);
@@ -85,7 +85,7 @@ class UserManager {
           one[prop] = data[prop];
         }
       } else {
-        throw new Error("No existe el usuario");
+        throw new Error("User not found!");
       }
       all = JSON.stringify(all, null, 2);
       await fs.promises.writeFile(this.path, all);
@@ -99,12 +99,13 @@ class UserManager {
     try {
       const one = await this.readOne(id);
       if (!one) {
-        throw new Error("El usuario no existe");
+        throw new Error("User not found!");
       } else {
         let all = await fs.promises.readFile(this.path, "utf-8");
         all = JSON.parse(all).filter((each) => each.id !== one.id);
         await fs.promises.writeFile(this.path, JSON.stringify(all, null, 2));
-        console.log("Se eliminó el usuario: ", one.email);
+        console.log("User with id ", one.id, " succesfully deleted");
+        return one;
       }
     } catch (error) {
       throw error;
