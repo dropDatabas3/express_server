@@ -8,7 +8,6 @@ import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import  __dirname  from "./utils.js";
 
 
-
 /*************
     SERVER
 **************/
@@ -32,6 +31,7 @@ server.set("views", __dirname+'/src/views'); // <-- Set the views directory
 server.use(express.urlencoded({ extended: true })); // <-- Allows the server to read req.param and req.query
 server.use(express.json()); // <-- Used for req body
 server.use(morgan("dev")); // <-- Log requests to the console
+
 
 /*************
   ENDPOINTS
