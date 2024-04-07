@@ -30,8 +30,7 @@ class ProductManager {
         !data.title ||
         !data.price ||
         !data.stock ||
-        !data.category ||
-        !data.photo
+        !data.category
       ) {
         throw new Error("All fields are required");
       } else {
@@ -39,7 +38,7 @@ class ProductManager {
         const newProduct = {
           id: data.id || crypto.randomBytes(12).toString("hex"), //data.id para generar un producto de prueba para readOne(id) y destroy(id)
           title: data.title,
-          photo: data.photo,
+          photo: data.photo || "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
           category: data.category,
           price: data.price,
           stock: data.stock,
