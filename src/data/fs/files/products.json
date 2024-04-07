@@ -1,0 +1,339 @@
+[
+  {
+    "id": "70f99041b88763249199af82",
+    "title": "Galletas",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "snack",
+    "price": 500,
+    "stock": 10
+  },
+  {
+
+    "id": "503b0c00080a311ab89e7c7c",
+    "title": "Agua Mineral",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "bebida",
+    "price": 300,
+    "stock": 50
+  },
+  {
+    "id": "31f490957e87ac8cdf3aad03",
+    "title": "Manzanas",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "fruta",
+    "price": 600,
+    "stock": 15
+  },
+  {
+    "id": "7d12695e3463aa2640639f3d",
+    "title": "Chocolate",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "dulce",
+    "price": 1000,
+    "stock": 8
+  },
+  {
+    "id": "7076dfac028c6b90f0a0fe2e",
+    "title": "Leche",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "lácteo",
+    "price": 900,
+    "stock": 20
+  },
+  {
+    "id": "cba7c8047108a1ad4bc5ffde",
+    "title": "Yogur",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "lácteo",
+    "price": 700,
+    "stock": 15
+  },
+  {
+    "id": "e560727544414195d6502630",
+    "title": "Hamburguesa",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "comida rápida",
+    "price": 1500,
+    "stock": 7
+  },
+  {
+    "id": "ae8bdc0b5202ed0eea583347",
+    "title": "Jugo de Naranja",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "bebida",
+    "price": 800,
+    "stock": 30
+  },
+  {
+    "id": "59a16d9bc61155bcaa757e87",
+    "title": "Cereal",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "desayuno",
+    "price": 1200,
+    "stock": 10
+  },
+  {
+    "id": "52928c328f66a29fa26323c7",
+    "title": "Papas Fritas",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "snack",
+    "price": 700,
+    "stock": 25
+  },
+  {
+    "id": "61a6e3d3b2de288cedb32fd1",
+    "title": "Tomates",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "verdura",
+    "price": 400,
+    "stock": 12
+  },
+  {
+    "id": "d14b9d433e5d0f0138747176",
+    "title": "Pescado",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "mariscos",
+    "price": 2500,
+    "stock": 4
+  },
+  {
+    "id": "b79bb8fa0ba25912286cd106",
+    "title": "Refresco de Lima",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "bebida",
+    "price": 1000,
+    "stock": 20
+  },
+  {
+    "id": "0053623ae4328056e99b63b3",
+    "title": "Huevos",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "lácteo",
+    "price": 600,
+    "stock": 18
+  },
+  {
+    "id": "00703dad6da6900d4d75a409",
+    "title": "Pizza",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "comida rápida",
+    "price": 1800,
+    "stock": 6
+  },
+  {
+    "id": "b7aaae438f5c1c0f37a3b03b",
+    "title": "Caramelo",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "dulce",
+    "price": 200,
+    "stock": 50
+  },
+  {
+    "id": "cf8c344b77415fd33409d3a6",
+    "title": "Sandwich",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "comida rápida",
+    "price": 900,
+    "stock": 15
+  },
+  {
+    "id": "b3ff3cd5dc8069c259bd5782",
+    "title": "Zanahorias",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "verdura",
+    "price": 300,
+    "stock": 20
+  },
+  {
+    "id": "d786abbe533199937e419808",
+    "title": "Té",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "bebida",
+    "price": 600,
+    "stock": 40
+  },
+  {
+    "id": "054b74e6f638141d73133c27",
+    "title": "Pasta",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "comida",
+    "price": 1100,
+    "stock": 8
+  },
+  {
+    "id": "d05b3bbc0b0b9067b62cf7e1",
+    "title": "Café",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "bebida",
+    "price": 450,
+    "stock": 40
+  },
+  {
+    "id": "0bd6180885cc6f64608f8d6d",
+    "title": "Croissant",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "panadería",
+    "price": 700,
+    "stock": 20
+  },
+  {
+    "id": "0474a4edea6949c7b5d100a0",
+    "title": "Ensalada César",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "ensalada",
+    "price": 1200,
+    "stock": 15
+  },
+  {
+    "id": "e7072e6566240a1e48079fda",
+    "title": "Sushi",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "comida",
+    "price": 2000,
+    "stock": 10
+  },
+  {
+    "id": "b3a8b840a3ea88190e9c5096",
+    "title": "Almendras",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "fruto seco",
+    "price": 850,
+    "stock": 30
+  },
+  {
+    "id": "c5f2e7068af02b92debd5550",
+    "title": "Torta de Chocolate",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "postre",
+    "price": 1500,
+    "stock": 10
+  },
+  {
+    "id": "3b39d54fd174ceb0a6211706",
+    "title": "Sopa de Verduras",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "sopa",
+    "price": 600,
+    "stock": 20
+  },
+  {
+    "id": "e39e46754d5f3d6a84f088ef",
+    "title": "Pistachos",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "fruto seco",
+    "price": 900,
+    "stock": 25
+  },
+  {
+    "id": "f8e4847c3a6194c474b89b7b",
+    "title": "Hummus",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "dip",
+    "price": 750,
+    "stock": 15
+  },
+  {
+    "id": "cf9ab263bc88a978b9d0760b",
+    "title": "Pastel de Carne",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "comida",
+    "price": 1400,
+    "stock": 8
+  },
+  {
+    "id": "26467b8a659775fd9f97a3e3",
+    "title": "Pancakes",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "desayuno",
+    "price": 800,
+    "stock": 20
+  },
+  {
+    "id": "317e59190075047593282ce4",
+    "title": "Sándwich de Pollo",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "comida rápida",
+    "price": 1000,
+    "stock": 15
+  },
+  {
+    "id": "2f7562c0093c6227bbbb9f5f",
+    "title": "Aceitunas",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "aperitivo",
+    "price": 600,
+    "stock": 30
+  },
+  {
+    "id": "3ee293fd910147094ae4fb19",
+    "title": "Tarta de Queso",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "postre",
+    "price": 1300,
+    "stock": 10
+  },
+  {
+    "id": "ede7478d6f8f5739091bb62a",
+    "title": "Burritos",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "comida rápida",
+    "price": 1200,
+    "stock": 12
+  },
+  {
+    "id": "b99eceb781961317cfd16bd5",
+    "title": "Sopa de Tomate",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "sopa",
+    "price": 700,
+    "stock": 25
+  },
+  {
+    "id": "1775365c48c3553f676596c2",
+    "title": "Plátanos",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "fruta",
+    "price": 300,
+    "stock": 40
+  },
+  {
+    "id": "17ea3b2f2cc220728c01eca1",
+    "title": "Ensalada de Frutas",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "ensalada",
+    "price": 900,
+    "stock": 15
+  },
+  {
+    "id": "c31505bc1c65349675764503",
+    "title": "Empanadas",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "comida",
+    "price": 1100,
+    "stock": 8
+  },
+  {
+    "id": "047915fe053b78ddb665f8c5",
+    "title": "Pastel de Manzana",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "postre",
+    "price": 1400,
+    "stock": 10
+  },
+  {
+    "id": "bd465dcf1ec8ae5da683415e",
+    "title": "Tarta de atun",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "comida rápida",
+    "price": 200,
+    "stock": 40
+  },
+  {
+    "id": "c3475deb0f4ccc2f13bd70c5",
+    "title": "Tarta de Jamon y Queso",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "comida rápida",
+    "price": 800,
+    "stock": 15
+  }
+]
