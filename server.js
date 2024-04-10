@@ -2,7 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import { Server } from "socket.io";
 import { createServer } from "http";
-import { engine } from "express-handlebars";
+
 
 import indexRouter from "./src/routers/index.router.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
@@ -28,6 +28,7 @@ const socketServer = new Server(nodeServer)
 socketServer.on("connection", socketcb)
 
 
+
 /*************
 MOTOR DE PLANTILLAS / TEMPLATING ENGINE
 **************/
@@ -43,6 +44,7 @@ server.use(express.urlencoded({ extended: true })); // <-- Allows the server to 
 server.use(express.json()); // <-- Used for req body
 server.use(morgan("dev")); // <-- Log requests to the console
 server.use(express.static(__dirname + "/public")); // <-- Serve static files
+
 
 
 /*************

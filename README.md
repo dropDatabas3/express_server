@@ -1,4 +1,3 @@
-
 # Express Server with Product and User Management
 
 Implementation of a server using Express, for managing products and users. Handlers have been developed to handle product and user data, allowing for the creation, reading, individual reading, updating, and deletion of resources.
