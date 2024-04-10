@@ -120,3 +120,25 @@ To test the API, you can use Postman or any other HTTP client tool.
 - **POST /api/users:** To create a user.
 - **PUT /api/users/:uid:** To update a users.
 - **DELETE /api/users/:uid:** To delete a user.
+
+### Tools and Libraries Integrated:
+
+- **Socket.IO:** Integrated Socket.IO library for real-time communication between server and client, enhancing user experience by displaying changes instantly without page reloads.
+
+- **HTTP Library (createServer):** Configured the server using the HTTP library's createServer function to complement Socket.IO with Express, ensuring seamless integration of real-time communication features with the rest of the Express-based application.
+
+- **Morgan Library:** Utilized the Morgan library to generate real-time logs of all client requests, providing a live view of application traffic for monitoring and debugging purposes.
+
+
+### Views and Routes:
+
+- **Views:** Developed views for **`/home`**, **`/products/real`**, **`/products`**, **`/users/register`**, and **`/users/:uid`**, along with their corresponding routes in `./routers/views` using **Handlebars**. These views and routes provide the necessary infrastructure for user interaction with the application.
+
+
+### Form Implementations:
+
+- **Product Registration Form:** Created a form enabling users to register new products. This form is designed to update in real-time, reflecting changes made by one user instantly in the interface of other connected users, thanks to the functionality provided by Socket.IO.
+
+- **User Registration Form (Functionality Not Yet Implemented):** Created the structure of a form for user registration, although the associated functionality has not been implemented yet.
+
+
