@@ -350,5 +350,13 @@
     "category": "bebida",
     "price": "1200",
     "stock": "40"
+  },
+  {
+    "id": "76700a71e2cc962ab7a82c8d",
+    "title": "Coca cola 1.5lts",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
+    "category": "bedida",
+    "price": 800,
+    "stock": 15
   }
 ]
