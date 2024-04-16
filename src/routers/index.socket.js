@@ -6,6 +6,6 @@ export default async (socket) => {
   socket.emit("products", await productsManager.read());
   socket.on("newProduct", async (data) => {
     await productsManager.create(data);
-    socket.emit("products", await usersManager.read());
+    socket.emit("products", await productsManager.read());
   });
 };
