@@ -27,8 +27,7 @@ async function create(req, res, next) {
 
 async function read(req, res, next) {
   try {
-    const { category } = req.query;
-    const all = await productsManager.read(category);
+    const all = await productsManager.read(req.query);
     if (all.length > 0) {
       return res.json({
         statusCode: 200,

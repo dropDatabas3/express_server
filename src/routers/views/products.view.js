@@ -1,5 +1,5 @@
 import { Router } from "express";
-import productsManager from "../../data/fs/ProductManager.fs.js";
+import productsManager from "../../data/mongo/manager/ProductManager.mongo.js";
 
 const productsRouter = Router();
 
@@ -14,8 +14,10 @@ productsRouter.get("/", async (req, res, next) => {
 
 productsRouter.get("/:pid", async (req, res, next) => {
   try {
-    const { pid } = req.params;
-    const product = await productsManager.readOne(pid);
+    //const { pid } = req.params;
+
+    const product = await productsManager.readOne(req.params.pid);
+    console.log("Producto: ", product)
     return res.render("product", { title: product.title, product }); // <-- chequear vista
   } catch (error) {
     return next(error);
