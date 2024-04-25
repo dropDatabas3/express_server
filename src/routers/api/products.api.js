@@ -1,14 +1,16 @@
 import { Router } from "express";
 
-import productsManager from "../../data/fs/ProductManager.fs.js";
+import productsManager from "../../data/mongo/manager/ProductManager.mongo.js";
+import checkProductsInputs from "../../middlewares/formChecker.js";
 
 const productsRouter = Router();
 
-productsRouter.post("/", create);
+productsRouter.post("/", checkProductsInputs, create);
 productsRouter.get("/", read);
 productsRouter.get("/:pid", readOne);
 productsRouter.put("/:pid", update);
 productsRouter.delete("/:pid", destroy);
+
 
 async function create(req, res, next) {
   try {

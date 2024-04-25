@@ -12,13 +12,22 @@ productsRouter.get("/", async (req, res, next) => {
   }
 });
 
+productsRouter.get("/:pid", async (req, res, next) => {
+  try {
+    const { pid } = req.params;
+    const product = await productsManager.readOne(pid);
+    return res.render("product", { title: product.title, product }); // <-- chequear vista
+  } catch (error) {
+    return next(error);
+  }
+});
 
 /************
     REAL
 ************/
 productsRouter.get("/real", async (req, res, next) => {
   try {
-    return res.render("real", { title: "Productos"});
+    return res.render("real", { title: "Productos" });
   } catch (error) {
     return next(error);
   }
