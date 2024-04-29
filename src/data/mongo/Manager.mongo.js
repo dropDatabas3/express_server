@@ -11,14 +11,15 @@ class Manager{
     }
     async read(category){
         try {
-            return await this.model.find(category);
+            return await this.model.find(category).lean(); // lean() para que devuelva un objeto plano
         } catch (error) {
             throw error
         }
     }
     async readOne(id){
         try {
-            return await this.model.findById(id);
+            console.log("ID: ", id)
+            return await this.model.findById(id).lean();
         } catch (error) {
             throw error
         }
