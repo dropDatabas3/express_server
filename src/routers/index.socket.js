@@ -9,3 +9,4 @@ export default async (socket) => {
     socket.emit("products", await productsManager.read());
   });
 };
+

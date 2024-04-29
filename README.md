@@ -141,4 +141,3 @@ To test the API, you can use Postman or any other HTTP client tool.
 
 - **User Registration Form (Functionality Not Yet Implemented):** Created the structure of a form for user registration, although the associated functionality has not been implemented yet.
 
-
