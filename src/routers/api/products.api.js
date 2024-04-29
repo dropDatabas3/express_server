@@ -1,10 +1,13 @@
 import { Router } from "express";
 
-import productsManager from "../../data/fs/ProductManager.fs.js";
+
+import productsManager from "../../data/mongo/manager/ProductManager.mongo.js";
+import checkProductsInputs from "../../middlewares/formChecker.js";
 
 const productsRouter = Router();
 
-productsRouter.post("/", create);
+productsRouter.post("/", checkProductsInputs, create);
+
 productsRouter.get("/", read);
 productsRouter.get("/:pid", readOne);
 productsRouter.put("/:pid", update);
@@ -25,8 +28,8 @@ async function create(req, res, next) {
 
 async function read(req, res, next) {
   try {
-    const { category } = req.query;
-    const all = await productsManager.read(category);
+    const all = await productsManager.read(req.query);
+
     if (all.length > 0) {
       return res.json({
         statusCode: 200,

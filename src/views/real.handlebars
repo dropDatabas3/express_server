@@ -1,0 +1,172 @@
+<main class="d-flex w-100 flex-grow-1">
+    <div id="formulario-fondo" onclick="cerrarFormulario()">
+    </div>
+    <div id="formulario-contenedor">
+      <form id="formulario" class="">
+        <div class="mb-3 px-2 pt-1 text-center">
+          <input type="text" class="form-control" placeholder="Titulo" id="exampleFormControlInput1">
+        </div>
+        <div class="mb-3 px-2 pt-1 text-center">
+          <input type="text" class="form-control" placeholder="Categoria" id="exampleFormControlInput2">
+        </div>
+        <div class="mb-3 px-2 pt-1 text-center">
+          <input type="text" class="form-control" placeholder="Url de la imagen" id="exampleFormControlInput3">
+        </div>
+        <div class="mb-3 px-2 pt-1 text-center">
+          <input type="number" class="form-control" placeholder="Precio" id="exampleFormControlInput4">
+        </div>
+        <div class="mb-3 px-2 pt-1 text-center">
+          <input type="number" class="form-control" placeholder="Cantidad" id="exampleFormControlInput5">
+        </div>
+        <button type="button" class="btn btn-primary text-center" onclick="enviarForm()">Enviar</button>
+      </form>
+    </div>
+  <section
+    id="products"
+    class="d-flex flex-wrap justify-content-center mt-3"
+    style="height: calc(100vh - 60px);">
+    <!--button class="card col-lg-2 col-md-3 col-sm-4 mb-3 mx-2 rem-8" onclick="mostrarFormulario()" id="addProductBtn">
+      <img src="/assets/add-product.png" class="card-img-top" alt="Agregar producto">
+      <div class="card-body d-flex flex-column align-items-stretch">
+        <h5 class="card-title pt-3 pb-4 text-center" >Agregar nuevo producto</h5>
+      </div>
+    </button-->
+  </section>
+</main>
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+  const socket = io(); 
+  socket.on("products", data => {
+    const template = data
+      .map(each => `
+        <div class="card col-lg-2 col-md-3 col-sm-4 mb-3 mx-2 rem-8 productCard">
+          <img src="${each.photo}" class="card-img-top" alt="">
+          <div class="card-body d-flex flex-column align-items-stretch">
+            <h5 class="card-title pt-2 text-center">${each.title}</h5>
+            <p class="card-text p-2 text-end">$${each.price}</p>
+          </div>
+        </div>
+      `)
+      .reverse()
+      .join("");
+      const newProductBtn = `
+      <button class="card col-lg-2 col-md-3 col-sm-4 mb-3 mx-2 rem-8 productCard" onclick="mostrarFormulario()" id="addProductBtn">
+      <img src="/assets/add-product.png" class="card-img-top" alt="Agregar producto">
+      <div class="card-body d-flex flex-column align-items-stretch">
+        <h5 class="card-title pt-3 pb-4 text-center" >Agregar nuevo producto</h5>
+      </div>
+      </button>
+    `
+    // Agregar tarjetas de productos al contenido existente
+    document.querySelector("#products").innerHTML = newProductBtn + template;
+  });
+
+    function enviarForm() {
+      const title = document.getElementById("exampleFormControlInput1").value;
+      const category = document.getElementById("exampleFormControlInput2").value;
+      const photo = document.getElementById("exampleFormControlInput3").value;
+      const price = document.getElementById("exampleFormControlInput4").value;
+      const stock = document.getElementById("exampleFormControlInput5").value;
+      socket.emit("newProduct", { title, category, photo, price, stock });
+      cerrarFormulario();
+    }
+
+function mostrarFormulario() {
+  document.getElementById('formulario-fondo').classList.add('mostrar');
+  document.getElementById('formulario-contenedor').classList.add('mostrar');
+}
+
+function cerrarFormulario() {
+  document.getElementById('formulario-fondo').classList.remove('mostrar');
+  document.getElementById('formulario-contenedor').classList.remove('mostrar');
+  document.querySelector('#formulario').reset();
+}
+
+</script>
+
+
+
+
+<style>
+#addProductBtn{
+    align-items: center;
+    box-shadow: 1px 1px 3px #FD9843;
+    background-color: rgba(253, 152, 67, 0.87);
+    color: white;
+    text-shadow: 1px 1px 1px #666;
+}
+
+#addProductBtn img{
+    filter: invert(1);
+}
+
+#addProdctBtn div h5 {
+    font-weight: 500;
+    text-shadow: 1px 1px 1px #777;
+}
+#formulario-fondo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px); /* Aplicar desenfoque al fondo */
+  background-color: rgba(255, 255, 255, 0.5); /* Color de fondo con transparencia */
+  display: none; /* Por defecto, ocultar el fondo */
+  z-index: 1000;
+}
+
+#formulario-contenedor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FD9843;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  z-index: 1001;
+  display: none;
+}
+
+#formulario {
+    justify-content: center;
+    display: flex;
+    padding: 15px 5px !important;
+    flex-direction: column;
+    align-items: center;
+}
+
+#formulario .form-control {
+  background-color: #ffffff; /* Fondo blanco para los campos de entrada */
+  color: #333333; /* Texto oscuro para los campos de entrada */
+  border-color: #ffffff; /* Borde blanco para los campos de entrada */
+  margin: 1rem;
+}
+
+#formulario .btn-primary {
+  background-color: #ffffff; /* Fondo blanco para el botón */
+  color: #FD9843; /* Texto en color de la gama principal */
+  border-color: #ffffff; /* Borde blanco para el botón */
+  width: 60%;
+}
+
+#formulario .btn-primary:hover {
+  background-color: #f5f5f5; /* Fondo ligeramente más claro al pasar el ratón */
+  color: #FD9843; /* Texto en color de la gama principal */
+  border-color: #f5f5f5; /* Borde ligeramente más claro al pasar el ratón */
+}
+
+
+#formulario-fondo.mostrar {
+  display: block; /* Mostrar el fondo al agregar la clase 'mostrar' */
+}
+#formulario-contenedor.mostrar {
+  display: block; /* Mostrar el formulario al agregar la clase 'mostrar' */
+}
+.productCard{
+    max-width: 230px !important;
+    max-height: 300px !important;
+}   
+
+</style>
