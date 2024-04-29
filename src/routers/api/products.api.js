@@ -1,16 +1,17 @@
 import { Router } from "express";
 
+
 import productsManager from "../../data/mongo/manager/ProductManager.mongo.js";
 import checkProductsInputs from "../../middlewares/formChecker.js";
 
 const productsRouter = Router();
 
 productsRouter.post("/", checkProductsInputs, create);
+
 productsRouter.get("/", read);
 productsRouter.get("/:pid", readOne);
 productsRouter.put("/:pid", update);
 productsRouter.delete("/:pid", destroy);
-
 
 async function create(req, res, next) {
   try {
@@ -28,6 +29,7 @@ async function create(req, res, next) {
 async function read(req, res, next) {
   try {
     const all = await productsManager.read(req.query);
+
     if (all.length > 0) {
       return res.json({
         statusCode: 200,

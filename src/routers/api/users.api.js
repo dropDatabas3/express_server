@@ -3,6 +3,7 @@ import { Router } from "express";
 //import userManager from "../../data/fs/UserManager.fs.js";
 import userManager from "../../data/mongo/manager/UserManager.mongo.js";
 
+
 const usersRouter = Router();
 
 usersRouter.post("/", create);
@@ -27,7 +28,7 @@ async function create(req, res, next) {
 async function read(req, res, next) {
   try {
     const { role } = req.query;
-    const all = await userManager.read();
+    const all = await userManager.read(role);
     if (all.length > 0) {
       return res.json({
         statusCode: 200,
