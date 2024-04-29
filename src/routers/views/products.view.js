@@ -1,7 +1,7 @@
 import { Router } from "express";
 //import productsManager from "../../data/fs/ProductManager.fs.js";
-
 import productsManager from "../../data/mongo/manager/ProductManager.mongo.js";
+
 
 const productsRouter = Router();
 
@@ -15,6 +15,7 @@ productsRouter.get("/", async (req, res, next) => {
   }
 });
 
+
 productsRouter.get("/:pid", async (req, res, next) => {
   try {
     const { pid } = req.params;
@@ -27,12 +28,14 @@ productsRouter.get("/:pid", async (req, res, next) => {
   }
 });
 
+
 /************
     REAL
 ************/
 productsRouter.get("/real", async (req, res, next) => {
   try {
     return res.render("real", { title: "Productos" });
+
   } catch (error) {
     return next(error);
   }
