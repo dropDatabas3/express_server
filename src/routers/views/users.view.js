@@ -13,6 +13,15 @@ userRouter.get("/register", async (req, res, next) => {
   }
 });
 
+userRouter.get("/login", async (req, res, next) => {
+  try {
+    return res.render("login", { title: "Login"});
+  } catch (error) {
+    return next(error);
+  } 
+})
+
+
 
 userRouter.get("/:uid", async (req, res, next) => {
   try {
@@ -29,6 +38,8 @@ userRouter.get("/:uid", async (req, res, next) => {
     return next(error);
   }
 });
+
+
 
 
 

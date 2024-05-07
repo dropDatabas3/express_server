@@ -1,13 +1,16 @@
 import { Router } from "express";
 import productsRouter from "./products.view.js";
 import userRouter from "./users.view.js";
-import productsManager from "../../data/fs/ProductManager.fs.js";
+import cartRouter from "./carts.view.js";
+import productsManager from "../../data/mongo/manager/ProductManager.mongo.js";
 
 
 const viewsRouter = Router();
 
 viewsRouter.use("/products", productsRouter)
 viewsRouter.use("/users", userRouter)
+viewsRouter.use("/carts", cartRouter)
+
 
 viewsRouter.get("/", async (req, res, next) => {
   try {
