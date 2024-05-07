@@ -1,20 +1,49 @@
 import { Router } from "express";
 //import productsManager from "../../data/fs/ProductManager.fs.js";
-import productsManager from "../../data/mongo/manager/ProductManager.mongo.js";
 
+import productsManager from "../../data/mongo/manager/ProductManager.mongo.js";
 
 const productsRouter = Router();
 
 productsRouter.get("/", async (req, res, next) => {
   try {
-    const products = await productsManager.read();
-    console.log(products)
-    return res.render("products", { title: "Productos", products });
+    const filter = {};
+    const opts = {};
+    if (req.query.limit) {
+      opts.limit = req.query.limit;
+    }
+    if (req.query.page) {
+      opts.page = req.query.page;
+    }
+    if (req.query._id) {
+      filter._id = req.query._id;
+    }
+    if (req.query.category) {
+      filter.category = req.query.category;
+    }
+
+    const all = await productsManager.paginate({filter, opts});
+    console.log(all)
+
+
+    /*const products = await productsManager.paginate();
+    console.log("Producto: ",products)*/
+    const products = all.docs.map(doc => doc.toObject({ virtuals: true }));
+    console.log(all)
+    const pagInfo = {
+      limit: all.limit,
+      page: all.page,
+      _id: filter._id,
+      hasNextPage : all.hasNextPage,
+      hasPrevPage : all.hasPrevPage,
+      NextPage: all.nextPage,
+      PrevPage: all.prevPage,
+    }
+    return res.render("products", { title: "Productos", products ,  pagInfo});
   } catch (error) {
     return next(error);
   }
 });
-
 
 productsRouter.get("/:pid", async (req, res, next) => {
   try {
@@ -28,14 +57,12 @@ productsRouter.get("/:pid", async (req, res, next) => {
   }
 });
 
-
 /************
     REAL
 ************/
 productsRouter.get("/real", async (req, res, next) => {
   try {
     return res.render("real", { title: "Productos" });
-
   } catch (error) {
     return next(error);
   }

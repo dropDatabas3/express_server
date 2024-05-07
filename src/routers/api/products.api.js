@@ -7,6 +7,7 @@ const productsRouter = Router();
 
 productsRouter.post("/", checkProductsInputs, create);
 productsRouter.get("/", read);
+productsRouter.get("/paginate", paginate);
 productsRouter.get("/:pid", readOne);
 productsRouter.put("/:pid", update);
 productsRouter.delete("/:pid", destroy);
@@ -23,6 +24,40 @@ async function create(req, res, next) {
     return next(error);
   }
 }
+async function paginate(req, res, next) {
+  try {
+    const filter = {};
+    const opts = {};
+    if (req.query.limit) {
+      opts.limit = req.query.limit;
+    }
+    if (req.query.page) {
+      opts.page = req.query.page;
+    }
+    if (req.query._id) {
+      filter._id = req.query._id;
+    }
+    if (req.query.category) {
+      filter.category = req.query.category;
+    }
+
+    const all = await productsManager.paginate({filter, opts});
+    console.log(all)
+    return res.json({
+      statusCode: 200,
+      response: all.docs,
+      info: {
+        limit: all.limit,
+        page: opts.page,
+        _id: filter._id,
+        totalPages: all.totalPages
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 async function read(req, res, next) {
   try {
