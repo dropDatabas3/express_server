@@ -2,10 +2,11 @@ import { Router } from "express";
 
 import productsManager from "../../data/mongo/manager/ProductManager.mongo.js";
 import checkProductsInputs from "../../middlewares/formChecker.js";
+import isValidAdmin from "../../middlewares/isValidAdmin.mid.js";
 
 const productsRouter = Router();
 
-productsRouter.post("/", checkProductsInputs, create);
+productsRouter.post("/", isValidAdmin, checkProductsInputs, create);
 productsRouter.get("/", read);
 productsRouter.get("/paginate", paginate);
 productsRouter.get("/:pid", readOne);
