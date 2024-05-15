@@ -5,7 +5,14 @@ import productsManager from "../../data/mongo/manager/ProductManager.mongo.js";
 
 const productsRouter = Router();
 
-productsRouter.get("/", async (req, res, next) => {
+productsRouter.get("/", read)
+productsRouter.get("/real", real)
+productsRouter.get("/:pid", readOne)
+
+
+
+
+async function read(req, res, next){
   try {
     const filter = {};
     const opts = {};
@@ -24,8 +31,6 @@ productsRouter.get("/", async (req, res, next) => {
 
     const all = await productsManager.paginate({filter, opts});
     console.log(all)
-
-
     /*const products = await productsManager.paginate();
     console.log("Producto: ",products)*/
     const products = all.docs.map(doc => doc.toObject({ virtuals: true }));
@@ -43,9 +48,9 @@ productsRouter.get("/", async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
-});
+};
 
-productsRouter.get("/:pid", async (req, res, next) => {
+ async function readOne(req, res, next){
   try {
     const { pid } = req.params;
     console.log({pid})
@@ -55,17 +60,17 @@ productsRouter.get("/:pid", async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
-});
+};
 
 /************
     REAL
 ************/
-productsRouter.get("/real", async (req, res, next) => {
+async function real(req, res, next){
   try {
     return res.render("real", { title: "Productos" });
   } catch (error) {
     return next(error);
   }
-});
+};
 
 export default productsRouter;

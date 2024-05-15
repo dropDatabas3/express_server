@@ -14,7 +14,7 @@
       <div class="form-group">
         <label for="exampleInputEmail1">Role</label>
         <input
-          type="email"
+          type="number"
           class="form-control"
           id="exampleInputRole"
           aria-describedby="emailHelp"
@@ -39,10 +39,47 @@
           placeholder="Password"
         />
       </div>
-      <button type="submit" class="btn btn-primary" id="registerBtn">Register</button>
+      <button class="btn btn-primary" id="registerBtn">Register</button>
     </form>
   </div>
 </main>
+<script>
+    document.getElementById('registerBtn').addEventListener('click', async function(event) {
+        event.preventDefault()
+        var email = document.getElementById('exampleInputEmail1').value;
+        var role = document.getElementById('exampleInputRole').value;
+        var photo = document.getElementById('exampleInputPhoto').value;
+        var password = document.getElementById('exampleInputPassword1').value;
+        var data = {
+            email: email,
+            role: role,
+            photo: photo,
+            password: password
+        };
+        const options = {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }
+        let response = await fetch("/api/sessions/register", options)
+        response = await response.json();
+        console.log(response)
+        if(response.statusCode === 201){
+          location.replace("/users/login")
+        }else{
+          alert(response.message)
+        }
+    });
+</script>
+
+
+
+
+
+
+
 
 <style>
     #formContainer {

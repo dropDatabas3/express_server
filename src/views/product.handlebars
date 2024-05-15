@@ -87,32 +87,20 @@
   let productId = "{{product._id}}"
   document.addEventListener('DOMContentLoaded', async () => {
     try {
-      console.log('Obteniendo los carritos...');
-      const userId = "663697a0921f5abc9f252ea4";
       productId = "{{product._id}}";
-
-      const response = await fetch('/api/carts/paginate?user_id={{userId}}&product_id={{product._id}}');
-      const carts = await response.json();
-      
-
-      // Filtrar el carrito que contiene el userId y el productId
-      console.log('carritos: ', carts);
-      const cart = carts.response.find(cart => cart.user_id._id === userId && cart.product_id._id === productId);
-
+      const response = await fetch('/api/carts/paginate?product_id={{product._id}}');
+      const cart = await response.json();
       if (cart) {
-        const quantity = cart.quantity;
-        console.log('La cantidad del carrito es:', quantity);
-       cantidadDisplay.textContent = quantity;
-       cantidadDisplay.setAttribute('value', quantity)  
-       carritoID = cart._id
+        const quantity = cart.response[0].quantity;
+        cantidadDisplay.textContent = quantity;
+        cantidadDisplay.setAttribute('value', quantity)  
+        carritoID = cart._id
       } else {
-        console.log('No se encontró ningún carrito para el usuario y producto especificados.');
         cantidadDisplay.textContent = "0";
         cantidadDisplay.setAttribute('value', 0)        
       }
     } catch (error) {
       console.error('Error al obtener los carritos:', error);
-      // Aquí puedes manejar los errores de la solicitud
     }
   });
 function updateQuantity(amount, productId) {

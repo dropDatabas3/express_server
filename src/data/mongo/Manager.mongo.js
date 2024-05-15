@@ -25,6 +25,13 @@ class Manager{
             throw error
         }
     }
+    async readByEmail(email){
+        try {
+        return await this.model.findOne({email}).lean()
+        } catch (error) {
+            throw error
+        }
+    }
     async update(id , obj){
         try {
             return await this.model.findByIdAndUpdate(id, obj, {new : true});

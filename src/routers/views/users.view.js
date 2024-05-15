@@ -5,6 +5,7 @@ import userManager from "../../data/mongo/manager/UserManager.mongo.js";
 
 const userRouter = Router();
 
+
 userRouter.get("/register", async (req, res, next) => {
   try {
     return res.render("register", { title: "Register"});
@@ -23,12 +24,12 @@ userRouter.get("/login", async (req, res, next) => {
 
 
 
-userRouter.get("/:uid", async (req, res, next) => {
+userRouter.get("/", async (req, res, next) => {
   try {
-    const { uid } = req.params;
-    const one = await userManager.readOne(uid);
+    const { user_id } = req.session;
+    const one = await userManager.readOne(user_id);
     if (one) {
-      return res.render("userInfo", { title: "User: " + one.id, one });
+      return res.render("userInfo", { title: "User: " + one._id, one });
     } else {
       const error = new Error("Not found!");
       error.statusCode = 404;

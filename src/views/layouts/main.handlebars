@@ -31,22 +31,7 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link text-light p-2" href="/products">Productos</a>
-            <a class="nav-link text-light p-2" href="/products/real">Real</a>
-            <a
-              class="nav-link text-light p-2"
-              href="/users/register"
-            >Register</a>
-            <a class="nav-link text-light p-2" href="/users/login">Login</a>
-            <a
-              class="nav-link text-light p-2"
-              href="/users/663697a0921f5abc9f252ea4" 
-            >Profile</a>
-            <a class="nav-link text-light p-2" href="/carts/paginate?user_id=663697a0921f5abc9f252ea4">Cart</a>
-          </div>
-        </div>
+        <section id="navbarSection"></section>
       </div>
     </nav>
     {{{body}}}
@@ -57,3 +42,69 @@
     crossorigin="anonymous"
   ></script>
 </html>
+
+
+<script>
+  window.addEventListener('load', async (event) => {
+    let response = await fetch('/api/sessions/online');
+    response = await response.json();
+    console.log(response)
+    const navContainer = document.getElementById('navbarSection');
+    if(response.statusCode === 200){
+    navContainer.innerHTML = `
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link text-light p-2" href="/products">Productos</a>
+              <a class="nav-link text-light p-2" href="/products/real">Real</a>
+              <a class="nav-link text-light p-2"  href="/users" >Profile</a>
+              <a class="nav-link text-light p-2" href="/carts/paginate">Cart</a>
+              <button class="nav-link text-light p-2" onclick="logout()">Singout</button>
+            </div>
+          </div>
+        `
+        //<a class="nav-link text-light p-2" href="/carts/paginate?user_id=663697a0921f5abc9f252ea4">Cart</a>
+
+    }else{
+          navContainer.innerHTML = `
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link text-light p-2" href="/products">Productos</a>
+              <a class="nav-link text-light p-2" href="/products/real">Real</a>
+              <a class="nav-link text-light p-2" href="/users/register">Register</a>
+              <a class="nav-link text-light p-2" href="/users/login">Login</a>
+            </div>
+          </div>
+        `
+    }
+  })
+
+async function logout(){
+  try{
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    let response = await fetch('/api/sessions/logout', options);
+    response = await response.json();
+     if(response.statusCode === 200){
+      window.location.href = "/";      
+    }
+  }catch(error){
+    alert(error)
+    console.error("Error al cerrar la sesion: ", error)
+  }  
+}
+</script>
+
+
+
+
+<style>
+  .show {
+    background: #777;
+    width: 13rem;
+    margin-top: 15px !important;
+  }
+</style>

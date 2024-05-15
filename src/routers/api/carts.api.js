@@ -14,7 +14,6 @@ cartRouter.delete("/:cid", destroy) // <-- Si se quiere eliminar un producto del
 
 
 async function create(req, res, next) {
-    console.log("USER ID: ",req.body.user_id);  
     try {
         const one = await cartManager.create(req.body);
         return res.json({
@@ -52,14 +51,13 @@ async function paginate(req, res, next) {
       if (req.query.state) {
         filter.state = req.query.state;
       }
-      if (req.query.user_id) {
-        filter.user_id = req.query.user_id;
-      }
       if(req.query.product_id){
         filter.product_id = req.query.product_id;
       }
+      filter.user_id = req.session.user_id
+      console.log("Vamos a buscar con user_id: ", filter.user_id , " y pid: ", filter.product_id)
       const all = await cartManager.paginate({ filter, opts });
-      console.log(all)
+      console.log("all de paginate carrito: ", all)
       res.json({
         statusCode: 200,
         response: all.docs,

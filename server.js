@@ -4,6 +4,9 @@ import morgan from "morgan";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import { engine } from "express-handlebars";
+import cookieParser from "cookie-parser";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 
 import indexRouter from "./src/routers/index.router.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
@@ -44,6 +47,13 @@ server.set("views", __dirname+'/src/views'); // <-- Set the views directory
 /*************
   MIDDLEWARES
 **************/
+server.use(session({
+  store: new MongoStore({mongoUrl: process.env.MONGO_URI, ttl: 60*60}),
+  secret: process.env.SECRET,
+  resave: true,
+  saveUninitialized: true,
+}));
+server.use(cookieParser(process.env.SECRET));
 server.use(express.urlencoded({ extended: true })); // <-- Allows the server to read req.param and req.query
 server.use(express.json()); // <-- Used for req body
 server.use(morgan("dev")); // <-- Log requests to the console
