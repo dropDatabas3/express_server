@@ -4,18 +4,21 @@ import isValidEmail from "../../middlewares/isValidEmail.mid.js";
 import isValidData from "../../middlewares/isValidData.mid.js";
 import isValidUser from "../../middlewares/isValidUser.mid.js";
 import isValidPassword from "../../middlewares/isValidPassword.mid.js";
+import passport from "../../middlewares/passport.mid.js"
 
 const sessionRouter = Router();
 
-sessionRouter.post("/login", isValidUser, isValidPassword, login);
+sessionRouter.post("/login",passport.authenticate("login", { session: false }) , login);
 sessionRouter.get("/online", online);
 sessionRouter.post("/logout", destroySession);
-sessionRouter.post("/register", isValidData, isValidEmail, register);
+sessionRouter.post("/register", passport.authenticate("register", { session: false }), register);
 
 async function register(req, res, next) {
   try {
+    /* 
     const data = req.body;
-    await userManager.create(data);
+    await userManager.create(data); 
+    */
     return res.json({
       statusCode: 201,
       message: "Registered",
@@ -27,13 +30,14 @@ async function register(req, res, next) {
 
 async function login(req, res, next) {
   try {
-    const { email } = req.body;
+/*     const { email } = req.body;
     const user = await userManager.readByEmail(email);
     req.session.email = email;
     req.session.role = user.role;
     req.session.user_id = user._id;
     req.session.photo = user.photo;
-    return res.json({
+ */   
+      return res.json({
       statusCode: 200,
       message: "Logged",
     });
