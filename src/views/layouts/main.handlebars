@@ -46,9 +46,9 @@
 
 <script>
   window.addEventListener('load', async (event) => {
-    let response = await fetch('/api/sessions/online');
+    let response = await fetch('/api/sessions/');
     response = await response.json();
-    console.log(response)
+    console.log("consulta sessions")
     const navContainer = document.getElementById('navbarSection');
     if(response.statusCode === 200){
     navContainer.innerHTML = `

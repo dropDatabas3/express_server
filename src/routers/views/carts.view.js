@@ -14,11 +14,6 @@ async function paginate(req, res, next) {
       if (req.query.state) {
         filter.state = req.query.state;
       }
-      /*
-      if (req.query.user_id) {
-        filter.user_id = req.query.user_id;
-      }
-      */
       filter.user_id = req.session.user_id
       const all = await cartManager.paginate({ filter, opts });
       const carts = all.docs.map(doc => doc.toObject({ virtuals: true }));
