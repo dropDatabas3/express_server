@@ -8,24 +8,43 @@ import passport from "../../middlewares/passport.mid.js"
 
 const sessionRouter = Router();
 
+sessionRouter.get("/", session)
 sessionRouter.post("/login",passport.authenticate("login", { session: false }) , login);
 sessionRouter.get("/online", online);
 sessionRouter.post("/logout", destroySession);
 sessionRouter.post("/register", passport.authenticate("register", { session: false }), register);
 
+
+async function session(req, res, next) {
+  try {
+    console.log("entro a ruta session")
+    if(req.session.online){ 
+      console.log("respuesta 200")
+     return res.json({
+       statusCode: 200,
+       message: "User is online",
+     });
+   }
+   console.log("respuesta 401")
+
+   return res.json({
+      statusCode: 401,
+      message: "User is offline",
+    });
+  } catch (error) {
+    return next(error);
+  }
+}
+
 async function register(req, res, next) {
   try {
-    /* 
-    const data = req.body;
-    await userManager.create(data); 
-    */
     return res.json({
       statusCode: 201,
       message: "Registered",
     });
   } catch (error) {
     return next(error);
-  }
+  } 
 }
 
 async function login(req, res, next) {
