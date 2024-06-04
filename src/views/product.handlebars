@@ -1,0 +1,199 @@
+<main>
+  <section
+    class="d-flex flex-wrap justify-content-center align-items-center m-3"
+  >
+    <div class="card col-lg-2 col-md-3 col-sm-4 mb-3 mx-2 rem-8" id="card">
+      <h3 class="p-2 text-center w-100" id="title">
+        {{title}}
+      </h3>
+        <img src={{product.photo}} class="card-img-top" alt="">
+      <div class="card-body d-flex flex-column align-items-stretch" id="card-body">
+        <div class="d-flex flex-column info-producto">        
+            <h5 class="card-title pt-2 text-center ">Category: {{product.category}}</h5>
+            <h5 class="card-title pt-2 text-center">Price: {{product.price}}</h5>
+            <h5 class="card-title pt-2 text-center">Stock: {{product.stock}}</h5>
+        </div>  
+        <div class="d-flex align-items-center mt-3 contenedor-botones-carrito">
+          <div class="botones-body">
+            <button type="button" class="btn btn-secondary boton" onclick="updateQuantity(-1 , '{{product._id}}')"> - </button>
+            <span id="cantidad" value="0">0</span>
+            <button class="btn btn-sm btn-secondary boton" onclick="updateQuantity(1 , '{{product._id}}')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<style>
+  .boton{
+    background-color:#fff; 
+    border: none;
+    width: 1.5rem;
+    color: #000;
+    font-weight: 700;
+    border-radius: 100%;
+    aspect-ratio: 1 / 1;
+  }
+  .botones-body span{
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0.5rem !important;
+    color: #fff;
+    aspect-ratio: 1 / 1;
+    width: 2rem;
+    text-align: center;
+  }
+  .botones-body{
+    background-color: #FEB272;
+    padding: 5px !important;
+    border-radius: 0.5rem;
+    display: flex;
+    height: 3rem;
+    align-items: center;
+  }
+  .info-producto{
+    align-items: flex-start;
+  }
+  .info-producto h5 {
+    margin-left: 0.5rem !important;
+  }
+  .contenedor-botones-carrito {
+    justify-content: end;
+    margin-right: 0.5rem !important;
+    margin-bottom: 0.5rem !important;  
+  }
+  #title { 
+    background-color:#FEB272; 
+    color: #fff; 
+    font-weight: 600; 
+    text-shadow: 1px 1px 1px #000; 
+    } 
+  #card img { 
+    background-color: #FEB272; 
+    } 
+  .card-title {
+  height: 2rem; /* Asegura que todas las tarjetas tengan al menos la misma
+  altura */ } 
+  #card { 
+    width: 100%; 
+    max-width: 380px; 
+    }
+</style>
+
+<script>
+  let cantidadDisplay =  document.getElementById('cantidad')
+  let carritoID = 0
+  let productId = "{{product._id}}"
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      productId = "{{product._id}}";
+      const response = await fetch('/api/carts/paginate?product_id={{product._id}}');
+      const cart = await response.json();
+      if (cart) {
+        const quantity = cart.response[0].quantity;
+        cantidadDisplay.textContent = quantity;
+        cantidadDisplay.setAttribute('value', quantity)  
+        carritoID = cart._id
+      } else {
+        cantidadDisplay.textContent = "0";
+        cantidadDisplay.setAttribute('value', 0)        
+      }
+    } catch (error) {
+      console.error('Error al obtener los carritos:', error);
+    }
+  });
+function updateQuantity(amount, productId) {
+  // Obtener el elemento del span que muestra la cantidad
+  const cantidadElement = document.getElementById('cantidad');
+  // Obtener la cantidad actual del producto del atributo "value" del span
+  let currentQuantity = parseInt(cantidadElement.getAttribute('value'));
+  console.log("current: ", currentQuantity)
+
+  if (currentQuantity === 0 && amount === -1) {
+    return;
+  }
+
+  // Lógica para llamar a los métodos create, update o destroy según corresponda
+  if (currentQuantity === 1 && amount === -1) {
+    console.log("logica de eliminacion de carrito")
+    destroyCart();
+  } else if (currentQuantity === 0 && amount === 1) {
+    console.log("logica de creacion de carrito")
+    createCart(productId);
+  } else {
+    // Llamar al método update si la cantidad cambia de cualquier otro valor
+    console.log("logica de actualizacion de carrito")
+    updateCart(productId, currentQuantity + amount);
+  }
+
+  // Incrementar o decrementar la cantidad según el botón clickeado
+  currentQuantity += amount;
+
+  // Actualizar el atributo "value" del span con la nueva cantidad
+  cantidadElement.setAttribute('value', currentQuantity);
+
+  // Actualizar el texto del span para mostrar la nueva cantidad
+  cantidadElement.textContent = currentQuantity;
+
+}
+
+// Función para eliminar el carrito
+const destroyCart = async () => {
+  try {
+    console.log('Eliminando el carrito...');
+    const response = await fetch(`/api/carts/${carritoID}`, {
+      method: 'DELETE',
+    });
+    const data = await response.json();
+    console.log('Carrito eliminado:', data);
+  } catch (error) {
+    console.error('Error al eliminar el carrito:', error);
+  }
+};
+
+// Función para crear el carrito
+const createCart = async (productId) => {
+  try {
+    console.log('Creando el carrito...');
+    const response = await fetch('/api/carts/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: "663697a0921f5abc9f252ea4",
+        product_id: productId,
+        quantity: 1,
+      }),
+    });
+    const data = await response.json();
+    carritoID = data.response._id
+    console.log('Carrito creado:', data);
+  } catch (error) {
+    console.error('Error al crear el carrito:', error);
+  }
+};
+
+// Función para actualizar el carrito
+const updateCart = async (productId, newQuantity) => {
+  try {
+    console.log('Actualizando el carrito...');
+    const response = await fetch(`/api/carts/${carritoID}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        quantity: newQuantity,
+      }),
+    });
+    const data = await response.json();
+    console.log('Carrito actualizado:', data);
+  } catch (error) {
+    console.error('Error al actualizar el carrito:', error);
+  }
+};
+
+</script>
+

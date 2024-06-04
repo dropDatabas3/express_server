@@ -1,0 +1,127 @@
+<main>
+  <div id="formContainer">
+    <form>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          placeholder="Enter email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Role</label>
+        <input
+          type="number"
+          class="form-control"
+          id="exampleInputRole"
+          aria-describedby="emailHelp"
+          placeholder="Enter your role"
+        />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Photo</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputPhoto"
+          placeholder="Enter your photo"
+        />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          placeholder="Password"
+        />
+      </div>
+      <button class="btn btn-primary" id="registerBtn">Register</button>
+    </form>
+  </div>
+</main>
+<script>
+    document.getElementById('registerBtn').addEventListener('click', async function(event) {
+        event.preventDefault()
+        var email = document.getElementById('exampleInputEmail1').value;
+        var role = document.getElementById('exampleInputRole').value;
+        var photo = document.getElementById('exampleInputPhoto').value;
+        var password = document.getElementById('exampleInputPassword1').value;
+        var data = {
+            email: email,
+            role: role,
+            photo: photo,
+            password: password
+        };
+        const options = {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }
+        let response = await fetch("/api/sessions/register", options)
+        response = await response.json();
+        console.log(response)
+        if(response.statusCode === 201){
+          location.replace("/users/login")
+        }else{
+          alert(response.message)
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<style>
+    #formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    align-items: center;
+    background: #ffc342;
+    }
+    form {
+    width: 40%;
+    border: solid 1px #ffb342;
+    border-radius: 20%;
+    padding: 4rem !important;
+    background-color: #ffa342;
+    box-shadow: 13px 13px 26px #D19337, -13px -13px 26px #ffd34e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2rem !important;
+    max-width: 370px;
+    }
+    .form-group{
+        margin-bottom: 1rem !important;
+        width: 100%;
+    }
+    #registerBtn {
+    width: 100%;
+    margin-top: 10px !important;
+    height: 2rem;
+    background-color: #777;
+    color: #ffb455;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #444;    
+    font-size: 1.2rem;
+    
+    }   
+    form div label {
+        display: inline-block;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #000;
+    }
+</style>
