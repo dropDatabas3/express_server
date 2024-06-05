@@ -15,7 +15,6 @@ class ProductsRouter extends CustomRouter {
 
 
 async function products(req, res, next){
-  console.log("entro a products")
   try {
     const filter = {};
     const opts = {};
@@ -33,9 +32,7 @@ async function products(req, res, next){
     }
 
     const all = await productsManager.paginate({filter, opts});
-    console.log(all)
     const products = all.docs.map(doc => doc.toObject({ virtuals: true }));
-    console.log(all)
     const pagInfo = {
       limit: all.limit,
       page: all.page,

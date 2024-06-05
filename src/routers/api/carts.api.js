@@ -113,8 +113,19 @@ async function create(req, res, next) {
   async function destroy(req, res, next) {
     try {
       console.log("destroy api carrito")
-
       const { cid } = req.params;
+      if ( cid === "all"){
+        const opts = {};
+        const filter = {};
+        const user = verifyToken(req.cookies.token);
+        filter.user_id = user._id;
+        let all = await cartManager.paginate({ filter, opts });
+        all = all.docs
+        all.forEach( async (all) => {
+          await cartManager.destroy(all._id);
+        });
+        return res.message200("Carritos borrados con éxito");
+      }
       const one = await cartManager.destroy(cid);
       return res.message200("Carrito borrado con éxito");
     } catch (error) {
