@@ -13,8 +13,8 @@
             <h5 class="card-title pt-2 text-center">Price: {{product.price}}</h5>
             <h5 class="card-title pt-2 text-center">Stock: {{product.stock}}</h5>
         </div>  
-        <div class="d-flex align-items-center mt-3 contenedor-botones-carrito">
-          <div class="botones-body">
+        <div class="d-flex align-items-center mt-3 contenedor-botones-carrito" id="boton-container">
+          <div class="botones-body" id="botones-body">
             <button type="button" class="btn btn-secondary boton" onclick="updateQuantity(-1 , '{{product._id}}')"> - </button>
             <span id="cantidad" value="0">0</span>
             <button class="btn btn-sm btn-secondary boton" onclick="updateQuantity(1 , '{{product._id}}')">+</button>
@@ -25,76 +25,37 @@
   </section>
 </main>
 
-<style>
-  .boton{
-    background-color:#fff; 
-    border: none;
-    width: 1.5rem;
-    color: #000;
-    font-weight: 700;
-    border-radius: 100%;
-    aspect-ratio: 1 / 1;
-  }
-  .botones-body span{
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0 0.5rem !important;
-    color: #fff;
-    aspect-ratio: 1 / 1;
-    width: 2rem;
-    text-align: center;
-  }
-  .botones-body{
-    background-color: #FEB272;
-    padding: 5px !important;
-    border-radius: 0.5rem;
-    display: flex;
-    height: 3rem;
-    align-items: center;
-  }
-  .info-producto{
-    align-items: flex-start;
-  }
-  .info-producto h5 {
-    margin-left: 0.5rem !important;
-  }
-  .contenedor-botones-carrito {
-    justify-content: end;
-    margin-right: 0.5rem !important;
-    margin-bottom: 0.5rem !important;  
-  }
-  #title { 
-    background-color:#FEB272; 
-    color: #fff; 
-    font-weight: 600; 
-    text-shadow: 1px 1px 1px #000; 
-    } 
-  #card img { 
-    background-color: #FEB272; 
-    } 
-  .card-title {
-  height: 2rem; /* Asegura que todas las tarjetas tengan al menos la misma
-  altura */ } 
-  #card { 
-    width: 100%; 
-    max-width: 380px; 
-    }
-</style>
 
 <script>
+  window.addEventListener('load', async (event) => {
+
+  })
+
   let cantidadDisplay =  document.getElementById('cantidad')
-  let carritoID = 0
+  let carritoID = null
   let productId = "{{product._id}}"
   document.addEventListener('DOMContentLoaded', async () => {
     try {
+      let online = await fetch('/api/sessions/online');
+      online = await online.json();
+
+      console.log("consulta sessions, response: ", online)
+      let container = document.getElementById("botones-body")
+      if(online.statusCode === 200){
+        container.style.display = ("flex")
+      }
+
       productId = "{{product._id}}";
       const response = await fetch('/api/carts/paginate?product_id={{product._id}}');
-      const cart = await response.json();
+      let cart = await response.json();
+      console.log(response)
+      console.log("carts: ", cart.response.docs[0])
       if (cart) {
-        const quantity = cart.response[0].quantity;
+        const {quantity}= cart.response.docs[0];
+
         cantidadDisplay.textContent = quantity;
         cantidadDisplay.setAttribute('value', quantity)  
-        carritoID = cart._id
+        carritoID = cart.response.docs[0]._id
       } else {
         cantidadDisplay.textContent = "0";
         cantidadDisplay.setAttribute('value', 0)        
@@ -179,6 +140,7 @@ const createCart = async (productId) => {
 const updateCart = async (productId, newQuantity) => {
   try {
     console.log('Actualizando el carrito...');
+    console.log(carritoID)
     const response = await fetch(`/api/carts/${carritoID}`, {
       method: 'PUT',
       headers: {
@@ -197,3 +159,58 @@ const updateCart = async (productId, newQuantity) => {
 
 </script>
 
+<style>
+  .boton{
+    background-color:#fff; 
+    border: none;
+    width: 1.5rem;
+    color: #000;
+    font-weight: 700;
+    border-radius: 100%;
+    aspect-ratio: 1 / 1;
+  }
+  .botones-body span{
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0.5rem !important;
+    color: #fff;
+    aspect-ratio: 1 / 1;
+    width: 2rem;
+    text-align: center;
+  }
+  .botones-body{
+    background-color: #FEB272;
+    padding: 5px !important;
+    border-radius: 0.5rem;
+    display: none;
+    height: 3rem;
+    align-items: center;
+  }
+  .info-producto{
+    align-items: flex-start;
+  }
+  .info-producto h5 {
+    margin-left: 0.5rem !important;
+  }
+  .contenedor-botones-carrito {
+    justify-content: end;
+    margin-right: 0.5rem !important;
+    margin-bottom: 0.5rem !important;  
+  }
+  #title { 
+    background-color:#FEB272; 
+    color: #fff; 
+    font-weight: 600; 
+    text-shadow: 1px 1px 1px #000; 
+    } 
+  #card img { 
+    background-color: #FEB272; 
+    } 
+  .card-title {
+  height: 2rem; /* Asegura que todas las tarjetas tengan al menos la misma
+  altura */ } 
+  #card { 
+    width: 100%; 
+    max-width: 380px; 
+    }
+</style>

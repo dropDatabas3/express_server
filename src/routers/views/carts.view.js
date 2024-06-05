@@ -1,5 +1,6 @@
 import CustomRouter from "../CustomRouter.js";
 import cartManager from "../../data/mongo/manager/CartManager.mongo.js";
+import { verifyToken } from "../../utils/jwt.utils.js";
 
 class CartsRouter extends CustomRouter {
   init() {
@@ -17,7 +18,8 @@ async function paginate(req, res, next) {
       if (req.query.state) {
         filter.state = req.query.state;
       }
-      filter.user_id = req.session.user_id
+      const user = verifyToken(req.cookies.token);
+      filter.user_id = user._id;
       const all = await cartManager.paginate({ filter, opts });
       const carts = all.docs.map(doc => doc.toObject({ virtuals: true }));
       console.log(carts)

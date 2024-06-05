@@ -5,7 +5,6 @@ import productsManager from "../../data/mongo/manager/ProductManager.mongo.js";
 
 class ProductsRouter extends CustomRouter {
   init() {
-    console.log("init de products")
     this.read("/", ["PUBLIC"], products);
     this.read("/real", ["PUBLIC"], real);
     this.read("/:pid", ["PUBLIC"], readOne);

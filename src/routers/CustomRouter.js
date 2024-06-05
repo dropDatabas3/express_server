@@ -48,10 +48,8 @@ class CustomRouter {
         try {
           token = verifyToken(token);
           const { role, email } = token;
-          console.log("role: ", role)
           if (
             (policies.includes("USER") && role === 0) || 
-            (policies.includes("USER") && role === 1) ||
             (policies.includes("ADMIN") && role === 1) 
           ) {
             const user = await usersManager.readByEmail(email);
@@ -73,7 +71,6 @@ class CustomRouter {
     );
   }
   read(path, arrayOfPolicies, ...callbacks) {
-    console.log("path: ", path)
       this.router.get(
       path,
       this.response,

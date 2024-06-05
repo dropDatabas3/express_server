@@ -21,7 +21,7 @@ async function create(req, res, next) {
     try {
       console.log("create api carrito")
       const user = verifyToken(req.cookies.token);
-      const { product_id } = req.query;
+      const { product_id } = req.body;
       const data = { product_id: product_id , user_id: user._id};
       console.log("data de create carrito: ", data)
       const one = await cartManager.create(data);
@@ -57,6 +57,7 @@ async function create(req, res, next) {
       if (req.query.state) {
         filter.state = req.query.state;
       }
+      console.log(filter)
       if (req.query.product_id) {
         filter.product_id = req.query.product_id;
       }
@@ -69,12 +70,12 @@ async function create(req, res, next) {
         filter.product_id
       );
       const all = await cartManager.paginate({ filter, opts });
-      console.log("all de paginate carrito: ", all);
+      console.log("all de paginate carrito: ", all.docs);
       return res.paginate(all.docs, {
-        limit: all.limit,
-        page: all.page,
-        totalPages: all.totalPages,
-      });
+          limit: all.limit,
+          page: all.page,
+          totalPages: all.totalPages,
+        });
     } catch (error) {
       return next(error);
     }
