@@ -27,10 +27,6 @@
 
 
 <script>
-  window.addEventListener('load', async (event) => {
-
-  })
-
   let cantidadDisplay =  document.getElementById('cantidad')
   let carritoID = null
   let productId = "{{product._id}}"
@@ -49,13 +45,17 @@
       const response = await fetch('/api/carts/paginate?product_id={{product._id}}');
       let cart = await response.json();
       console.log(response)
-      console.log("carts: ", cart.response.docs[0])
+      
+      console.log("carts: ", cart.response[0])
+      console.log(cart)
+
       if (cart) {
-        const {quantity}= cart.response.docs[0];
+
+        const {quantity}= cart.response[0];
 
         cantidadDisplay.textContent = quantity;
         cantidadDisplay.setAttribute('value', quantity)  
-        carritoID = cart.response.docs[0]._id
+        carritoID = cart.response[0]._id
       } else {
         cantidadDisplay.textContent = "0";
         cantidadDisplay.setAttribute('value', 0)        
