@@ -12,10 +12,7 @@ class ProductsRouter extends CustomRouter {
   }
 }
 
-
-
-
-async function products(req, res, next){
+async function products(req, res, next) {
   try {
     const filter = {};
     const opts = {};
@@ -32,48 +29,48 @@ async function products(req, res, next){
       filter.category = req.query.category;
     }
 
-//    const all = await paginateService({filter, opts});
+    //    const all = await paginateService({filter, opts});
     const all = await readService();
-const products = all.docs.map(doc => doc.toObject({ virtuals: true }));
+    console.log(all);
+    const products = all.map((doc) => JSON.parse(JSON.stringify(doc)));
     const pagInfo = {
       limit: all.limit,
       page: all.page,
       _id: filter._id,
-      hasNextPage : all.hasNextPage,
-      hasPrevPage : all.hasPrevPage,
+      hasNextPage: all.hasNextPage,
+      hasPrevPage: all.hasPrevPage,
       NextPage: all.nextPage,
       PrevPage: all.prevPage,
-    }
-    return res.render("products", { title: "Productos", products ,  pagInfo});
+    };
+    return res.render("products", { title: "Productos", products, pagInfo });
   } catch (error) {
     return next(error);
   }
-};
+}
 
- async function readOne(req, res, next){
-   try {
-    console.log("entro")
+async function readOne(req, res, next) {
+  try {
+    console.log("entro");
     const { pid } = req.params;
-    console.log({pid})
+    console.log({ pid });
     const product = await productsManager.readOne(pid);
-    console.log("Producto: ", product)
-    return res.render("product", { title: product.title, product}); // <-- chequear vista
+    console.log("Producto: ", product);
+    return res.render("product", { title: product.title, product }); // <-- chequear vista
   } catch (error) {
     return next(error);
   }
-};
+}
 
 /************
     REAL
 ************/
-async function real(req, res, next){
+async function real(req, res, next) {
   try {
     return res.render("real", { title: "Productos" });
   } catch (error) {
     return next(error);
   }
-};
-
+}
 
 const productsRouter = new ProductsRouter();
 

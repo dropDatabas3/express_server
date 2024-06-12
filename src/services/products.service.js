@@ -4,6 +4,7 @@ import Service from "./service.js";
 
 
 const ProductService = new Service(ProductManager);
+console.log(ProductService.manager, "ProductService")
 const {
   createService,
   paginateService,
