@@ -4,7 +4,7 @@ import Service from "./service.js";
 
 console.log(cartManager, "cartManager")
 console.log(typeof(cartManager))
-const cartService = new Service(new cartManager);
+const cartService = new Service(cartManager);
 const {
   createService,
   readService,
