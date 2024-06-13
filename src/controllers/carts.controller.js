@@ -10,11 +10,9 @@ import {
 class CartController {
   async create(req, res, next) {
     try {
-      console.log("create api carrito");
       const user = verifyToken(req.cookies.token);
       const { product_id } = req.body;
       const data = { product_id: product_id, user_id: user._id };
-      console.log("data de create carrito: ", data);
       const one = await createService(data);
       return res.message201("CREATED WITH ID " + one.id);
     } catch (error) {
@@ -24,8 +22,6 @@ class CartController {
 
   async read(req, res, next) {
     try {
-      console.log("read api carrito");
-
       const { uid } = req.body;
       const all = await readService(uid);
       if (all.length > 0) {
@@ -42,7 +38,6 @@ class CartController {
 
   async paginate(req, res, next) {
     try {
-      console.log("paginate api carrito");
       const opts = {};
       const filter = {};
       if (req.query.state) {
@@ -53,14 +48,7 @@ class CartController {
       }
       const user = verifyToken(req.cookies.token);
       filter.user_id = user._id;
-      console.log(
-        "Vamos a buscar con user_id: ",
-        filter.user_id,
-        " y pid: ",
-        filter.product_id
-      );
       const all = await paginateService({ filter, opts });
-      console.log("all de paginate carrito: ", all.docs);
       return res.paginate(all.docs, {
         limit: all.limit,
         page: all.page,
@@ -73,7 +61,6 @@ class CartController {
 
   async readOne(req, res, next) {
     try {
-      console.log("readOne api carrito");
       const { cid } = req.params;
       const one = await readOneService(cid);
       if (one) {
@@ -90,8 +77,6 @@ class CartController {
 
   async update(req, res, next) {
     try {
-      console.log("update api carrito");
-
       const { cid } = req.params;
       const one = await updateService(cid, req.body);
       return res.response200(one);
@@ -102,7 +87,6 @@ class CartController {
 
   async destroy(req, res, next) {
     try {
-      console.log("destroy api carrito");
       const { cid } = req.params;
       if (cid === "all") {
         const opts = {};

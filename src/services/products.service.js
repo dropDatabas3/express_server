@@ -1,10 +1,7 @@
 import ProductManager from "../data/mongo/manager/ProductManager.mongo.js";
 import Service from "./service.js";
-
-
-
 const ProductService = new Service(ProductManager);
-const {
+export const {
   createService,
   paginateService,
   readService,
@@ -12,11 +9,3 @@ const {
   updateService,
   destroyService,
 } = ProductService;
-export {
-  createService,
-  paginateService,
-  readService,
-  readOneService,
-  updateService,
-  destroyService,
-};

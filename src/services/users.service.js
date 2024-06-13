@@ -3,17 +3,10 @@ import Service from "./service.js";
 
 const UserService = new Service(userManager);
 
-const {
+export const {
   createService,
   readService,
   readOneService,
   updateService,
   destroyService,
 } = UserService;
-export {
-  createService,
-  readService,
-  readOneService,
-  updateService,
-  destroyService,
-};
