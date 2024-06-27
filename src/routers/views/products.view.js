@@ -2,7 +2,13 @@ import CustomRouter from "../CustomRouter.js";
 //import productsManager from "../../data/fs/ProductManager.fs.js";
 
 import productsManager from "../../data/mongo/manager/ProductManager.mongo.js";
-import { readService } from "../../services/products.service.js";
+import {   
+  createService,
+  paginateService,
+  readService,
+  readOneService,
+  updateService,
+  destroyService } from "../../services/products.service.js";
 
 class ProductsRouter extends CustomRouter {
   init() {
@@ -11,9 +17,6 @@ class ProductsRouter extends CustomRouter {
     this.read("/:pid", ["PUBLIC"], readOne);
   }
 }
-
-
-
 
 async function products(req, res, next){
   try {
@@ -32,9 +35,12 @@ async function products(req, res, next){
       filter.category = req.query.category;
     }
 
-//    const all = await paginateService({filter, opts});
-    const all = await readService();
-const products = all.docs.map(doc => doc.toObject({ virtuals: true }));
+   const all = await paginateService({filter, opts});
+    //const all = await readService();
+    console.log(all)
+    const products = all.docs.map(doc => {
+      return typeof doc.toObject === 'function' ? doc.toObject({ virtuals: true }) : doc;
+    });
     const pagInfo = {
       limit: all.limit,
       page: all.page,

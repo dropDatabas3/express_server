@@ -12,9 +12,9 @@ class Service {
     }
   }
 
-  readService = async (id) => {
+  readService = async (cat) => {
     try {
-      const all = await this.manager.read(id);
+      const all = await this.manager.read(cat);
       return all;
     } catch (error) {
       throw error;

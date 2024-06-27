@@ -2,7 +2,7 @@ import CustomRouter from "../CustomRouter.js";
 import productsRouter from "./products.view.js";
 import userRouter from "./users.view.js";
 import cartRouter from "./carts.view.js";
-import productsManager from "../../data/mongo/manager/ProductManager.mongo.js";
+import { readService } from "../../services/products.service.js";
 
 class ViewsRouter extends CustomRouter {
   init() {
@@ -17,7 +17,7 @@ const viewsRouter = new ViewsRouter();
 
 async function home(req, res, next){
   try {
-    const products = await productsManager.read();
+    const products = await readService();
     const title = "Home";
     return res.render("index", { title , products});
   } catch (error) {

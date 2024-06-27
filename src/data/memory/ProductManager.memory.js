@@ -91,6 +91,11 @@ class ProductManager {
   };
 }
 
+
+const productManager = new ProductManager();
+export default productManager;
+
+
 function testProductManager() {
   console.log("Creamos 10 prductos:");
   manager.create({

@@ -24,6 +24,8 @@ class UserManager {
       console.error(error);
     }
   }
+  //agregar paginate
+  //agregar readByEmail
   read() {
     try {
       if (UserManager.#user.length === 0) {
@@ -80,3 +82,7 @@ class UserManager {
     }
   };
 }
+
+
+const userManager = new UserManager();
+export default userManager;
