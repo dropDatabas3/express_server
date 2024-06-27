@@ -12,6 +12,7 @@ class Service {
     }
   }
 
+
   readService = async (cat) => {
     try {
       const all = await this.manager.read(cat);

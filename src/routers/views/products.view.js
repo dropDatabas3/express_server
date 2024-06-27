@@ -2,6 +2,7 @@ import CustomRouter from "../CustomRouter.js";
 //import productsManager from "../../data/fs/ProductManager.fs.js";
 
 import productsManager from "../../data/mongo/manager/ProductManager.mongo.js";
+
 import {   
   createService,
   paginateService,
@@ -9,6 +10,7 @@ import {
   readOneService,
   updateService,
   destroyService } from "../../services/products.service.js";
+
 
 class ProductsRouter extends CustomRouter {
   init() {
@@ -34,6 +36,7 @@ async function products(req, res, next){
     if (req.query.category) {
       filter.category = req.query.category;
     }
+
 
    const all = await paginateService({filter, opts});
     //const all = await readService();
