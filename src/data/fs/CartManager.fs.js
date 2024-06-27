@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 class CartManager{
     constructor(){
-        this.path = "./data/fs/db/carts.json";
+        this.path = "./src/data/fs/files/carts.json";
         this.init();
     }
     init() {
@@ -114,3 +114,6 @@ class CartManager{
         }
       }
     }
+
+const cartManager = new CartManager();
+export default cartManager;
