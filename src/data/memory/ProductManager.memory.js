@@ -1,7 +1,7 @@
 class ProductManager {
   static #products = [];
 
-  create(data) {
+  async create(data) {
     try {
       const newProduct = {
         title: data.title,
@@ -28,23 +28,25 @@ class ProductManager {
         console.log(
           `\nSe creo con exito el producto "${data.title}". Su id es: ${newProduct.id}`
         );
+        return newProduct
       }
     } catch (error) {
       console.error(error);
     }
   }
-  read() {
+  async read() {
     try {
       if (ProductManager.#products.length === 0) {
         throw new Error(`No hay productos disponibles`);
       } else {
         console.log(ProductManager.#products);
+        return ProductManager.#products 
       }
     } catch (error) {
       console.error(error);
     }
   }
-  readOne = (id) => {
+   readOne = async (id) => {
     try {
       const product =
         ProductManager.#products.length === 0
@@ -62,7 +64,7 @@ class ProductManager {
     }
   };
 
-  update = (id, data) => {
+  update = async(id, data) => {
     try {
       let all = this.read();
       let one = all.find((product) => product.id === id);
@@ -71,6 +73,7 @@ class ProductManager {
           one[prop] = data[prop];
         }
         console.log("producto modificado");
+        return one
       } else {
         throw new Error("No existe el producto");
       }
@@ -79,7 +82,7 @@ class ProductManager {
     }
   };
 
-  destroy = (id) => {
+  destroy = async (id) => {
     const product = this.readOne(id);
     if (product) {
       ProductManager.#products.splice(
@@ -87,6 +90,7 @@ class ProductManager {
         1
       );
       console.log(`Se elimino el producto ${JSON.stringify(product)}`);
+      return product
     }
   };
 }

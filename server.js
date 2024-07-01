@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 
-import enviromenten from "./src/utils/envs.utils.js";
+import enviroment from "./src/utils/envs.utils.js";
 import argsUtils from "./src/utils/args.utils.js";
 import indexRouter from "./src/routers/index.router.js";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
@@ -47,12 +47,12 @@ server.set("views", __dirname+'/src/views'); // <-- Set the views directory
   MIDDLEWARES
 **************/
 server.use(session({
-  store: new MongoStore({mongoUrl: enviromenten.MONGO_URI, ttl: 60*60}),
-  secret: enviromenten.SECRET,
+  store: new MongoStore({mongoUrl: enviroment.MONGO_URI, ttl: 60*60}),
+  secret: enviroment.SECRET,
   resave: true,
   saveUninitialized: true,
 }));
-server.use(cookieParser(enviromenten.SECRET));
+server.use(cookieParser(enviroment.SECRET));
 server.use(express.urlencoded({ extended: true })); // <-- Allows the server to read req.param and req.query
 server.use(express.json()); // <-- Used for req body
 server.use(morgan("dev")); // <-- Log requests to the console
@@ -67,5 +67,5 @@ server.use(errorHandler);
 server.use(pathHandler);
 
 console.log("args: ", argsUtils)
-console.log("Envirment: ",enviromenten)
+console.log("Envirment: ",enviroment)
 
