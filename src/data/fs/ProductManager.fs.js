@@ -142,6 +142,7 @@ class ProductManager {
                 return false;
             });
         });
+
         //console.log("carts por key: ", carts)
         const start = (page - 1) * limit;
         const end = start + limit;
