@@ -121,10 +121,12 @@ class ProductManager {
   async paginate({ filter, opts}) {
     try {
         let { page, limit } = opts;
-        limit = limit || 10;
-        page = page || 1;
+        limit = parseInt(limit) || 10;
+        page = parseInt(page) || 1;
         let carts = await this.read();
-
+        console.log("limit: ", limit)
+        console.log("page: ", page)
+        
         // Aplicar filtros
         carts = carts.filter(cart => {
             return Object.keys(filter).every(key => {
@@ -141,12 +143,13 @@ class ProductManager {
             });
         });
 
+        //console.log("carts por key: ", carts)
         const start = (page - 1) * limit;
         const end = start + limit;
         const paginatedCarts = carts.slice(start, end);
+        //console.log("paginateCarts: ", paginatedCarts)
 
         const totalPages = Math.ceil(carts.length / limit);
-
         return {
             docs: paginatedCarts,
             totalDocs: carts.length,
