@@ -1,10 +1,7 @@
-
-//import cartManager from "../data/mongo/manager/CartManager.mongo.js";
 import Service from "./service.js";
-import dao from "../data/dao.factory.js";
-const { carts } = dao;
+import cartsRepository from "../repositories/carts.repository.js";
 
-const cartService = new Service(carts);
+const cartService = new Service(cartsRepository);
 
 export const {
   createService,

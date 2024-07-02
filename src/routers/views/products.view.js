@@ -64,7 +64,7 @@ async function products(req, res, next){
     console.log("entro")
     const { pid } = req.params;
     console.log({pid})
-    const product = await productsManager.readOne(pid);
+    const product = await readOneService(pid);
     console.log("Producto: ", product)
     return res.render("product", { title: product.title, product}); // <-- chequear vista
   } catch (error) {

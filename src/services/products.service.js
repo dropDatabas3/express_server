@@ -1,11 +1,9 @@
 
 //import ProductManager from "../data/mongo/manager/ProductManager.mongo.js";
 import Service from "./service.js";
-import dao from "../data/dao.factory.js";
+import productsRepository from "../repositories/products.repository.js";
 
-const { products } = dao;
-
-const ProductService = new Service(products);
+const ProductService = new Service(productsRepository);
 
 
 export const {

@@ -1,11 +1,7 @@
-
-//import userManager from "../data/mongo/manager/UserManager.mongo.js";
 import Service from "./service.js";
-import dao from "../data/dao.factory.js";
+import usersRepository from "../repositories/user.repository.js";
 
-const { users } = dao;
-
-const UserService = new Service(users);
+const UserService = new Service(usersRepository);
 
 
 export const {

@@ -36,7 +36,7 @@ class ProductManager {
       } else {
         //CREO EL NUEVO PRODUCTO PARA LUEGO AGREGARLO A LA LISTA
         const newProduct = {
-          id: data.id || crypto.randomBytes(12).toString("hex"), //data.id para generar un producto de prueba para readOne(id) y destroy(id)
+          _id: data.id || crypto.randomBytes(12).toString("hex"), //data.id para generar un producto de prueba para readOne(id) y destroy(id)
           title: data.title,
           photo: data.photo || "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
           category: data.category,
@@ -74,7 +74,7 @@ class ProductManager {
     try {
       let lista = await fs.promises.readFile(this.path, "utf-8");
       lista = JSON.parse(lista);
-      let product = lista.find((each) => each.id === id);
+      let product = lista.find((each) => each._id === id);
       return product;
     } catch (error) {
       return error;
@@ -84,7 +84,7 @@ class ProductManager {
   async update(id, data) {
     try {
       let all = await this.read();
-      let one = all.find((each) => each.id === id);
+      let one = all.find((each) => each._id === id);
       if (one) {
         for (let prop in data) {
           one[prop] = data[prop];
@@ -108,9 +108,9 @@ class ProductManager {
         throw new Error("Product not found!");
       } else {
         let all = await fs.promises.readFile(this.path, "utf-8");
-        all = JSON.parse(all).filter((each) => each.id !== one.id);
+        all = JSON.parse(all).filter((each) => each._id !== one._id);
         await fs.promises.writeFile(this.path, JSON.stringify(all, null, 2));
-        console.log("Product with id ", one.id, " successfully deleted:");
+        console.log("Product with id ", one._id, " successfully deleted:");
         return one;
 
       }

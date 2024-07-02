@@ -21,7 +21,7 @@ import socketcb from "./src/routers/index.socket.js"
   HTTP  SERVER
 **************/
 const server = express(); // <-- Initialize Express server
-const port = argsUtils.p || 8080; // <-- Define the port number for the server
+const port =  argsUtils.p || enviroment.PORT  ; // <-- Define the port number for the server
 const ready = async () => {
   console.log("Server ready on port " + port); // <-- Log a message when the server is ready
 } 
@@ -69,4 +69,5 @@ server.use(pathHandler);
 
 console.log("args: ", argsUtils)
 console.log("Envirment: ",enviroment)
+console.log("process.args: ", process.argv)
 

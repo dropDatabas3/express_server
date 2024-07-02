@@ -9,6 +9,7 @@ const enviroment = {
     MONGO_URI : process.env.MONGO_URI,
     SECRET_JWT : process.env.SECRET_JWT,
     SECRET : process.env.SECRET,
+    PORT:  process.env.PORT,
     GOOGLE_EMAIL : process.env.GOOGLE_EMAIL,
     GOOGLE_PASSWORD : process.env.GOOGLE_PASSWORD 
 }

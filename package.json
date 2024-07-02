@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node ./server.js",
-    "dev": "nodemon ./server.js --env dev --persistence=fs",
+    "dev": "nodemon ./server.js --env=dev",
     "argv": "nodemon ./server.js -p 8080 --env=prod --persistence=mongo"
   },
   "keywords": [],
