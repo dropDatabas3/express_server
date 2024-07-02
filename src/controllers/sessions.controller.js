@@ -49,8 +49,16 @@ class SessionsController {
       return next(error);
     }
   }
+  async verifyEmail(req, res, next) {
+    try {
+      res.cookie("token", req.user.token, { signedCookie: true });
+      return res.redirect("/");
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
 const sessionController = new SessionsController();
-const { session, register, login, online, destroySession } = sessionController;
+const { session, register, login, online, destroySession, verifyEmail } = sessionController;
 
-export { session, register, login, online, destroySession };
+export { session, register, login, online, destroySession , verifyEmail};

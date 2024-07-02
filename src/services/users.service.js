@@ -10,4 +10,5 @@ export const {
   readOneService,
   updateService,
   destroyService,
+  readByEmailService,
 } = UserService;

@@ -28,6 +28,15 @@ class UsersRepository {
       }
     }
   
+    readByEmailRepository = async (email) => {
+        try {
+            const one = await this.manager.readByEmail(email);
+            return one;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     paginateRepository = async ({ filter, opts }) => {
       try {
         const all = await this.manager.paginate({ filter, opts });

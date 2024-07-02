@@ -1,6 +1,6 @@
 import passportCb from "../../middlewares/passportCb.mid.js";
 import CustomRouter from "../CustomRouter.js";
-import { login, register, session, online, destroySession } from "../../controllers/sessions.controller.js";
+import { login, register, session, online, destroySession , verifyEmail } from "../../controllers/sessions.controller.js";
 
 class SessionRouter extends CustomRouter {
   init() {
@@ -9,6 +9,7 @@ class SessionRouter extends CustomRouter {
     this.read("/online", ["USER", "ADMIN"], passportCb("jwt"), online);
     this.create("/logout", ["PUBLIC"],destroySession);
     this.create("/register", ["PUBLIC"],passportCb("register"), register);
+    this.read("/verify", ["PUBLIC"],passportCb("verifyEmail"), verifyEmail);
   }
   
 }

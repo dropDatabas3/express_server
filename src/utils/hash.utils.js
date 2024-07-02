@@ -6,8 +6,8 @@ const createHash = (password) => {
   return hash;
 };
 
-const verifyHash = (reqBodyPass, mongoPass) => {
-  const verify = compareSync(reqBodyPass, mongoPass);
+const verifyHash = (reqBodyPass, storagePass) => {
+  const verify = compareSync(reqBodyPass, storagePass);
   return verify;
 };
 

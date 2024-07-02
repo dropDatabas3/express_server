@@ -123,12 +123,12 @@ class ProductManager {
         let { page, limit } = opts;
         limit = parseInt(limit) || 10;
         page = parseInt(page) || 1;
-        let carts = await this.read();
+        let products = await this.read();
         console.log("limit: ", limit)
         console.log("page: ", page)
         
         // Aplicar filtros
-        carts = carts.filter(cart => {
+        products = products.filter(cart => {
             return Object.keys(filter).every(key => {
                 if (key in cart) {
                     if (typeof filter[key] === 'object' && filter[key] !== null) {
@@ -143,16 +143,16 @@ class ProductManager {
             });
         });
 
-        //console.log("carts por key: ", carts)
+        //console.log("products por key: ", products)
         const start = (page - 1) * limit;
         const end = start + limit;
-        const paginatedCarts = carts.slice(start, end);
-        //console.log("paginateCarts: ", paginatedCarts)
+        const paginatedproducts = products.slice(start, end);
+        //console.log("paginateproducts: ", paginatedproducts)
 
-        const totalPages = Math.ceil(carts.length / limit);
+        const totalPages = Math.ceil(products.length / limit);
         return {
-            docs: paginatedCarts,
-            totalDocs: carts.length,
+            docs: paginatedproducts,
+            totalDocs: products.length,
             limit: limit,
             page: page,
             totalPages: totalPages,
@@ -164,9 +164,17 @@ class ProductManager {
     } catch (error) {
         throw error;
     }
-}
+  }
 }
 
+
+
+const productsManager = new ProductManager();
+export default productsManager;
+
+
+
+/*
 async function test() {
   const product = new ProductManager();
   await product.create({
@@ -531,7 +539,4 @@ async function create40products() {
     stock: 10,
   });
 }
-
-
-const productsManager = new ProductManager();
-export default productsManager;
+*/

@@ -39,6 +39,14 @@ class Service {
       throw error;
     }
   }
+  readByEmailService = async (email) => {
+    try {
+      const one = await this.repository.readByEmailRepository(email);
+      return one;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   updateService = async (id, data) => {
     try {

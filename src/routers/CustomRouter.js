@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/jwt.utils.js";
 import usersManager from "../data/mongo/manager/UserManager.mongo.js"
+import usersRepository from "../repositories/user.repository.js";
 
 class CustomRouter {
   //para construir y configurar cada instancia del enrutador
@@ -52,7 +53,7 @@ class CustomRouter {
             (policies.includes("USER") && role === 0) || 
             (policies.includes("ADMIN") && role === 1) 
           ) {
-            const user = await usersManager.readByEmail(email);
+            const user = await usersRepository.readByEmailRepository(email);
             req.user = user;
             return next();
           } else return res.error403();

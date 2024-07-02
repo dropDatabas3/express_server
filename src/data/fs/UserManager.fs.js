@@ -1,5 +1,4 @@
 import fs from "fs";
-import crypto from "crypto";
 
 class UserManager {
   constructor() {
@@ -29,27 +28,14 @@ class UserManager {
 
   async create(data) {
     try {
-      if (!data.email || !data.password || !data.role || !data.photo) {
-        throw new Error("All fields are required");
-      } else {
-        // Crear el nuevo usuario
-        const newUser = {
-          id: data.id || crypto.randomBytes(12).toString("hex"),
-          email: data.email,
-          password: data.password,
-          role: data.role,
-          photo: data.photo,
-        };
-
         // Leer y modificar la lista de usuarios
         let users = await fs.promises.readFile(this.path, "utf-8");
         users = JSON.parse(users);
-        users.push(newUser);
+        users.push(data);
 
         // Escribir en el archivo
         await fs.promises.writeFile(this.path, JSON.stringify(users, null, 2));
-        return newUser;
-      }
+        return data;
     } catch (error) {
       console.error(error);
       throw error;
@@ -81,7 +67,7 @@ class UserManager {
   async update(id, data) {
     try {
       let all = await this.read();
-      let one = all.find((each) => each.id === id);
+      let one = all.find((each) => each._id === id);
       if (one) {
         for (let prop in data) {
           one[prop] = data[prop];
@@ -113,12 +99,17 @@ class UserManager {
       throw error;
     }
   }
-  async paginate({ filter = {}, page = 1, limit = 10 } = {}) {
+  async paginate({ filter, opts}) {
     try {
-        let carts = await this.read();
-
+        let { page, limit } = opts;
+        limit = parseInt(limit) || 10;
+        page = parseInt(page) || 1;
+        let users = await this.read();
+        console.log("limit: ", limit)
+        console.log("page: ", page)
+        
         // Aplicar filtros
-        carts = carts.filter(cart => {
+        users = users.filter(cart => {
             return Object.keys(filter).every(key => {
                 if (key in cart) {
                     if (typeof filter[key] === 'object' && filter[key] !== null) {
@@ -133,15 +124,16 @@ class UserManager {
             });
         });
 
+        //console.log("users por key: ", users)
         const start = (page - 1) * limit;
         const end = start + limit;
-        const paginatedCarts = carts.slice(start, end);
+        const paginatedusers = users.slice(start, end);
+        //console.log("paginateusers: ", paginatedusers)
 
-        const totalPages = Math.ceil(carts.length / limit);
-
+        const totalPages = Math.ceil(users.length / limit);
         return {
-            docs: paginatedCarts,
-            totalDocs: carts.length,
+            docs: paginatedusers,
+            totalDocs: users.length,
             limit: limit,
             page: page,
             totalPages: totalPages,
@@ -153,7 +145,16 @@ class UserManager {
     } catch (error) {
         throw error;
     }
-}
+  }
+  async readByEmail(email) {
+    try {
+      let users = await this.read();
+      let user = users.find((each) => each.email === email);
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 async function test() {

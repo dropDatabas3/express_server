@@ -16,12 +16,12 @@ async function sendEmail(data){
         await trasport.sendMail({
             from: GOOGLE_EMAIL,
             to: data.to,
-            subject: "VERIFY YOUR EMAIL",
+            subject: `${data.name.toUpperCase()} VERIFY YOUR EMAIL`,
             html:
             `
             <h1>HELLO ${data.name}</h1>
-            <p>Click the link below to verify your email</p>
-            <a href="${data.url}">VERIFY EMAIL</a>
+            <p>Click here for verify your email</p>
+            <a href="http://localhost:8000/api/sessions/verify?email=${data.to}&code=${data.verifyCode}">VERIFY</a>
             `
         })
     } catch (error) {
