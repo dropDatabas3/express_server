@@ -1,8 +1,9 @@
 import { createTransport } from "nodemailer";
 import __dirname from "../../utils.js"
 import enviroment from "./envs.utils.js"
+import argsUtils from "./args.utils.js";
 
-const {GOOGLE_EMAIL , GOOGLE_PASSWORD} = enviroment
+const {GOOGLE_EMAIL , GOOGLE_PASSWORD, PORT} = enviroment
 
 async function sendEmail(data){
     try {
@@ -13,6 +14,7 @@ async function sendEmail(data){
             auth: { user: GOOGLE_EMAIL , pass: GOOGLE_PASSWORD}
         }) 
         await trasport.verify()
+        const port = argsUtils.p || PORT || 8000
         await trasport.sendMail({
             from: GOOGLE_EMAIL,
             to: data.to,
@@ -21,7 +23,7 @@ async function sendEmail(data){
             `
             <h1>HELLO ${data.name}</h1>
             <p>Click here for verify your email</p>
-            <a href="http://localhost:8000/api/sessions/verify?email=${data.to}&code=${data.verifyCode}">VERIFY</a>
+            <a href="http://localhost:${port}/api/sessions/verify?email=${data.to}&code=${data.verifyCode}">VERIFY</a>
             `
         })
     } catch (error) {
