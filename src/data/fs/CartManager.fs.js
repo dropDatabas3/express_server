@@ -26,38 +26,22 @@ class CartManager{
       }
       async create(data) {
         try {
-          if (
-            !data.user_id ||
-            !data.product_id ||
-            !data.quantity ||
-            !data.state
-          ) {
-            throw new Error("All fields are required");
-          } else {
-            //CREO EL NUEVO CART PARA LUEGO AGREGARLO A LA LISTA
-            const newCart = {
-              id: data.id || crypto.randomBytes(12).toString("hex"),
-              user_id: data.user_id,
-              product_id: data.product_id,
-              quantity: data.quantity,
-              state: data.state,
-            };
             //HAGO UNA COPIA DEL ARRAY DE CARTS.JSON EN MI VARIABLE CART
             let carts = await fs.promises.readFile(this.path, "utf-8");
             carts = JSON.parse(carts);
             //AGREGO EL NUEVO CART A LA COPIA DEL ARCHIVO
-            carts.push(newCart);
+            carts.push(data);
             //SOBREESCRIBO EL ARCHIVO CON MI NUEVA INFORMACION
             await fs.promises.writeFile(
               this.path,
               JSON.stringify(carts, null, 2)
             );
-            return newCart
-          }
+            return data
         } catch (error) {
           throw error
         }
       }
+
       async read() {
         try {
           let lista = await fs.promises.readFile(this.path, "utf-8");
@@ -71,7 +55,7 @@ class CartManager{
         try {
           let lista = await fs.promises.readFile(this.path, "utf-8");
           lista = JSON.parse(lista);
-          let cart = lista.find((each) => each.id === id);
+          let cart = lista.find((each) => each._id === id);
           return cart;
         } catch (error) {
           throw error;

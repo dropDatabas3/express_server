@@ -26,35 +26,17 @@ class ProductManager {
   }
   async create(data) {
     try {
-      if (
-        !data.title ||
-        !data.price ||
-        !data.stock ||
-        !data.category
-      ) {
-        throw new Error("All fields are required");
-      } else {
-        //CREO EL NUEVO PRODUCTO PARA LUEGO AGREGARLO A LA LISTA
-        const newProduct = {
-          _id: data.id || crypto.randomBytes(12).toString("hex"), //data.id para generar un producto de prueba para readOne(id) y destroy(id)
-          title: data.title,
-          photo: data.photo || "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
-          category: data.category,
-          price: data.price,
-          stock: data.stock,
-        };
         //HAGO UNA COPIA DEL ARRAY DE PRODUCTS.JSON EN MI VARIABLE PRODUCTS
         let products = await fs.promises.readFile(this.path, "utf-8");
         products = JSON.parse(products);
         //AGREGO EL NUEVO PRODUCTO A LA COPIA DEL ARCHIVO
-        products.push(newProduct);
+        products.push(data);
         //SOBREESCRIBO EL ARCHIVO CON MI NUEVA INFORMACION
         await fs.promises.writeFile(
           this.path,
           JSON.stringify(products, null, 2)
         );
-        return newProduct
-      }
+        return data
     } catch (error) {
       throw error
     }
@@ -67,7 +49,7 @@ class ProductManager {
         (lista = lista.filter((each) => each.category === category)); // <-- En caso de ser true, filtramos la lista a solo los que tengan category = category
       return lista;
     } catch (error) {
-      return error;
+      throw error
     }
   }
   async readOne(id) {
@@ -77,7 +59,7 @@ class ProductManager {
       let product = lista.find((each) => each._id === id);
       return product;
     } catch (error) {
-      return error;
+      throw error
     }
   }
 
@@ -128,15 +110,15 @@ class ProductManager {
         console.log("page: ", page)
         
         // Aplicar filtros
-        products = products.filter(cart => {
+        products = products.filter(product => {
             return Object.keys(filter).every(key => {
-                if (key in cart) {
+                if (key in product) {
                     if (typeof filter[key] === 'object' && filter[key] !== null) {
                         if (filter[key].$in && Array.isArray(filter[key].$in)) {
-                            return filter[key].$in.includes(cart[key]);
+                            return filter[key].$in.includes(product[key]);
                         }
                     } else {
-                        return cart[key] === filter[key];
+                        return product[key] === filter[key];
                     }
                 }
                 return false;

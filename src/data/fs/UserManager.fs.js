@@ -63,6 +63,16 @@ class UserManager {
       throw error;
     }
   }
+  
+  async readByEmail(email) {
+    try {
+      let users = await this.read();
+      let user = users.find((each) => each.email === email);
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async update(id, data) {
     try {
@@ -144,15 +154,6 @@ class UserManager {
         };
     } catch (error) {
         throw error;
-    }
-  }
-  async readByEmail(email) {
-    try {
-      let users = await this.read();
-      let user = users.find((each) => each.email === email);
-      return user;
-    } catch (error) {
-      throw error;
     }
   }
 }
