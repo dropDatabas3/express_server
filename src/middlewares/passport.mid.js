@@ -7,6 +7,8 @@ import { createHash, verifyHash } from "../utils/hash.utils.js";
 import { createToken } from "../utils/jwt.utils.js";
 import sendEmail from "../utils/mailing.utils.js";
 import enviroment from "../utils/envs.utils.js";
+import errors from "../utils/errors/errors.js";
+import CustomError from "../utils/errors/customError.js";
 
 passport.use(
   "register",
@@ -18,12 +20,10 @@ passport.use(
         //QUE CONSTA DE TODO LO QUE VALIDAMOS EN LOS MIDDLEWARES
         if (!email || !password || !req.body.name) {
           if (!req.body.name) {
-            const error = new Error("Please enter name!");
-            error.statusCode = 400;
+            const error = CustomError.new(errors.missing);
             return done(null, null, error);
           }
-          const error = new Error("Please enter email and password!");
-          error.statusCode = 400;
+          const error = CustomError.new(errors.missing);
           return done(null, null, error);
         }
         const one = await usersRepository.readByEmailRepository(email);

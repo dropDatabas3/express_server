@@ -12,12 +12,13 @@ class Manager {
   }
   async read(filter) {
     try {
+      
       if (typeof filter === "string") {
         filter = { _id: new Types.ObjectId(filter) };
       } else if (filter && filter._id) {
         filter._id =  new Types.ObjectId(filter._id);
       }
-      return await this.model.find(filter).lean(); // lean() para que devuelva un objeto plano
+      return await this.model.find(filter).sort("title").lean(); // lean() para que devuelva un objeto plano
     } catch (error) {
       throw error;
     }

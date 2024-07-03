@@ -6,6 +6,7 @@ import { engine } from "express-handlebars";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import compression from "express-compression";
 
 
 import enviroment from "./src/utils/envs.utils.js";
@@ -59,7 +60,7 @@ server.use(express.urlencoded({ extended: true })); // <-- Allows the server to 
 server.use(express.json()); // <-- Used for req body
 server.use(morgan("dev")); // <-- Log requests to the console
 server.use(express.static(__dirname + "/public")); // <-- Serve static files
-
+server.use(compression()); // <-- Compress the response data
 
 /*************
   ENDPOINTS
