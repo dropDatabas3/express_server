@@ -6,7 +6,7 @@ class SessionRouter extends CustomRouter {
   init() {
     this.read("/",["PUBLIC"], session);
     this.create("/login", ["PUBLIC"], passportCb("login"), login);
-    this.read("/online", ["USER", "ADMIN"], passportCb("jwt"), online);
+    this.read("/online", ["PUBLIC"], passportCb("jwt"), online);
     this.create("/logout", ["PUBLIC"],destroySession);
     this.create("/register", ["PUBLIC"],passportCb("register"), register);
     this.read("/verify", ["PUBLIC"],passportCb("verifyEmail"), verifyEmail);

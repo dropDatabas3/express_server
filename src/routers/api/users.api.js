@@ -4,7 +4,7 @@ import { create, read, readOne, update, destroy } from "../../controllers/users.
 class UsersRouter extends CustomRouter {
   init() {
     this.create("/", ["PUBLIC"], create);
-    this.read("/", ["USER", "ADMIN"], read);
+    this.read("/", ["PUBLIC"], read);
     this.read("/:uid", ["USER", "ADMIN"], readOne);
     this.update("/:uid", ["USER", "ADMIN"], update);
     this.destroy("/:uid", ["ADMIN"], destroy);

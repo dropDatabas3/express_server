@@ -1,6 +1,6 @@
 import argsUtils from "../utils/args.utils.js";
 import dbConnect from "../utils/dbConnect.mongo.utils.js";
-
+import create40productMemoryManager from "../utils/createMemoryExampleProducts.utils.js";
 const persistence = argsUtils.persistence;
 
 let dao = {}
@@ -16,6 +16,7 @@ switch (persistence) {
             products: productManagerMemory,
             carts: cartManagerMemory
         }
+        create40productMemoryManager()
         break;
     case "fs":
         console.log("Using FileSystem persistence")

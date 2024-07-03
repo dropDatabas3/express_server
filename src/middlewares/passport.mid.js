@@ -6,6 +6,8 @@ import UserDTO from "../dto/user.dto.js";
 import { createHash, verifyHash } from "../utils/hash.utils.js";
 import { createToken } from "../utils/jwt.utils.js";
 import sendEmail from "../utils/mailing.utils.js";
+import enviroment from "../utils/envs.utils.js";
+
 passport.use(
   "register",
   new LocalStrategy(
@@ -53,6 +55,11 @@ passport.use(
           error.statusCode = 401;
           return done(error);
         }
+        if(one.verify === false){
+          const error = new Error("Email not verified!");
+          error.statusCode = 401;
+          return done(error);
+        }
         const verify = verifyHash(password, one.password);
         if (verify) {
           const user = {
@@ -85,7 +92,7 @@ passport.use(
       jwtFromRequest: ExtractJwt.fromExtractors([
         (req) => req?.cookies["token"],
       ]),
-      secretOrKey: process.env.SECRET_JWT,
+      secretOrKey: enviroment.SECRET_JWT,
     },
     (data, done) => {
       try {

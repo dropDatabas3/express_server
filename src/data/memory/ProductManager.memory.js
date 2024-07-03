@@ -1,11 +1,11 @@
 class ProductManager {
   static #products = [];
 
-  async create(data) {
+  create(data) {
     try {
         ProductManager.#products.push(data);
         console.log(
-          `\nSe creo con exito el producto "${data.title}". Su id es: ${newProduct._id}`
+          `\nSe creo con exito el producto "${data.title}". Su id es: ${data._id}`
         );
         return data
     } catch (error) {
@@ -208,3 +208,5 @@ function testProductManager() {
     stock: 5,
   });
 }
+
+

@@ -30,6 +30,7 @@ class SessionsController {
 
   async online(req, res, next) {
     try {
+      console.log("req.user.online: ",req.user.online)
       if (req.user.online) {
         return res.response200(req.user);
       }
