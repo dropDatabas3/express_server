@@ -5,14 +5,19 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node ./server.js",
-    "dev": "nodemon ./server.js --env=dev",
-    "argv": "nodemon ./server.js -p 8080 --env=prod --persistence=mongo"
+    "start": "node ./server.js -p 8080",
+    "prod": "nodemon ./server.js -p 8080 --env prod --persistence mongo",
+    "dev": "nodemon ./server.js -p 8080 --env dev --persistence mongo",
+    "test_fs": "node ./server.js -p 8080 --env test --persistence fs",
+    "test_memory": "node ./server.js -p 8080 --env test --persistence memory",
+    "argv": "nodemon ./server.js -p 8080 --env=prod --persistence=mongo",
+    "mocksProducts": "node ./src/mocks/products.mocks.js --env dev"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "nodemon": "^3.1.0"
   },
   "dependencies": {
@@ -22,6 +27,7 @@
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-compression": "^1.0.2",
     "express-handlebars": "^7.1.2",
     "express-session": "^1.18.0",
     "jsonwebtoken": "^9.0.2",
