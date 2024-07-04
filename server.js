@@ -60,7 +60,7 @@ server.use(express.urlencoded({ extended: true })); // <-- Allows the server to 
 server.use(express.json()); // <-- Used for req body
 server.use(morgan("dev")); // <-- Log requests to the console
 server.use(express.static(__dirname + "/public")); // <-- Serve static files
-server.use(compression()); // <-- Compress the response data
+server.use(compression({brotli: { enabled: true, zlib: {} },}));// <-- Compress the response data
 
 /*************
   ENDPOINTS
