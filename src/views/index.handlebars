@@ -3,13 +3,13 @@
         Bienvenido
     </h1>
     <div class="imgContainer">
-    <img src="https://img.freepik.com/vector-premium/plantilla-diseno-logotipo-tienda-alimentos_145155-1251.jpg"
-    style="height: 100%"></img>
+        <img src="https://img.freepik.com/vector-premium/plantilla-diseno-logotipo-tienda-alimentos_145155-1251.jpg"
+        style="height: 100%" alt="Store Logo">
     </div>
     <section class="d-flex flex-wrap justify-content-center align-items-center m-3">
         {{#each products}}
             <div class="card col-lg-2 col-md-3 col-sm-4 mb-3 mx-2 rem-8" id="card" onclick="showDetail('{{_id}}')">
-                <img src={{photo}} class="card-img-top" alt="">
+                <img src="{{photo}}" class="card-img-top" alt="Product Image">
                 <div class="card-body d-flex flex-column align-items-stretch" id="card-body">
                     <h5 class="card-title pt-2 text-center">{{title}}</h5>
                     <p class="card-text p-2 text-end">${{price}}</p>
@@ -18,14 +18,13 @@
         {{/each}}
     </section>
 </main>
-<!-- {{photo}}-->
 <style>
-    #title  {
-        background-color:#FEB272; 
+    #title {
+        background-color: #FEB272; 
         color: #fff; 
         font-weight: 600;
-        text-shado
-        w: 1px 1px 1px #000;
+        text-shadow: 1px 1px 1px #000;
+        font-size: x-large;
     }
     .card-title {
         height: 2rem; /* Asegura que todas las tarjetas tengan al menos la misma altura */
@@ -40,7 +39,7 @@
 </style>
 <script>
     function showDetail(id) {
-        console.log(id)
+        console.log(id);
         window.location.href = `/products/${id}`;
     }
 </script>

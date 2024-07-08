@@ -31,6 +31,7 @@ class CustomRouter {
     res.paginate = (response, info) =>
       res.json({ statusCode: 200, response, info });
     res.message201 = (message) => res.json({ statusCode: 201, message });
+    res.response201 = (response) => res.json({ statusCode: 201, response });
     res.error400 = (message) => res.json({ statusCode: 400, message });
     res.error401 = () =>
       res.json({ statusCode: 401, message: "Bad auth from poliecies!" });

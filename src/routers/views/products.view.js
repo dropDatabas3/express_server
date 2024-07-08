@@ -24,9 +24,7 @@ async function products(req, res, next){
   try {
     const filter = {};
     const opts = {};
-    if (req.query.limit) {
-      opts.limit = req.query.limit;
-    }
+    opts.limit = req.query.limit || 12;
     if (req.query.page) {
       opts.page = req.query.page;
     }
@@ -37,7 +35,7 @@ async function products(req, res, next){
       filter.category = req.query.category;
     }
 
-
+    console.log("limit: ", opts.limit)
    const all = await paginateService({filter, opts});
     //const all = await readService();
     console.log(all)

@@ -1,146 +1,146 @@
-import productManager from "../data/memory/ProductManager.memory.js";
-function create40productMemoryManager() {
-    productManager.create({
+async function create40productMemoryManager() {
+  const { default: productsRepository } = await import("../repositories/products.repository.js");
+  productsRepository.createRepository({
       title: "Galletas",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "snack",
       price: 500,
       stock: 10,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Agua Mineral",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "bebida",
       price: 300,
       stock: 50,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Manzanas",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "fruta",
       price: 600,
       stock: 15,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Chocolate",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "dulce",
       price: 1000,
       stock: 8,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Leche",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "lácteo",
       price: 900,
       stock: 20,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Yogur",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "lácteo",
       price: 700,
       stock: 15,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Hamburguesa",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "comida rápida",
       price: 1500,
       stock: 7,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Jugo de Naranja",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "bebida",
       price: 800,
       stock: 30,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Cereal",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "desayuno",
       price: 1200,
       stock: 10,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Papas Fritas",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "snack",
       price: 700,
       stock: 25,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Tomates",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "verdura",
       price: 400,
       stock: 12,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Pescado",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "mariscos",
       price: 2500,
       stock: 4,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Refresco de Lima",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "bebida",
       price: 1000,
       stock: 20,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Huevos",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "lácteo",
       price: 600,
       stock: 18,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Pizza",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "comida rápida",
       price: 1800,
       stock: 6,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Caramelo",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "dulce",
       price: 200,
       stock: 50,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Sandwich",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "comida rápida",
       price: 900,
       stock: 15,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Zanahorias",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "verdura",
       price: 300,
       stock: 20,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Té",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "bebida",
       price: 600,
       stock: 40,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Pasta",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "comida",
       price: 1100,
       stock: 8,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Café",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "bebida",
@@ -148,7 +148,7 @@ function create40productMemoryManager() {
       stock: 40,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Croissant",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "panadería",
@@ -156,7 +156,7 @@ function create40productMemoryManager() {
       stock: 20,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Ensalada César",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "ensalada",
@@ -164,7 +164,7 @@ function create40productMemoryManager() {
       stock: 15,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Sushi",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "comida",
@@ -172,7 +172,7 @@ function create40productMemoryManager() {
       stock: 10,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Almendras",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "fruto seco",
@@ -180,7 +180,7 @@ function create40productMemoryManager() {
       stock: 30,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Torta de Chocolate",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "postre",
@@ -188,7 +188,7 @@ function create40productMemoryManager() {
       stock: 10,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Sopa de Verduras",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "sopa",
@@ -196,7 +196,7 @@ function create40productMemoryManager() {
       stock: 20,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Pistachos",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "fruto seco",
@@ -204,7 +204,7 @@ function create40productMemoryManager() {
       stock: 25,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Hummus",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "dip",
@@ -212,14 +212,14 @@ function create40productMemoryManager() {
       stock: 15,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Pastel de Carne",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "comida",
       price: 1400,
       stock: 8,
     });
-    productManager.create({
+    productsRepository.createRepository({
       title: "Pancakes",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "desayuno",
@@ -227,7 +227,7 @@ function create40productMemoryManager() {
       stock: 20,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Sándwich de Pollo",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "comida rápida",
@@ -235,7 +235,7 @@ function create40productMemoryManager() {
       stock: 15,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Aceitunas",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "aperitivo",
@@ -243,7 +243,7 @@ function create40productMemoryManager() {
       stock: 30,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Tarta de Queso",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "postre",
@@ -251,7 +251,7 @@ function create40productMemoryManager() {
       stock: 10,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Burritos",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "comida rápida",
@@ -259,7 +259,7 @@ function create40productMemoryManager() {
       stock: 12,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Sopa de Tomate",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "sopa",
@@ -267,7 +267,7 @@ function create40productMemoryManager() {
       stock: 25,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Plátanos",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "fruta",
@@ -275,7 +275,7 @@ function create40productMemoryManager() {
       stock: 40,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Ensalada de Frutas",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "ensalada",
@@ -283,7 +283,7 @@ function create40productMemoryManager() {
       stock: 15,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Empanadas",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "comida",
@@ -291,7 +291,7 @@ function create40productMemoryManager() {
       stock: 8,
     });
   
-    productManager.create({
+    productsRepository.createRepository({
       title: "Pastel de Manzana",
       photo: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
       category: "postre",

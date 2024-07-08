@@ -68,6 +68,7 @@ passport.use(
             photo: one.photo,
             name: one.name,
             _id: one._id,
+            avatar: one.photo,
             online: true,
           };
           const token = createToken(user);
@@ -137,7 +138,7 @@ passport.use(
             online: true,
           };
           console.log("User_id de passport: ", one._id)
-          const update = await usersRepository.updateRepository(one._id, {verify: true});
+          await usersRepository.updateRepository(one._id, {verify: true});
           const token = createToken(user);
           user.token = token;
           return done(null, user);

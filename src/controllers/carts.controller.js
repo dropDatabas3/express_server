@@ -14,7 +14,7 @@ class CartController {
       const { product_id } = req.body;
       const data = { product_id: product_id, user_id: user._id };
       const one = await createService(data);
-      return res.message201("CREATED WITH ID " + one.id);
+      return res.response200({ message: "CREATED WITH ID " + one._id , one});
     } catch (error) {
       return next(error);
     }

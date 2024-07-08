@@ -8,7 +8,7 @@ class UsersRouter extends CustomRouter {
   init() {
     this.read("/register",["PUBLIC"], register);
     this.read("/login",["PUBLIC"], login);
-    this.read("/", ["USER"], userInfo);
+    this.read("/", ["USER", "ADMIN"], userInfo);
   }
 }
 
