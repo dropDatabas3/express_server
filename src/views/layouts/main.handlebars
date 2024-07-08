@@ -412,7 +412,7 @@
         };
         let response = await fetch("/api/sessions/register", options);
         response = await response.json();
-        document.query.querySelector('#loading-register-span').style.display = 'none';
+        document.querySelector('#loading-register-span').style.display = 'none';
         console.log(response);
         if (response.statusCode === 201) {
           document.querySelectorAll('#registerForm > div > label').forEach(label => label.style.display = 'none');
