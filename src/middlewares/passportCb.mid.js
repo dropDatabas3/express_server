@@ -4,7 +4,6 @@ import passport from "./passport.mid.js";
 function passportCb(strategy) {
   return (req, res, next) => {
     passport.authenticate(strategy, (error, user, info) => {
-      console.log(error)
       if (error) {
         return next(error);
       }

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/jwt.utils.js";
-import usersManager from "../data/mongo/manager/UserManager.mongo.js"
 import usersRepository from "../repositories/user.repository.js";
+import winston from "../utils/winston.utils.js";
 
 class CustomRouter {
   //para construir y configurar cada instancia del enrutador
@@ -32,13 +32,22 @@ class CustomRouter {
       res.json({ statusCode: 200, response, info });
     res.message201 = (message) => res.json({ statusCode: 201, message });
     res.response201 = (response) => res.json({ statusCode: 201, response });
-    res.error400 = (message) => res.json({ statusCode: 400, message });
-    res.error401 = () =>
-      res.json({ statusCode: 401, message: "Bad auth from poliecies!" });
-    res.error403 = () =>
-      res.json({ statusCode: 403, message: "Forbidden from poliecies!" });
-    res.error404 = () =>
-      res.json({ statusCode: 404, message: "Not found docs" });
+    res.error400 = (message) => {
+      const errorMessage = `${req.method} - ${req.url}: - 400 ${new Date().toLocaleTimeString()} - ${message} `;
+      winston.ERROR(errorMessage);
+      res.json({ statusCode: 400, message })};
+    res.error401 = () =>{
+      const errorMessage = `${req.method} - ${req.url}: - 401 ${new Date().toLocaleTimeString()} - Bad auth from poliecies! `;
+      winston.ERROR(errorMessage);
+      res.json({ statusCode: 401, message: "Bad auth from poliecies!" })};
+    res.error403 = () =>{
+      const errorMessage = `${req.method} - ${req.url}: - 403 ${new Date().toLocaleTimeString()} - Forbidden from poliecies! `;
+      winston.ERROR(errorMessage);
+      res.json({ statusCode: 403, message: "Forbidden from poliecies!" })};
+    res.error404 = () =>{
+      const errorMessage = `${req.method} - ${req.url}: - 404 ${new Date().toLocaleTimeString()} - Docs not found`;
+      winston.ERROR(errorMessage);
+      res.json({ statusCode: 404, message: "Not found docs" })};
     return next();
   };
   policies = (policies) => async (req, res, next) => {

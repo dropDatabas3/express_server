@@ -1,5 +1,5 @@
 import express from "express";
-import morgan from "morgan";
+//import morgan from "morgan";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import { engine } from "express-handlebars";
@@ -9,6 +9,7 @@ import MongoStore from "connect-mongo";
 import compression from "express-compression";
 
 
+import winston from "./src/middlewares/winston.mid.js";
 import enviroment from "./src/utils/envs.utils.js";
 import argsUtils from "./src/utils/args.utils.js";
 import indexRouter from "./src/routers/index.router.js";
@@ -58,7 +59,7 @@ server.use(session({
 server.use(cookieParser(enviroment.SECRET));
 server.use(express.urlencoded({ extended: true })); // <-- Allows the server to read req.param and req.query
 server.use(express.json()); // <-- Used for req body
-server.use(morgan("dev")); // <-- Log requests to the console
+server.use(winston); // <-- Log requests to the console
 server.use(express.static(__dirname + "/public")); // <-- Serve static files
 server.use(compression({brotli: { enabled: true, zlib: {} },}));// <-- Compress the response data
 
