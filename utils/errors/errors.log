@@ -1,0 +1,4 @@
+[33mERROR[39m: POST /api/sessions/login . 10:13:36 p.m. TypeError: (intermediate value).toLocalTimeString is not a function
+[33mERROR[39m: POST /api/sessions/login . 10:15:02 p.m. Error: Bad auth from login!
+[33mERROR[39m: POST /api/sessions/login . 10:15:54 p.m. Error: Bad auth from login!
+[33mERROR[39m: POST /api/sessions/login . 10:57:13 p.m. Error: Bad auth from login!

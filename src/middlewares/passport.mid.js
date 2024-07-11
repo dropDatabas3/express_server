@@ -28,7 +28,7 @@ passport.use(
         }
         const one = await usersRepository.readByEmailRepository(email);
         if (one) {
-          const error = new Error("Bad auth from register!");
+          const error = CustomError.new("Bad auth from register!");
           error.statusCode = 401;
           return done(error);
         }
@@ -51,12 +51,12 @@ passport.use(
       try {
         const one = await usersRepository.readByEmailRepository(email);
         if (!one) {
-          const error = new Error("Bad auth from login!");
+          const error = CustomError.new("Bad auth from login!");
           error.statusCode = 401;
           return done(error);
         }
         if(one.verify === false){
-          const error = new Error("Email not verified!");
+          const error = CustomError.new("Email not verified!");
           error.statusCode = 401;
           return done(error);
         }
@@ -77,7 +77,7 @@ passport.use(
           //agrega la propeidad USER al objeto de requerimientos
           //esa propiedad user tiene todas las propiedades que estamos definiendo en el objeto correspondiente
         }
-        const error = new Error("Invalid credentials");
+        const error = CustomError.new("Invalid credentials");
         error.statusCode = 401;
         return done(error);
       } catch (error) {
@@ -100,7 +100,7 @@ passport.use(
         if (data) {
           return done(null, data);
         } else {
-          const error = new Error("Forbidden from jwt!");
+          const error = CustomError.new("Forbidden from jwt!");
           error.statusCode = 403;
           return done(error);
         }
@@ -119,12 +119,12 @@ passport.use(
       try {
         const one = await usersRepository.readByEmailRepository(email);
         if (!one) {
-          const error = new Error("Bad auth from verifyEmail!");
+          const error = CustomError.new("Bad auth from verifyEmail!");
           error.statusCode = 401;
           return done(error);
         }
         if(one.verify){
-          const error = new Error("Email already verified!");
+          const error = CustomError.new("Email already verified!");
           error.statusCode = 401;
           return done(error)
         }
@@ -137,13 +137,12 @@ passport.use(
             _id: one._id,
             online: true,
           };
-          console.log("User_id de passport: ", one._id)
           await usersRepository.updateRepository(one._id, {verify: true});
           const token = createToken(user);
           user.token = token;
           return done(null, user);
         }
-        const error = new Error("Invalid credentials");
+        const error = CustomError.new("Invalid credentials");
         error.statusCode = 401;
         return done(error);
       } catch (error) {

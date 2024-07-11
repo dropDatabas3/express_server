@@ -1,0 +1,4 @@
+2024-07-10 23:14:07 [33mERROR[39m: POST /api/sessions/login . 11:14:07 p.m. Error: Bad auth from login!
+2024-07-10 23:15:54 [33mERROR[39m: POST /api/sessions/login . 11:15:54 p.m. Error
+2024-07-10 23:16:01 [33mERROR[39m: POST /api/sessions/login . 11:16:01 p.m. Error
+2024-07-10 23:16:59 [33mERROR[39m: POST /api/sessions/login . 11:16:59 p.m. Error

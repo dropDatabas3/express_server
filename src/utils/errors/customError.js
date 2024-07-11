@@ -6,4 +6,4 @@ class CustomError {
     }
    }
    
-   export default CustomError;
+export default CustomError;
