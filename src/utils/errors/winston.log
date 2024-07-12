@@ -32,3 +32,5 @@
 2024-07-12 13:56:06 [33mERROR[39m: POST /api/sessions/login . 1:56:06 p.m. Error: Invalid credentials
 2024-07-12 13:56:29 [33mERROR[39m: POST /api/sessions/login . 1:56:29 p.m. TypeError: Cannot destructure property 'message' of 'undefined' as it is undefined.
 2024-07-12 13:57:23 [33mERROR[39m: POST /api/sessions/login . 1:57:23 p.m. Error: Email not verified
+2024-07-12 14:02:19 [33mERROR[39m: POST /api/sessions/login . 2:02:19 p.m. Error: Invalid credentials
+2024-07-12 14:02:28 [33mERROR[39m: POST /api/sessions/register . 2:02:28 p.m. Error: This email is registered
