@@ -21,15 +21,14 @@ passport.use(
         if (!email || !password || !req.body.name) {
           if (!req.body.name) {
             const error = CustomError.new(errors.missing);
-            return done(null, null, error);
+            return done(error);
           }
           const error = CustomError.new(errors.missing);
-          return done(null, null, error);
+          return done(error);
         }
         const one = await usersRepository.readByEmailRepository(email);
         if (one) {
-          const error = CustomError.new("Bad auth from register!");
-          error.statusCode = 401;
+          const error = CustomError.new(errors.emailAlreadyExists);
           return done(error);
         }
         req.body.password = createHash(password);
@@ -49,19 +48,22 @@ passport.use(
     { passReqToCallback: true, usernameField: "email" },
     async (req, email, password, done) => {
       try {
+        console.log("Entro a login strategy")
         const one = await usersRepository.readByEmailRepository(email);
+        console.log("one: ", one)
         if (!one) {
-          const error = CustomError.new("Bad auth from login!");
-          error.statusCode = 401;
+          console.log("no encontro usuario")
+          const error = CustomError.new(errors.invalid);
           return done(error);
         }
         if(one.verify === false){
-          const error = CustomError.new("Email not verified!");
-          error.statusCode = 401;
+          console.log("email no verificado")
+          const error = CustomError.new(errors.notVerified);
           return done(error);
         }
         const verify = verifyHash(password, one.password);
         if (verify) {
+          console.log("contraseña correcta")
           const user = {
             email,
             role: one.role,
@@ -77,8 +79,7 @@ passport.use(
           //agrega la propeidad USER al objeto de requerimientos
           //esa propiedad user tiene todas las propiedades que estamos definiendo en el objeto correspondiente
         }
-        const error = CustomError.new("Invalid credentials");
-        error.statusCode = 401;
+        const error = CustomError.new(errors.invalid);
         return done(error);
       } catch (error) {
         return done(error);
@@ -100,8 +101,7 @@ passport.use(
         if (data) {
           return done(null, data);
         } else {
-          const error = CustomError.new("Forbidden from jwt!");
-          error.statusCode = 403;
+          const error = CustomError.new(errors.forbidden);
           return done(error);
         }
       } catch (error) {
@@ -119,13 +119,11 @@ passport.use(
       try {
         const one = await usersRepository.readByEmailRepository(email);
         if (!one) {
-          const error = CustomError.new("Bad auth from verifyEmail!");
-          error.statusCode = 401;
+          const error = CustomError.new(errors.invalid);
           return done(error);
         }
         if(one.verify){
-          const error = CustomError.new("Email already verified!");
-          error.statusCode = 401;
+          const error = CustomError.new(errors.auth);
           return done(error)
         }
         if (one.verifyCode === code) {
@@ -142,8 +140,7 @@ passport.use(
           user.token = token;
           return done(null, user);
         }
-        const error = CustomError.new("Invalid credentials");
-        error.statusCode = 401;
+        const error = CustomError.new(errors.invalid);
         return done(error);
       } catch (error) {
         return done(error);

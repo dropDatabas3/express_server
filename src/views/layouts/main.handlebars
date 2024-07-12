@@ -373,6 +373,8 @@
 
       document.querySelector('#loginForm').addEventListener("submit", async (event) => {
         event.preventDefault();
+        document.getElementById('loginError').style.display = 'none';
+        document.getElementById('loginErrorMessage').textContent = "";
         const data = {
           email: document.querySelector('#email').value,
           password: document.querySelector('#password').value
@@ -389,7 +391,7 @@
           location.replace("/");
         } else {
           document.getElementById('loginError').style.display = 'block';
-          document.getElementById('loginErrorMessage').textContent = response.message;
+          document.getElementById('loginErrorMessage').textContent = response.error;
         }
       });
 
@@ -422,7 +424,9 @@
           document.querySelector('#btn-register').style.display = 'none';
           document.querySelector('.login-link').style.display = 'none';
         } else {
-          alert(response.message);
+          document.querySelector('#register-span').style.display = 'block';
+          document.querySelector('#btn-register').removeAttribute('disabled');
+          alert(response.error);
         }
       });
 

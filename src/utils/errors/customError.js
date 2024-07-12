@@ -1,9 +1,9 @@
 class CustomError {
-    static new({ message, statusCode }) {
+  static new({ message, statusCode }) {
       const error = new Error(message);
       error.statusCode = statusCode;
-      throw error;
-    }
-   }
-   
+      return error;
+  }
+}
+
 export default CustomError;

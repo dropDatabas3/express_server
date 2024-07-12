@@ -93,11 +93,11 @@
       {{#if pagInfo}}
         <div class="pagination">
           {{#if pagInfo.hasPrevPage}}
-            <a href="/products?page={{pagInfo.PrevPage}}" class="btn btn-secondary">Página anterior</a>
+            <a href="/products?page={{pagInfo.PrevPage}}" class="btn btn-secondary"> << Página anterior</a>
           {{/if}}
           <span>Página {{pagInfo.page}}</span>
           {{#if pagInfo.hasNextPage}}
-            <a href="/products?page={{pagInfo.NextPage}}" class="btn btn-secondary">Página siguiente</a>
+            <a href="/products?page={{pagInfo.NextPage}}" class="btn btn-secondary">Página siguiente >></a>
           {{/if}}
         </div>
       {{/if}}
