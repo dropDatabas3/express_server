@@ -59,7 +59,7 @@ server.use(session({
 server.use(cookieParser(enviroment.SECRET));
 server.use(express.urlencoded({ extended: true })); // <-- Allows the server to read req.param and req.query
 server.use(express.json()); // <-- Used for req body
-server.use(winston); // <-- Log requests to the console
+server.use(winston); // <-- Log requests
 server.use(express.static(__dirname + "/public")); // <-- Serve static files
 server.use(compression({brotli: { enabled: true, zlib: {} },}));// <-- Compress the response data
 
