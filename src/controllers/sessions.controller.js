@@ -30,7 +30,6 @@ class SessionsController {
 
   async online(req, res, next) {
     try {
-      console.log("req.user.online: ",req.user.online)
       if (req.user.online) {
         return res.response200(req.user);
       }
@@ -58,8 +57,30 @@ class SessionsController {
       return next(error);
     }
   }
+  async passwordRecovery(req, res, next) {
+    try {
+      return res.message201("Email sent!");
+    } catch (error) {
+      return next(error);
+    }
+  }
+  async verifyPasswordCode(req, res, next) {
+    try {
+      res.cookie("token", req.user.token, { signedCookie: true });
+      return res.redirect("/recovery");
+    } catch (error) {
+      return next(error);
+    }
+  }
+  async resetPassword(req, res, next) {
+    try {
+      return res.message200("Password reset");
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
 const sessionController = new SessionsController();
-const { session, register, login, online, destroySession, verifyEmail } = sessionController;
+const { session, register, login, online, destroySession, verifyEmail , passwordRecovery , verifyPasswordCode , resetPassword} = sessionController;
 
-export { session, register, login, online, destroySession , verifyEmail};
+export { session, register, login, online, destroySession , verifyEmail , passwordRecovery , verifyPasswordCode , resetPassword};

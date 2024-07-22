@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node ./server.js -p 8080",
-    "prod": "nodemon ./server.js -p 8080 --env prod --persistence mongo",
+    "prod": "nodemon ./server.js -p 9080 --env prod --persistence mongo",
     "dev": "nodemon ./server.js -p 8080 --env dev --persistence mongo",
     "test_fs": "node ./server.js -p 8080 --env test --persistence fs",
     "test_memory": "node ./server.js -p 8080 --env test --persistence memory",

@@ -19,6 +19,7 @@ class CustomRouter {
   applyCbs(callbacks) {
     return callbacks.map((callback) => async (...params) => {
       try {
+        
         await callback.apply(this, params);
       } catch (error) {
         return params[2](error);
@@ -61,7 +62,8 @@ class CustomRouter {
           const { role, email } = token;
           if (
             (policies.includes("USER") && role === 0) || 
-            (policies.includes("ADMIN") && role === 1) 
+            (policies.includes("ADMIN") && role === 1)  ||
+            (policies.includes("RECOVERY" ) && role === 2)
           ) {
             const user = await usersRepository.readByEmailRepository(email);
             req.user = user;

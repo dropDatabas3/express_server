@@ -5,7 +5,7 @@ import usersRepository from "../repositories/user.repository.js";
 import UserDTO from "../dto/user.dto.js";
 import { createHash, verifyHash } from "../utils/hash.utils.js";
 import { createToken } from "../utils/jwt.utils.js";
-import sendEmail from "../utils/mailing.utils.js";
+import {sendVerifyEmail , sendPasswordRecovery} from "../utils/mailing.utils.js";
 import enviroment from "../utils/envs.utils.js";
 import errors from "../utils/errors/errors.js";
 import CustomError from "../utils/errors/customError.js";
@@ -34,7 +34,7 @@ passport.use(
         req.body.password = createHash(password);
         const data = new UserDTO(req.body);
         const user = await usersRepository.createRepository(data);
-        await sendEmail({to : email , name: user.name , verifyCode: user.verifyCode});//enviar email
+        await sendVerifyEmail({to : email , name: user.name , verifyCode: user.verifyCode});//enviar email
         return done(null, user);
       } catch (error) {
         return done(error);
@@ -42,28 +42,27 @@ passport.use(
     }
   )
 );
+
+
+
+
 passport.use(
   "login",
   new LocalStrategy(
     { passReqToCallback: true, usernameField: "email" },
     async (req, email, password, done) => {
       try {
-        console.log("Entro a login strategy")
         const one = await usersRepository.readByEmailRepository(email);
-        console.log("one: ", one)
         if (!one) {
-          console.log("no encontro usuario")
           const error = CustomError.new(errors.invalid);
           return done(error);
         }
         if(one.verify === false){
-          console.log("email no verificado")
           const error = CustomError.new(errors.notVerified);
           return done(error);
         }
         const verify = verifyHash(password, one.password);
         if (verify) {
-          console.log("contraseña correcta")
           const user = {
             email,
             role: one.role,
@@ -76,8 +75,6 @@ passport.use(
           const token = createToken(user);
           user.token = token;
           return done(null, user);
-          //agrega la propeidad USER al objeto de requerimientos
-          //esa propiedad user tiene todas las propiedades que estamos definiendo en el objeto correspondiente
         }
         const error = CustomError.new(errors.invalid);
         return done(error);
@@ -115,7 +112,7 @@ passport.use(
   new LocalStrategy(
     {passwordField: 'code' , usernameField: "email", passReqToCallback: true},
     async (req, email, code, done) => {
-      console.log("entro a estrategia de verificaicon")
+
       try {
         const one = await usersRepository.readByEmailRepository(email);
         if (!one) {
@@ -148,5 +145,104 @@ passport.use(
     }
   )
 )
+
+
+passport.use(
+  "passwordRecovery",
+  new LocalStrategy(
+    {
+      passReqToCallback: true,
+      usernameField: "email",
+      passwordField: "password", // Necesario para evitar el error de credenciales faltantes
+    },
+    async (req, email, password,  done) => {
+      try {
+        const user = await usersRepository.readByEmailRepository(email);
+        if (!user) {
+          const error = CustomError.new(errors.invalid);
+          return done(error);
+        }
+        const verifyCode = Math.floor(Math.random() * 1000000);
+        await usersRepository.updateRepository(user._id, { verifyCode });
+        await sendPasswordRecovery({ to: email, name: user.name, verifyCode });
+        return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
+
+passport.use(
+  "verifyPasswordCode",
+  new LocalStrategy(
+    {passwordField: 'code' , usernameField: "email", passReqToCallback: true},
+    async (req, email, code, done) => {
+      try {
+        const one = await usersRepository.readByEmailRepository(email);
+        if (!one) {
+          const error = CustomError.new(errors.invalid);
+          return done(error);
+        }
+        if (one.verifyCode === code) {
+          const user = {
+            email,
+            role: 2,
+            _id: one._id,
+            online: false,
+          };
+          const token = createToken(user);
+          user.token = token;
+          return done(null, user);
+        }
+        const error = CustomError.new(errors.invalid);
+        return done(error);
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+)
+
+passport.use(
+  "resetPassword",
+  new LocalStrategy(
+    { passReqToCallback: true, usernameField: "email", passwordField: "password" },
+    async (req, email, password, done) => {
+      try {
+        // Autenticar al usuario con JWT
+        passport.authenticate('jwt', { session: false }, async (err, user, info) => {
+          if (err) {
+            return done(err);
+          }
+          if (!user) {
+            const error = CustomError.new(errors.invalid);
+            return done(error);
+          }
+          // Obtener el email del usuario autenticado
+          const userEmail = user.email;
+
+          // Buscar el usuario por email
+          const one = await usersRepository.readByEmailRepository(userEmail);
+          if (!one) {
+            const error = CustomError.new(errors.invalid);
+            return done(error);
+          }
+
+          // Actualizar la contraseña
+          const newPassword = createHash(password);
+          await usersRepository.updateRepository(one._id, { password: newPassword });
+
+          return done(null, one);
+        })(req, null, done); // Asegúrate de pasar los parámetros req y done
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
+
+
+
 
 export default passport;

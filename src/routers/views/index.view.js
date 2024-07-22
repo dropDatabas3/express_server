@@ -9,6 +9,7 @@ class ViewsRouter extends CustomRouter {
     this.use("/products", productsRouter)
     this.use("/users", userRouter);
     this.use("/carts", cartRouter);
+    this.read("/recovery", ["RECOVERY"], recovery);
     this.use("/", home);
   }
 }
@@ -20,6 +21,15 @@ async function home(req, res, next){
     const products = await readService();
     const title = "Home";
     return res.render("index", { title , products});
+  } catch (error) {
+    return next(error);
+  }
+};
+
+async function recovery(req, res, next){
+  try {
+    const title = "Recovery";
+    return res.render("recovery", { title });
   } catch (error) {
     return next(error);
   }

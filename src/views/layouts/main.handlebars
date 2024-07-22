@@ -165,7 +165,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ms-auto" id="navbarSection">
-            <!-- Content added via JS -->
+
           </div>
         </div>
       </div>
@@ -223,7 +223,26 @@
               <div class="register-link mt-4">
                 <p>No estás registrado? <a href="#" id="switchToRegister" style="color: blue;">Regístrate aquí</a></p>
               </div>
+              <div class="forgot-password mt-2">
+                <p><a href="#" id="forgotPassword" style="color: blue;" onclick="changeToPasswordRecovery()">Olvidé mi contraseña</a></p>
+              </div>
             </form>
+
+            <!-- Forgot Password Form -->
+            <form id="forgotPasswordForm" class="forgot-password-form mx-auto" style="display: none;">
+              <div class="form-group mb-4">
+                <label for="resetEmail" class="block text-gray-700 font-bold mb-2">Email address</label>
+                <input type="email" class="form-control px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" id="resetEmail" placeholder="Enter email" required>
+              </div>
+              <div id="resetError" class="text-danger mb-4" style="display: none;">
+                <p id="resetErrorMessage"></p>
+              </div>
+              <button class="btn btn-primary w-full py-2" id="btn-reset" onclick="sendPasswordRecoveryEmail()">Enviar</button>
+            </form>
+
+            <div id="resetMessage" class="text-success mb-4" style="display: none;">
+              <p>Por favor verifica tu casilla de mensajes</p>
+            </div>
           </div>
           <div class="modal-footer"></div>
         </div>
@@ -329,6 +348,46 @@
           console.error("Error fetching session status: ", error);
         }
       });
+
+async function changeToPasswordRecovery() {
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('forgotPasswordForm').style.display = 'block';
+}
+
+async function sendPasswordRecoveryEmail(){
+  try {
+  const email = document.getElementById('resetEmail').value;
+        const option = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({email})
+        };
+        let response = await fetch("/api/sessions/password", option);
+        response = await response.json();
+        console.log(response);
+    if (response.statusCode === 201) {
+      document.getElementById('forgotPasswordForm').style.display = 'none';
+      document.getElementById('resetMessage').style.display = 'block';
+    } else {
+      const error = await response.json();
+      document.getElementById('resetError').style.display = 'block';
+      document.getElementById('resetErrorMessage').textContent = error.message;
+    }
+  } catch (error) {
+    console.log(error);
+    document.getElementById('resetError').style.display = 'block';
+    document.getElementById('resetErrorMessage').textContent = 'An error occurred. Please try again.';
+  }
+}
+
+document.getElementById('loginModal').addEventListener('hidden.bs.modal', () => {
+  document.getElementById('loginForm').style.display = 'block';
+  document.getElementById('forgotPasswordForm').style.display = 'none';
+  document.getElementById('resetMessage').style.display = 'none';
+  document.getElementById('resetError').style.display = 'none';
+  document.getElementById('resetEmail').value = '';
+});
+
 
       async function logout() {
         try {

@@ -57,7 +57,7 @@ class UsersRepository {
   
     updateRepository = async (id, data) => {
       try {
-        const one = await this.manager.update(id, data);
+        const one = await this.manager.update(id, data);   
         return one;
       } catch (error) {
         throw error;

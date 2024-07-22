@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import compression from "express-compression";
+import passport from 'passport';
 
 
 import winston from "./src/middlewares/winston.mid.js";
@@ -17,6 +18,7 @@ import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import  __dirname  from "./utils.js";
 import socketcb from "./src/routers/index.socket.js"
+import morgan from "morgan";
 
 
 
@@ -50,15 +52,16 @@ server.set("views", __dirname+'/src/views'); // <-- Set the views directory
 /*************
   MIDDLEWARES
 **************/
-server.use(session({
+/*server.use(session({
   store: new MongoStore({mongoUrl: enviroment.MONGO_URI, ttl: 60*60}),
   secret: enviroment.SECRET,
   resave: true,
   saveUninitialized: true,
-}));
+}));*/
 server.use(cookieParser(enviroment.SECRET));
 server.use(express.urlencoded({ extended: true })); // <-- Allows the server to read req.param and req.query
 server.use(express.json()); // <-- Used for req body
+//server.use(morgan("dev")); // <-- Log requests
 server.use(winston); // <-- Log requests
 server.use(express.static(__dirname + "/public")); // <-- Serve static files
 server.use(compression({brotli: { enabled: true, zlib: {} },}));// <-- Compress the response data
@@ -70,7 +73,5 @@ server.use("/", indexRouter);
 server.use(errorHandler);
 server.use(pathHandler);
 
-console.log("args: ", argsUtils)
-console.log("Envirment: ",enviroment)
-console.log("process.args: ", process.argv)
+
 

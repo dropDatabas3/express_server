@@ -18,7 +18,7 @@ class Manager {
       } else if (filter && filter._id) {
         filter._id =  new Types.ObjectId(filter._id);
       }
-      return await this.model.find(filter).sort("title").lean(); // lean() para que devuelva un objeto plano
+      return await this.model.find(filter).sort("title").lean();
     } catch (error) {
       throw error;
     }
