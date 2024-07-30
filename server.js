@@ -8,6 +8,8 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import compression from "express-compression";
 import passport from 'passport';
+import swaggerJSDoc from "swagger-jsdoc";
+import { serve, setup } from "swagger-ui-express";
 
 
 import winston from "./src/middlewares/winston.mid.js";
@@ -19,6 +21,7 @@ import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import  __dirname  from "./utils.js";
 import socketcb from "./src/routers/index.socket.js"
 import morgan from "morgan";
+import swaggerOptions from "./src/utils/swagger.utils.js";
 
 
 
@@ -58,6 +61,9 @@ server.set("views", __dirname+'/src/views'); // <-- Set the views directory
   resave: true,
   saveUninitialized: true,
 }));*/
+const specs = swaggerJSDoc(swaggerOptions);
+server.use("/api/docs", serve, setup(specs));
+
 server.use(cookieParser(enviroment.SECRET));
 server.use(express.urlencoded({ extended: true })); // <-- Allows the server to read req.param and req.query
 server.use(express.json()); // <-- Used for req body

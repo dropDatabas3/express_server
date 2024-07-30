@@ -1,0 +1,94 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          description: The email of the user
+        password:
+          type: string
+          description: The password of the user
+        photo:
+          type: string
+          description: The photo of the user
+        verify:
+          type: boolean
+          description: The verify of the user
+        role:
+          type: number
+          description: The role of the user
+        verifyCode:
+          type: string
+          description: The verify code of the user
+      example:
+        email: user@example.com
+        password: password123
+        photo: https://example.com/photo.jpg
+        verify: true
+        role: 1
+        verifyCode: abc123
+  responses:
+    Message 200:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: The status code of the response successfully returned
+        message:
+      example:
+        statusCode:
+        message: Success
+    Message 201:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: The status code of the response successfully returned
+        message:
+      example: 
+        statusCode:
+        message:
+    Response 200:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: The status code of the response successfully returned
+        message:       
+      example:
+        statusCode:
+        message:
+    Paginate:
+      type: object
+      properties:
+      example:
+        statusCode:
+        message:
+    Error 400:
+      type: object
+      properties:
+      example:
+        statusCode:
+        message:
+    Error 401:
+      type: object
+      properties:
+      example:
+        statusCode:
+        message:
+    Error 404:
+      type: object
+      properties:
+      example:
+        statusCode:
+        message:
+    Error 500:
+      type: object
+      properties:
+      example: 
+        statusCode:
+        message:
