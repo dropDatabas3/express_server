@@ -1,143 +1,163 @@
 # Express Server with Product and User Management
 
-Implementation of a server using Express, for managing products and users. Handlers have been developed to handle product and user data, allowing for the creation, reading, individual reading, updating, and deletion of resources.
-
+This project is an implementation of a server using Express, designed to manage products and users. The server supports operations such as creation, reading, individual reading, updating, and deletion of resources. Additionally, it includes enhanced features like argument parsing with Commander, variable persistence with a DAO factory, logging with Winston, data mocking with Faker.js, error handling, email functionality with Nodemailer, and authentication with JWT.
 
 ## Data Structure
 
-Each product and user has specific properties:
+### Product
+```json
+- title: String
+- category: String
+- price: Number
+- stock: Number
+- photo: String (URL)
+```
+### User
+```json
+- email: String
+- password: String
+- name: String
+- role: Number (default: 0)
+- photo: String (URL)
+- age: Number (default: 18)
+- verify: Boolean (default: false)
+- verifyCode: String
+```
+### Cart
+```json
+- user_id: ObjectId (reference to User)
+- product_id: ObjectId (reference to Product)
+- quantity: Number (default: 1)
+- state: String (default: 'reserved', enum: ['reserved', 'paid', 'delivered'])
+```
+## Implemented Functionality
 
-**Product:**
-- **id:** 12-byte hexadecimal identifier code.
-- **title:** Product title.
-- **photo:** Product image path.
-- **category:** Product category.
-- **price:** Product price.
-- **stock:** Available units of the product.
+### Product Endpoints:
 
-**User:**
-- **id:** 12-byte hexadecimal identifier code.
-- **photo:** User image path.
-- **email:** User email address.
-- **password:** User password.
-- **role:** User role (default is zero).
+- **POST /api/products:** Implements the `create(data)` method to create a product.
+- **GET /api/products:** Implements the `read()` method to fetch all products with optional category filtering.
+- **GET /api/products/:pid:** Implements the `readOne(pid)` method to fetch a specific product.
+- **PUT /api/products/:pid:** Implements the `update(pid, data)` method to update a product.
+- **DELETE /api/products/:pid:** Implements the `destroy(pid)` method to delete a product.
 
-## Functionality Implemented
+### User Endpoints:
 
-The following functionalities have been developed using Express:
+- **POST /api/users:** Implements the `create(data)` method to create a user.
+- **GET /api/users:** Implements the `read()` method to fetch all users with optional role filtering.
+- **GET /api/users/:uid:** Implements the `readOne(uid)` method to fetch a specific user.
+- **PUT /api/users/:uid:** Implements the `update(uid, data)` method to update a user.
+- **DELETE /api/users/:uid:** Implements the `destroy(uid)` method to delete a user.
 
-### Endpoints for Products:
+### Cart Endpoints:
 
-- **POST /api/products:** Implements the `create(data)` method to create a product and save it with fs.
-  - If created successfully:
-    - **statusCode:** 201
-    - **response:** id (of the new product)
-    - **message:** (descriptive message)
-  - Error handling with errorHandler.
+- **POST /api/carts:** Implements the `create(data)` method to create a cart.
+- **GET /api/carts:** Implements the `read()` method to fetch all carts.
+- **GET /api/carts/:cid:** Implements the `readOne(cid)` method to fetch a specific cart.
+- **PUT /api/carts/:cid:** Implements the `update(cid, data)` method to update a cart.
+- **DELETE /api/carts/:cid:** Implements the `destroy(cid)` method to delete a cart.
 
-- **GET /api/products:** Implements the `read()` method to fetch all products from fs. Add the necessary query to filter by category.
-  - If the array has products, send the client an object with properties:
-    - **statusCode:** 200
-    - **response:** (the array)
-  - Error handling with errorHandler.
+## Enhancements and Features
 
-- **GET /api/products/:pid:** Implements the `readOne(pid)` method to fetch a product from fs:
-  - If the product is found, send the client an object with properties:
-    - **statusCode:** 200
-    - **response:** (the object)
-  - Error handling with errorHandler.
+### Argument Parsing with Commander
+Allows changing the port, environment, or persistence at runtime using command-line arguments.
 
-- **PUT /api/products/:pid:** Implements the `update(pid,data)` method to fetch a product from fs and update it:
-  - If the product is updated, send the client an object with properties:
-    - **statusCode:** 200
-    - **response:** (the modified object)
-  - Error handling with errorHandler.
+### Variable Persistence
+Uses a DAO factory to switch between filesystem, memory, or MongoDB based on the environment.
 
-- **DELETE /api/products/:pid:** Implements the `destroy(pid)` method to fetch a product from fs and delete it:
-  - If the product is deleted, send the client an object with properties:
-    - **statusCode:** 200
-    - **response:** (the object)
-  - Error handling with errorHandler.
+### Logger
+Implemented with Winston, supporting levels: FATAL, ERROR, HTTP, INFO.
 
-### Endpoints for Users:
+### Data Mocking with Faker.js
+Uses mocks to simulate data in the development environment.
 
-- **POST /api/users:** Implements the `create(data)` method to create a user and save it with fs. Add the corresponding middleware to validate mandatory and default properties.
-  - If created successfully:
-    - **statusCode:** 201
-    - **response:** id (of the new user)
-    - **message:** (descriptive message)
-  - Error handling with errorHandler.
+### Error Handling
+Enhanced error handling using `errorHandler`, `customError`, and an error library.
 
-- **GET /api/users:** Implements the `read()` method to fetch all users from fs. Add the necessary query to filter by role.
-  - If the array has users, send the client an object with properties:
-    - **statusCode:** 200
-    - **response:** (the array)
-  - Error handling with errorHandler.
+### MVC Architecture
+Uses a clear MVC architecture with separate layers for Routes, Controllers, Services, Repositories, and DTOs.
 
-- **GET /api/users/:uid:** Implements the `readOne(uid)` method to fetch a user from fs:
-  - If the user is found, send the client an object with properties:
-    - **statusCode:** 200
-    - **response:** (the object)
-  - Error handling with errorHandler.
+### Email Functionality
+Email functionality implemented using Nodemailer.
 
-- **PUT /api/users/:uid:** Implements the `update(uid,data)` method to fetch a user from fs and update it:
-  - If the user is updated, send the client an object with properties:
-    - **statusCode:** 200
-    - **response:** (the modified object)
-  - Error handling with errorHandler.
+### JWT Authentication
+Secures routes using JWT and a custom router with policies.
 
-- **DELETE /api/users/:pid:** Implements the `destroy(pid)` method to fetch a user from fs and delete it:
-  - If the user is deleted, send the client an object with properties:
-    - **statusCode:** 200
-    - **response:** (the object)
-  - Error handling with errorHandler.
- 
-## Additional Information
+## Running the Project
 
-This project is a continuation of the development done in [Sprint 3](https://github.com/juanp1996/express_server/tree/sprint3). For more details about the functionalities implemented in that sprint, we recommend checking out the corresponding branch.
+### Scripts
 
-Furthermore, for a complete understanding of the handlers developed in this project, it is recommended to read the [Sprint 2](https://github.com/juanp1996/express_server/tree/sprint2) branch.
+The following scripts are configured in `package.json`:
+```json
+- start: `node ./server.js -p 8080`
+- prod: `nodemon ./server.js -p 9080 --env prod --persistence mongo`
+- dev: `nodemon ./server.js -p 8080 --env dev --persistence mongo`
+- test_fs: `node ./server.js -p 8080 --env test --persistence fs`
+- test_memory: `node ./server.js -p 8080 --env test --persistence memory`
+```
 
+### Running in Different Environments
 
+- **Development with MongoDB:**
+```bash
+  Use `npm run dev` to start the server in development mode with MongoDB persistence.
+```
+- **Production with MongoDB:**
+```bash
+  Use `npm run prod` to start the server in production mode with MongoDB persistence.
+```
+- **Testing with Filesystem Persistence:**
+```bash
+  Use `npm run test_fs` to start the server in test mode with filesystem persistence.
+```
+- **Testing with Memory Persistence:**
+```bash
+  Use `npm run test_memory` to start the server in test mode with memory persistence.
+```
 ## Testing the API
 
-To test the API, you can use Postman or any other HTTP client tool.
+You can use Postman or any other HTTP client tool to test the API.
 
-### Products Endpoints:
+### Product Endpoints:
 
-- **GET /api/products:** To get all products: `http://localhost:8080/api/products`
-- **GET /api/products?category=filter:** To filter by category (replace 'filter' with the desired category).
-- **GET /api/products/:pid:** To get a specific product (replace ':pid' with the product ID).
-- **POST /api/products:** To create a product.
-- **PUT /api/products/:pid:** To update a product.
-- **DELETE /api/products/:pid:** To delete a product.
+- **GET /api/products:** Fetch all products.
+- **GET /api/products?category=filter:** Filter by category.
+- **GET /api/products/:pid:** Fetch a specific product.
+- **POST /api/products:** Create a product.
+- **PUT /api/products/:pid:** Update a product.
+- **DELETE /api/products/:pid:** Delete a product.
 
-### Users Endpoints:
+### User Endpoints:
 
-- **GET /api/users:** To get all products: `http://localhost:8080/api/products`
-- **GET /api/users?role=filter:** To filter by role (replace 'filter' with the desired role).
-- **GET /api/users/:uid:** To get a specific user (replace ':uid' with the user ID).
-- **POST /api/users:** To create a user.
-- **PUT /api/users/:uid:** To update a users.
-- **DELETE /api/users/:uid:** To delete a user.
+- **GET /api/users:** Fetch all users.
+- **GET /api/users?role=filter:** Filter by role.
+- **GET /api/users/:uid:** Fetch a specific user.
+- **POST /api/users:** Create a user.
+- **PUT /api/users/:uid:** Update a user.
+- **DELETE /api/users/:uid:** Delete a user.
 
-### Tools and Libraries Integrated:
+### Cart Endpoints:
 
-- **Socket.IO:** Integrated Socket.IO library for real-time communication between server and client, enhancing user experience by displaying changes instantly without page reloads.
+- **GET /api/carts:** Fetch all carts.
+- **GET /api/carts/:cid:** Fetch a specific cart.
+- **POST /api/carts:** Create a cart.
+- **PUT /api/carts/:cid:** Update a cart.
+- **DELETE /api/carts/:cid:** Delete a cart.
 
-- **HTTP Library (createServer):** Configured the server using the HTTP library's createServer function to complement Socket.IO with Express, ensuring seamless integration of real-time communication features with the rest of the Express-based application.
+## Tools and Libraries Integrated
 
-- **Morgan Library:** Utilized the Morgan library to generate real-time logs of all client requests, providing a live view of application traffic for monitoring and debugging purposes.
-
+- **Socket.IO:** For real-time communication.
+- **Morgan:** For real-time request logging.
+- **Handlebars:** Template engine for views.
 
 ### Views and Routes:
 
-- **Views:** Developed views for **`/home`**, **`/products/real`**, **`/products`**, **`/users/register`**, and **`/users/:uid`**, along with their corresponding routes in `./routers/views` using **Handlebars**. These views and routes provide the necessary infrastructure for user interaction with the application.
-
-
-### Form Implementations:
-
-- **Product Registration Form:** Created a form enabling users to register new products. This form is designed to update in real-time, reflecting changes made by one user instantly in the interface of other connected users, thanks to the functionality provided by Socket.IO.
-
-- **User Registration Form (Functionality Not Yet Implemented):** Created the structure of a form for user registration, although the associated functionality has not been implemented yet.
-
+Views have been developed for the following routes using **Handlebars**:
+- `/cart`: View the shopping cart.
+- `/home`: Home page.
+- `/login`: Login page.
+- `/product`: Specific product details.
+- `/products`: Product listing.
+- `/products/real`: Real-time view of products.
+- `/recovery`: Account recovery page.
+- `/register`: User registration page.
+- `/userInfo`: User information page.
