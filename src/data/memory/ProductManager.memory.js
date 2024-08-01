@@ -3,66 +3,51 @@ class ProductManager {
 
   create(data) {
     try {
-      const newProduct = {
-        title: data.title,
-        photo: data.photo,
-        category: data.category,
-        price: data.price,
-        stock: data.stock,
-        id:
-          ProductManager.#products.length === 0
-            ? 1
-            : ProductManager.#products[ProductManager.#products.length - 1].id +
-              1,
-      };
-      if (
-        !data.title ||
-        !data.photo ||
-        !data.category ||
-        !data.price ||
-        !data.stock
-      ) {
-        throw new Error(`Todos los campos de producto deben ser obligatorios`);
-      } else {
-        ProductManager.#products.push(newProduct);
+        ProductManager.#products.push(data);
         console.log(
-          `\nSe creo con exito el producto "${data.title}". Su id es: ${newProduct.id}`
+          `\nSe creo con exito el producto "${data.title}". Su id es: ${data._id}`
         );
-      }
+        return data
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   }
-  read() {
+
+  read(category) {
     try {
       if (ProductManager.#products.length === 0) {
         throw new Error(`No hay productos disponibles`);
       } else {
-        console.log(ProductManager.#products);
+        let lista = ProductManager.#products;
+        if (category) {
+          lista = lista.filter((each) => each.category == category);
+        }
+        return lista;
       }
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   }
-  readOne = (id) => {
+
+   readOne = async (id) => {
     try {
       const product =
         ProductManager.#products.length === 0
           ? (() => {
               throw new Error(`No hay productos disponibles`);
             })()
-          : ProductManager.#products.find((product) => product.id === id);
+          : ProductManager.#products.find((product) => product._id === id);
       if (!product) {
         throw new Error(`No se encontro producto con id ${id}`);
       } else {
         return product;
       }
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   };
 
-  update = (id, data) => {
+  update = async(id, data) => {
     try {
       let all = this.read();
       let one = all.find((product) => product.id === id);
@@ -71,25 +56,84 @@ class ProductManager {
           one[prop] = data[prop];
         }
         console.log("producto modificado");
+        return one
       } else {
         throw new Error("No existe el producto");
       }
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   };
 
-  destroy = (id) => {
-    const product = this.readOne(id);
-    if (product) {
-      ProductManager.#products.splice(
-        ProductManager.#products.indexOf(product),
-        1
-      );
-      console.log(`Se elimino el producto ${JSON.stringify(product)}`);
-    }
+  destroy = async (id) => {
+      try {
+        const product = this.readOne(id);
+        if (product) {
+          ProductManager.#products.splice(
+            ProductManager.#products.indexOf(product),
+            1
+          );
+          console.log(`Se elimino el producto ${JSON.stringify(product)}`);
+          return product
+        }
+      } catch (error) {
+        throw error;
+      }
   };
+
+  async paginate({ filter, opts}) {
+    try {
+        let { page, limit } = opts;
+        limit = parseInt(limit) || 10;
+        page = parseInt(page) || 1;
+        let products = this.read();
+        console.log("limit: ", limit)
+        console.log("page: ", page)
+        
+        // Aplicar filtros
+        products = products.filter(product => {
+            return Object.keys(filter).every(key => {
+                if (key in product) {
+                    if (typeof filter[key] === 'object' && filter[key] !== null) {
+                        if (filter[key].$in && Array.isArray(filter[key].$in)) {
+                            return filter[key].$in.includes(product[key]);
+                        }
+                    } else {
+                        return product[key] === filter[key];
+                    }
+                }
+                return false;
+            });
+        });
+
+        //console.log("products por key: ", products)
+        const start = (page - 1) * limit;
+        const end = start + limit;
+        const paginatedproducts = products.slice(start, end);
+        //console.log("paginateproducts: ", paginatedproducts)
+
+        const totalPages = Math.ceil(products.length / limit);
+        return {
+            docs: paginatedproducts,
+            totalDocs: products.length,
+            limit: limit,
+            page: page,
+            totalPages: totalPages,
+            hasPrevPage: page > 1,
+            hasNextPage: page < totalPages,
+            prevPage: page > 1 ? page - 1 : null,
+            nextPage: page < totalPages ? page + 1 : null
+        };
+    } catch (error) {
+        throw error;
+    }
+  }
 }
+
+
+const productManager = new ProductManager();
+export default productManager;
+
 
 function testProductManager() {
   console.log("Creamos 10 prductos:");
@@ -164,3 +208,5 @@ function testProductManager() {
     stock: 5,
   });
 }
+
+

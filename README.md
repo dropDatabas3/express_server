@@ -6,29 +6,29 @@ This project is an implementation of a server using Express, designed to manage 
 
 ### Product
 ```json
-- **title:** String
-- **category:** String
-- **price:** Number
-- **stock:** Number
-- **photo:** String (URL)
+- title: String
+- category: String
+- price: Number
+- stock: Number
+- photo: String (URL)
 ```
 ### User
 ```json
-- **email:** String
-- **password:** String
-- **name:** String
-- **role:** Number (default: 0)
-- **photo:** String (URL)
-- **age:** Number (default: 18)
-- **verify:** Boolean (default: false)
-- **verifyCode:** String
+- email: String
+- password: String
+- name: String
+- role: Number (default: 0)
+- photo: String (URL)
+- age: Number (default: 18)
+- verify: Boolean (default: false)
+- verifyCode: String
 ```
 ### Cart
 ```json
-- **user_id:** ObjectId (reference to User)
-- **product_id:** ObjectId (reference to Product)
-- **quantity:** Number (default: 1)
-- **state:** String (default: 'reserved', enum: ['reserved', 'paid', 'delivered'])
+- user_id: ObjectId (reference to User)
+- product_id: ObjectId (reference to Product)
+- quantity: Number (default: 1)
+- state: String (default: 'reserved', enum: ['reserved', 'paid', 'delivered'])
 ```
 ## Implemented Functionality
 
@@ -88,11 +88,11 @@ Secures routes using JWT and a custom router with policies.
 
 The following scripts are configured in `package.json`:
 ```json
-- **start:** `node ./server.js -p 8080`
-- **prod:** `nodemon ./server.js -p 9080 --env prod --persistence mongo`
-- **dev:** `nodemon ./server.js -p 8080 --env dev --persistence mongo`
-- **test_fs:** `node ./server.js -p 8080 --env test --persistence fs`
-- **test_memory:** `node ./server.js -p 8080 --env test --persistence memory`
+- start: `node ./server.js -p 8080`
+- prod: `nodemon ./server.js -p 9080 --env prod --persistence mongo`
+- dev: `nodemon ./server.js -p 8080 --env dev --persistence mongo`
+- test_fs: `node ./server.js -p 8080 --env test --persistence fs`
+- test_memory: `node ./server.js -p 8080 --env test --persistence memory`
 ```
 
 ### Running in Different Environments

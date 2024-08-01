@@ -4,27 +4,80 @@
     "email": "juan@juan.com",
     "password": "contraseña1",
     "role": "0",
-    "photo": "sin foto"
+    "photo": "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA4L2pvYjEwMzQtZWxlbWVudC0wNi0zOTcucG5n.png"
   },
   {
     "id": "050dcbd16ea5ed78e3e8116d",
     "email": "marcos@marcos.com",
     "password": "contraseña2",
     "role": "1",
-    "photo": "sin foto"
+    "photo": "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA5L3M5MS1tay0wMjA2LWpvYjEyNzVfMS5wbmc.png"
   },
   {
     "id": "298791076a493adfb6a48ef4",
     "email": "luis@luis.com",
     "password": "contraseña3",
     "role": "2",
-    "photo": "foto.jpg"
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"
   },
   {
     "id": "8e5d742f6547ef8e56b40e4f",
     "email": "agustina@agustina.com",
     "password": "contraseña4",
     "role": "1",
-    "photo": "sin foto"
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png"
+  },
+  {
+    "_id": "c8377931df3d45da16155513",
+    "email": "juan@juan.com",
+    "password": "$2b$10$iaFbicToYus.OYKbL/08sOGU/3/OcQ/LL5F6R0DenjxI48id84Ss2",
+    "role": "3",
+    "photo": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "age": 18,
+    "createAt": "2024-07-02T15:06:09.556Z",
+    "updateAt": "2024-07-02T15:06:09.556Z"
+  },
+  {
+    "_id": "cdb1e84271dc16ae76299370",
+    "email": "juan@prueba1.com",
+    "password": "$2b$10$j8CIEtV1plnJnYcN1gsBgeLITDW4a62jeNxpuS0Mgp6VqOMYqAJ16",
+    "role": 0,
+    "photo": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "age": 18,
+    "createAt": "2024-07-02T15:07:08.012Z",
+    "updateAt": "2024-07-02T15:07:08.012Z"
+  },
+  {
+    "_id": "9629feddb4801a44a1609b13",
+    "email": "juan@prueba2.com",
+    "password": "$2b$10$k2lup2fLlxMEjH6QP3T1VO8h669m0tHqjVfPsubWxphz43EAJrzue",
+    "role": 0,
+    "photo": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "age": 18,
+    "createAt": "2024-07-02T15:20:09.366Z",
+    "updateAt": "2024-07-02T15:20:09.366Z"
+  },
+  {
+    "_id": "88ea7364661096ee991980a3",
+    "email": "juan@prueba3.com",
+    "password": "$2b$10$ZcxqzHc6b4sVHJ9aQBQ6nuGhVshdN1NZdpAiSnEySFrhAWjah8.6y",
+    "role": 0,
+    "photo": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "age": 18,
+    "createAt": "2024-07-02T15:22:52.886Z",
+    "updateAt": "2024-07-02T15:22:52.886Z"
+  },
+  {
+    "_id": "67f732c21072690b1ed959e3",
+    "email": "juanpalacio1996@gmail.com",
+    "password": "$2b$10$GpQYJBfvgB26n26Bd0qoPuuxzzMeaUitA/uqMVJnwTJVf8a2nK.TG",
+    "name": "Juan",
+    "role": 0,
+    "photo": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "age": 18,
+    "verify": true,
+    "verifyCode": "f5b1c168",
+    "createAt": "2024-07-02T18:48:40.528Z",
+    "updateAt": "2024-07-02T18:48:40.528Z"
   }
 ]

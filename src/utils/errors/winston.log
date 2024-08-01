@@ -1,0 +1,156 @@
+2024-07-10 23:14:07 [33mERROR[39m: POST /api/sessions/login . 11:14:07 p.m. Error: Bad auth from login!
+2024-07-10 23:15:54 [33mERROR[39m: POST /api/sessions/login . 11:15:54 p.m. Error
+2024-07-10 23:16:01 [33mERROR[39m: POST /api/sessions/login . 11:16:01 p.m. Error
+2024-07-10 23:16:59 [33mERROR[39m: POST /api/sessions/login . 11:16:59 p.m. Error
+2024-07-11 17:04:40 [31mFATAL[39m: FATAL
+2024-07-11 17:04:40 [33mERROR[39m: ERROR
+2024-07-11 17:49:32 [31mFATAL[39m: FATAL
+2024-07-11 17:49:32 [33mERROR[39m: ERROR
+2024-07-12 12:48:50 [33mERROR[39m: GET - /paginate?product_id=662a75e45de9f982d4f1d862: - 400 12:48:50 p.m. - jwt expired 
+2024-07-12 12:48:53 [33mERROR[39m: GET - /paginate?product_id=662a75f35de9f982d4f1d864: - 400 12:48:53 p.m. - jwt expired 
+2024-07-12 12:49:02 [33mERROR[39m: POST /api/sessions/login . 12:49:02 p.m. Error
+2024-07-12 12:49:04 [33mERROR[39m: POST /api/sessions/login . 12:49:04 p.m. Error
+2024-07-12 12:49:27 [33mERROR[39m: POST /api/sessions/login . 12:49:27 p.m. Error
+2024-07-12 12:50:01 [33mERROR[39m: POST /api/sessions/login . 12:50:01 p.m. Error
+2024-07-12 12:50:17 [33mERROR[39m: POST /api/sessions/register . 12:50:17 p.m. Error
+2024-07-12 12:52:49 [33mERROR[39m: POST /api/sessions/login . 12:52:49 p.m. Error
+2024-07-12 12:58:49 [33mERROR[39m: POST /api/sessions/register . 12:58:49 p.m. Error: Bad auth
+2024-07-12 12:59:14 [33mERROR[39m: POST /api/sessions/register . 12:59:14 p.m. Error: Bad auth
+2024-07-12 13:01:13 [33mERROR[39m: POST /api/sessions/register . 1:01:13 p.m. Error: Bad auth
+2024-07-12 13:03:27 [33mERROR[39m: POST /api/sessions/register . 1:03:27 p.m. Error: Bad auth
+2024-07-12 13:04:32 [33mERROR[39m: POST /api/sessions/register . 1:04:32 p.m. Error: Bad auth
+2024-07-12 13:42:33 [33mERROR[39m: POST /api/sessions/register . 1:42:33 p.m. Error: Bad auth
+2024-07-12 13:42:38 [33mERROR[39m: POST /api/sessions/register . 1:42:38 p.m. Error: Bad auth
+2024-07-12 13:48:01 [33mERROR[39m: POST /api/sessions/register . 1:48:01 p.m. Error: This email is registered
+2024-07-12 13:49:04 [33mERROR[39m: POST /api/sessions/login . 1:49:04 p.m. Error
+2024-07-12 13:53:49 [33mERROR[39m: POST /api/sessions/login . 1:53:49 p.m. Error: Invalid credentials
+2024-07-12 13:54:23 [33mERROR[39m: POST /api/sessions/login . 1:54:23 p.m. Error: Invalid credentials
+2024-07-12 13:55:12 [33mERROR[39m: POST /api/sessions/login . 1:55:12 p.m. Error: Invalid credentials
+2024-07-12 13:55:15 [33mERROR[39m: POST /api/sessions/login . 1:55:15 p.m. Error: Invalid credentials
+2024-07-12 13:55:29 [33mERROR[39m: POST /api/sessions/login . 1:55:29 p.m. Error: Invalid credentials
+2024-07-12 13:56:03 [33mERROR[39m: POST /api/sessions/login . 1:56:03 p.m. Error: Invalid credentials
+2024-07-12 13:56:06 [33mERROR[39m: POST /api/sessions/login . 1:56:06 p.m. Error: Invalid credentials
+2024-07-12 13:56:29 [33mERROR[39m: POST /api/sessions/login . 1:56:29 p.m. TypeError: Cannot destructure property 'message' of 'undefined' as it is undefined.
+2024-07-12 13:57:23 [33mERROR[39m: POST /api/sessions/login . 1:57:23 p.m. Error: Email not verified
+2024-07-12 14:02:19 [33mERROR[39m: POST /api/sessions/login . 2:02:19 p.m. Error: Invalid credentials
+2024-07-12 14:02:28 [33mERROR[39m: POST /api/sessions/register . 2:02:28 p.m. Error: This email is registered
+2024-07-20 12:55:05 [33merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8080
+Error: listen EADDRINUSE: address already in use :::8080
+    at Server.setupListenHandle [as _listen2] (node:net:1893:16)
+    at listenInCluster (node:net:1941:12)
+    at Server.listen (node:net:2029:7)
+    at file:///C:/Users/Juan/OneDrive/Escritorio/Express/express_server/server.js:32:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-07-20 12:56:22 [33merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8080
+Error: listen EADDRINUSE: address already in use :::8080
+    at Server.setupListenHandle [as _listen2] (node:net:1893:16)
+    at listenInCluster (node:net:1941:12)
+    at Server.listen (node:net:2029:7)
+    at file:///C:/Users/Juan/OneDrive/Escritorio/Express/express_server/server.js:32:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-07-20 12:56:55 [33merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8080
+Error: listen EADDRINUSE: address already in use :::8080
+    at Server.setupListenHandle [as _listen2] (node:net:1893:16)
+    at listenInCluster (node:net:1941:12)
+    at Server.listen (node:net:2029:7)
+    at file:///C:/Users/Juan/OneDrive/Escritorio/Express/express_server/server.js:32:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-07-20 12:57:03 [33merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8080
+Error: listen EADDRINUSE: address already in use :::8080
+    at Server.setupListenHandle [as _listen2] (node:net:1893:16)
+    at listenInCluster (node:net:1941:12)
+    at Server.listen (node:net:2029:7)
+    at file:///C:/Users/Juan/OneDrive/Escritorio/Express/express_server/server.js:32:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-07-20 12:57:08 [33merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8080
+Error: listen EADDRINUSE: address already in use :::8080
+    at Server.setupListenHandle [as _listen2] (node:net:1893:16)
+    at listenInCluster (node:net:1941:12)
+    at Server.listen (node:net:2029:7)
+    at file:///C:/Users/Juan/OneDrive/Escritorio/Express/express_server/server.js:32:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-07-20 12:57:52 [33merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8080
+Error: listen EADDRINUSE: address already in use :::8080
+    at Server.setupListenHandle [as _listen2] (node:net:1893:16)
+    at listenInCluster (node:net:1941:12)
+    at Server.listen (node:net:2029:7)
+    at file:///C:/Users/Juan/OneDrive/Escritorio/Express/express_server/server.js:33:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-07-20 12:58:05 [33merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8080
+Error: listen EADDRINUSE: address already in use :::8080
+    at Server.setupListenHandle [as _listen2] (node:net:1893:16)
+    at listenInCluster (node:net:1941:12)
+    at Server.listen (node:net:2029:7)
+    at file:///C:/Users/Juan/OneDrive/Escritorio/Express/express_server/server.js:33:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-07-20 12:58:09 [33merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8080
+Error: listen EADDRINUSE: address already in use :::8080
+    at Server.setupListenHandle [as _listen2] (node:net:1893:16)
+    at listenInCluster (node:net:1941:12)
+    at Server.listen (node:net:2029:7)
+    at file:///C:/Users/Juan/OneDrive/Escritorio/Express/express_server/server.js:33:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-07-20 13:00:49 [33merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8080
+Error: listen EADDRINUSE: address already in use :::8080
+    at Server.setupListenHandle [as _listen2] (node:net:1893:16)
+    at listenInCluster (node:net:1941:12)
+    at Server.listen (node:net:2029:7)
+    at file:///C:/Users/Juan/OneDrive/Escritorio/Express/express_server/server.js:33:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-07-20 13:01:08 [33merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8080
+Error: listen EADDRINUSE: address already in use :::8080
+    at Server.setupListenHandle [as _listen2] (node:net:1893:16)
+    at listenInCluster (node:net:1941:12)
+    at Server.listen (node:net:2029:7)
+    at file:///C:/Users/Juan/OneDrive/Escritorio/Express/express_server/server.js:33:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-07-20 13:03:23 [33merror[39m: uncaughtException: listen EADDRINUSE: address already in use :::8080
+Error: listen EADDRINUSE: address already in use :::8080
+    at Server.setupListenHandle [as _listen2] (node:net:1893:16)
+    at listenInCluster (node:net:1941:12)
+    at Server.listen (node:net:2029:7)
+    at file:///C:/Users/Juan/OneDrive/Escritorio/Express/express_server/server.js:33:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-07-20 13:52:50 [33mERROR[39m: GET /api/sessions/online . 1:52:50 p.m. TypeError [ERR_CONSOLE_WRITABLE_STREAM]: Console expects a writable stream instance for stdout
+2024-07-20 14:20:38 [33mERROR[39m: POST /api/sessions/password . 2:20:38 p.m. TypeError: Cannot read properties of undefined (reading 'apply')
+2024-07-20 14:45:33 [33mERROR[39m: POST /api/sessions/password/juanpalacio1996@gmail.com . 2:45:33 p.m. TypeError: callback.apply is not a function
+2024-07-20 14:46:02 [33mERROR[39m: POST /api/sessions/password/juanpalacio1996@gmail.com . 2:46:02 p.m. ReferenceError: next is not defined
+2024-07-20 16:42:15 [33mERROR[39m: POST /api/sessions/password . 4:42:15 p.m. SyntaxError: Unexpected token '"', ""juanpalac"... is not valid JSON
+2024-07-20 16:44:41 [33mERROR[39m: POST /api/sessions/password . 4:44:41 p.m. Error: Unknown authentication strategy "pRecovery"
+2024-07-20 17:40:36 [33mERROR[39m: GET /api/sessions/online . 5:40:36 p.m. Error: Bad auth
+2024-07-20 17:40:49 [33mERROR[39m: GET /recovery . 5:40:49 p.m. TypeError: callback.apply is not a function
+2024-07-20 17:42:16 [33mERROR[39m: GET /recovery . 5:42:16 p.m. TypeError: callback.apply is not a function
+2024-07-20 17:42:58 [33mERROR[39m: GET /recovery . 5:42:58 p.m. TypeError: callback.apply is not a function
+2024-07-20 17:44:51 [33mERROR[39m: GET /recovery . 5:44:51 p.m. TypeError: callback.apply is not a function
+2024-07-20 17:45:15 [33mERROR[39m: GET /api/sessions/online . 5:45:15 p.m. Error: Bad auth
+2024-07-20 17:45:23 [33mERROR[39m: GET /recovery . 5:45:23 p.m. TypeError: callback.apply is not a function
+2024-07-20 17:45:32 [33mERROR[39m: GET /recovery . 5:45:32 p.m. TypeError: callback.apply is not a function
+2024-07-20 17:47:36 [33mERROR[39m: GET /api/sessions/online . 5:47:36 p.m. Error: Bad auth
+2024-07-20 17:48:51 [33mERROR[39m: GET /recovery . 5:48:51 p.m. TypeError: callback.apply is not a function
+2024-07-20 17:55:37 [33mERROR[39m: GET /recovery . 5:55:37 p.m. TypeError: callback.apply is not a function
+2024-07-20 17:56:04 [33mERROR[39m: GET /recovery . 5:56:04 p.m. TypeError: callback.apply is not a function
+2024-07-20 17:58:24 [33mERROR[39m: GET /api/sessions/online . 5:58:24 p.m. Error: Bad auth
+2024-07-20 17:58:32 [33mERROR[39m: GET /api/sessions/online . 5:58:32 p.m. Error: Bad auth
+2024-07-20 17:58:55 [33mERROR[39m: GET - /recovery: - 401 5:58:55 p.m. - Bad auth from poliecies! 
+2024-07-20 18:41:21 [33mERROR[39m: GET - /recovery: - 403 6:41:21 p.m. - Forbidden from poliecies! 
+2024-07-20 18:41:32 [33mERROR[39m: GET - /recovery: - 401 6:41:31 p.m. - Bad auth from poliecies! 
+2024-07-20 18:41:39 [33mERROR[39m: GET /api/sessions/online . 6:41:39 p.m. Error: Bad auth
+2024-07-20 18:42:49 [33mERROR[39m: GET /api/sessions/online . 6:42:49 p.m. Error: Bad auth
+2024-07-20 18:42:56 [33mERROR[39m: GET /api/sessions/online . 6:42:56 p.m. Error: Bad auth
+2024-07-20 18:52:01 [33mERROR[39m: GET /api/sessions/online . 6:52:01 p.m. Error: Bad auth
+2024-07-20 18:52:33 [33mERROR[39m: GET /api/sessions/online . 6:52:33 p.m. Error: Bad auth
+2024-07-20 18:52:56 [33mERROR[39m: POST /api/sessions/login . 6:52:56 p.m. Error: Invalid credentials
+2024-07-20 18:56:34 [33mERROR[39m: GET /api/sessions/online . 6:56:34 p.m. Error: Bad auth
+2024-07-20 18:56:58 [33mERROR[39m: GET /api/sessions/online . 6:56:58 p.m. Error: Bad auth
+2024-07-20 18:58:28 [33mERROR[39m: GET /api/sessions/online . 6:58:28 p.m. Error: Bad auth
+2024-07-20 18:58:55 [33mERROR[39m: GET /api/sessions/online . 6:58:55 p.m. Error: Bad auth
+2024-07-20 18:59:42 [33mERROR[39m: GET /api/sessions/online . 6:59:42 p.m. Error: Bad auth
+2024-07-20 18:59:53 [33mERROR[39m: GET /api/sessions/online . 6:59:53 p.m. Error: Bad auth
+2024-07-20 18:59:58 [33mERROR[39m: POST /api/sessions/login . 6:59:58 p.m. Error: Invalid credentials
+2024-07-20 19:10:43 [33mERROR[39m: GET /api/sessions/online . 7:10:43 p.m. Error: Bad auth
+2024-07-20 19:10:57 [33mERROR[39m: GET /api/sessions/online . 7:10:57 p.m. Error: Bad auth
+2024-07-20 19:11:05 [33mERROR[39m: GET /api/sessions/online . 7:11:05 p.m. Error: Bad auth
+2024-07-20 19:11:14 [33mERROR[39m: GET /api/sessions/online . 7:11:14 p.m. Error: Bad auth
+2024-07-20 19:11:23 [33mERROR[39m: GET /api/sessions/online . 7:11:23 p.m. Error: Bad auth
+2024-07-20 19:24:46 [33mERROR[39m: GET /api/sessions/online . 7:24:46 p.m. Error: Bad auth
+2024-07-20 19:24:55 [33mERROR[39m: GET /api/sessions/online . 7:24:55 p.m. Error: Bad auth

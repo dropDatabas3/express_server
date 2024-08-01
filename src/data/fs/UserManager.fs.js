@@ -1,5 +1,4 @@
 import fs from "fs";
-import crypto from "crypto";
 
 class UserManager {
   constructor() {
@@ -24,30 +23,19 @@ class UserManager {
       }
     }
   }
+   //agregar paginate
+  //agregar readByEmail
 
   async create(data) {
     try {
-      if (!data.email || !data.password || !data.role || !data.photo) {
-        throw new Error("All fields are required");
-      } else {
-        // Crear el nuevo usuario
-        const newUser = {
-          id: data.id || crypto.randomBytes(12).toString("hex"),
-          email: data.email,
-          password: data.password,
-          role: data.role,
-          photo: data.photo,
-        };
-
         // Leer y modificar la lista de usuarios
         let users = await fs.promises.readFile(this.path, "utf-8");
         users = JSON.parse(users);
-        users.push(newUser);
+        users.push(data);
 
         // Escribir en el archivo
         await fs.promises.writeFile(this.path, JSON.stringify(users, null, 2));
-        return newUser;
-      }
+        return data;
     } catch (error) {
       console.error(error);
       throw error;
@@ -75,11 +63,21 @@ class UserManager {
       throw error;
     }
   }
+  
+  async readByEmail(email) {
+    try {
+      let users = await this.read();
+      let user = users.find((each) => each.email === email);
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async update(id, data) {
     try {
       let all = await this.read();
-      let one = all.find((each) => each.id === id);
+      let one = all.find((each) => each._id === id);
       if (one) {
         for (let prop in data) {
           one[prop] = data[prop];
@@ -109,6 +107,53 @@ class UserManager {
       }
     } catch (error) {
       throw error;
+    }
+  }
+  async paginate({ filter, opts}) {
+    try {
+        let { page, limit } = opts;
+        limit = parseInt(limit) || 10;
+        page = parseInt(page) || 1;
+        let users = await this.read();
+        console.log("limit: ", limit)
+        console.log("page: ", page)
+        
+        // Aplicar filtros
+        users = users.filter(cart => {
+            return Object.keys(filter).every(key => {
+                if (key in cart) {
+                    if (typeof filter[key] === 'object' && filter[key] !== null) {
+                        if (filter[key].$in && Array.isArray(filter[key].$in)) {
+                            return filter[key].$in.includes(cart[key]);
+                        }
+                    } else {
+                        return cart[key] === filter[key];
+                    }
+                }
+                return false;
+            });
+        });
+
+        //console.log("users por key: ", users)
+        const start = (page - 1) * limit;
+        const end = start + limit;
+        const paginatedusers = users.slice(start, end);
+        //console.log("paginateusers: ", paginatedusers)
+
+        const totalPages = Math.ceil(users.length / limit);
+        return {
+            docs: paginatedusers,
+            totalDocs: users.length,
+            limit: limit,
+            page: page,
+            totalPages: totalPages,
+            hasPrevPage: page > 1,
+            hasNextPage: page < totalPages,
+            prevPage: page > 1 ? page - 1 : null,
+            nextPage: page < totalPages ? page + 1 : null
+        };
+    } catch (error) {
+        throw error;
     }
   }
 }

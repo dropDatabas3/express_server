@@ -26,36 +26,17 @@ class ProductManager {
   }
   async create(data) {
     try {
-      if (
-        !data.title ||
-        !data.price ||
-        !data.stock ||
-        !data.category ||
-        !data.photo
-      ) {
-        throw new Error("All fields are required");
-      } else {
-        //CREO EL NUEVO PRODUCTO PARA LUEGO AGREGARLO A LA LISTA
-        const newProduct = {
-          id: data.id || crypto.randomBytes(12).toString("hex"), //data.id para generar un producto de prueba para readOne(id) y destroy(id)
-          title: data.title,
-          photo: data.photo,
-          category: data.category,
-          price: data.price,
-          stock: data.stock,
-        };
         //HAGO UNA COPIA DEL ARRAY DE PRODUCTS.JSON EN MI VARIABLE PRODUCTS
         let products = await fs.promises.readFile(this.path, "utf-8");
         products = JSON.parse(products);
         //AGREGO EL NUEVO PRODUCTO A LA COPIA DEL ARCHIVO
-        products.push(newProduct);
+        products.push(data);
         //SOBREESCRIBO EL ARCHIVO CON MI NUEVA INFORMACION
         await fs.promises.writeFile(
           this.path,
           JSON.stringify(products, null, 2)
         );
-        return newProduct
-      }
+        return data
     } catch (error) {
       throw error
     }
@@ -68,24 +49,24 @@ class ProductManager {
         (lista = lista.filter((each) => each.category === category)); // <-- En caso de ser true, filtramos la lista a solo los que tengan category = category
       return lista;
     } catch (error) {
-      return error;
+      throw error
     }
   }
   async readOne(id) {
     try {
       let lista = await fs.promises.readFile(this.path, "utf-8");
       lista = JSON.parse(lista);
-      let product = lista.find((each) => each.id === id);
+      let product = lista.find((each) => each._id === id);
       return product;
     } catch (error) {
-      return error;
+      throw error
     }
   }
 
   async update(id, data) {
     try {
       let all = await this.read();
-      let one = all.find((each) => each.id === id);
+      let one = all.find((each) => each._id === id);
       if (one) {
         for (let prop in data) {
           one[prop] = data[prop];
@@ -109,9 +90,9 @@ class ProductManager {
         throw new Error("Product not found!");
       } else {
         let all = await fs.promises.readFile(this.path, "utf-8");
-        all = JSON.parse(all).filter((each) => each.id !== one.id);
+        all = JSON.parse(all).filter((each) => each._id !== one._id);
         await fs.promises.writeFile(this.path, JSON.stringify(all, null, 2));
-        console.log("Product with id ", one.id, " successfully deleted:");
+        console.log("Product with id ", one._id, " successfully deleted:");
         return one;
 
       }
@@ -119,8 +100,63 @@ class ProductManager {
       throw error;
     }
   }
+  async paginate({ filter, opts}) {
+    try {
+        let { page, limit } = opts;
+        limit = parseInt(limit) || 10;
+        page = parseInt(page) || 1;
+        let products = await this.read();
+        console.log("limit: ", limit)
+        console.log("page: ", page)
+        
+        // Aplicar filtros
+        products = products.filter(product => {
+            return Object.keys(filter).every(key => {
+                if (key in product) {
+                    if (typeof filter[key] === 'object' && filter[key] !== null) {
+                        if (filter[key].$in && Array.isArray(filter[key].$in)) {
+                            return filter[key].$in.includes(product[key]);
+                        }
+                    } else {
+                        return product[key] === filter[key];
+                    }
+                }
+                return false;
+            });
+        });
+
+        //console.log("products por key: ", products)
+        const start = (page - 1) * limit;
+        const end = start + limit;
+        const paginatedproducts = products.slice(start, end);
+        //console.log("paginateproducts: ", paginatedproducts)
+
+        const totalPages = Math.ceil(products.length / limit);
+        return {
+            docs: paginatedproducts,
+            totalDocs: products.length,
+            limit: limit,
+            page: page,
+            totalPages: totalPages,
+            hasPrevPage: page > 1,
+            hasNextPage: page < totalPages,
+            prevPage: page > 1 ? page - 1 : null,
+            nextPage: page < totalPages ? page + 1 : null
+        };
+    } catch (error) {
+        throw error;
+    }
+  }
 }
 
+
+
+const productsManager = new ProductManager();
+export default productsManager;
+
+
+
+/*
 async function test() {
   const product = new ProductManager();
   await product.create({
@@ -485,7 +521,4 @@ async function create40products() {
     stock: 10,
   });
 }
-
-
-const productsManager = new ProductManager();
-export default productsManager;
+*/
